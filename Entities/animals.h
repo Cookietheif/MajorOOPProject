@@ -1,29 +1,32 @@
-#ifndef CROPS_H
-#define CROPS_H
+#ifndef ANIMALS_H
+#define ANIMALS_H
 
 #include <iostream>
-#include <stdio.h>
+#include <string>
 #include "Entity.h"
 
-class Animals : public Entity{
-    int produce;
-    int price;
+class Animals : public Entity {
+protected:
+    int produceRate;     // Goods produced per turn (e.g. milk, eggs)
+    int priceAnimal;     // Price of the animal when sold
+    int priceProduce;    // Price of one unit of produce
+  
 
-    Animals();
-    virtual ~Animals();
+public:
+   
+    Animals();           // Default constructor
+    virtual ~Animals();  // Virtual destructor
 
-    int getProduce() const {return produce;};
-    int getPrice() const {return price;};
+    
+    int getProduceRate() const { return produceRate; }
+    int getPriceAnimal() const { return priceAnimal; }
+    int getPriceProduce() const { return priceProduce; }
 
-    virtual int sellAnimal() = 0;
-    virtual int sellProduce() = 0;
-    virtual void emptyPlot();
-    virtual void seasonalMod() = 0;
-
-
-
-
+    
+    virtual int sellAnimal() = 0;   // Each derived animal defines how it's sold
+    virtual int sellProduce() = 0;  // Defines how produce is sold
+    virtual void seasonalMod() = 0; // Adjusts stats per season
 };
 
+#endif 
 
-#endif
