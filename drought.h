@@ -5,7 +5,7 @@
 class drought : public event{
     public:
     drought();
-    void hit();
+    int hit(int monthlyProfit);
     ~drought();
 };
 

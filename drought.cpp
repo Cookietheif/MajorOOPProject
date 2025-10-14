@@ -5,6 +5,7 @@ drought::drought(){
     duration = 2;
 }
 
-void drought::hit(){
-    
+int drought::hit(int monthlyProfit){
+    monthlyProfit = monthlyProfit * 0.2;
+    return monthlyProfit;
 }

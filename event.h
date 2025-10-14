@@ -10,7 +10,7 @@ class event {
 
     public:
     event();
-    virtual void hit();
+    virtual int hit(int monthlyProfit);
     ~event();
 };
 

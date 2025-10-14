@@ -5,6 +5,6 @@ event::event(){
     duration = 0;
 }
 
-void event::hit(){
-    //do nothing
+int event::hit(int monthlyProfit){
+    return 0;
 }
