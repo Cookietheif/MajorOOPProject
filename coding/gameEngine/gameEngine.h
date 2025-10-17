@@ -10,9 +10,10 @@ class gameEngine
     sf::RenderWindow* window;
     sf::Event gameEvent;
 
+    //Mouse positions
+    sf::Vector2i mousePositionWindow;
+
     //game objects!!!!!!!!!!
-    sf::Sprite test;
-    sf::Texture testTexture;
     sf::Sprite createSprites();
 
     //private functions
@@ -26,6 +27,7 @@ class gameEngine
         virtual ~gameEngine();
 
     //function
+        void updateMousePositions();
         void update();
         void pollEvents();
         void render();

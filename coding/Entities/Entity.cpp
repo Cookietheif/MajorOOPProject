@@ -1,13 +1,14 @@
 #include "Entity.h"
 #include <iostream>
+#include <SFML/Graphics.hpp>
 
 
 Entity::Entity()
     : entity_ID(0),
       entity_Name("Unnamed Entity"),
-      texture(nullptr),
-      sprite(nullptr)
 {
+    texture.loadFromFile();
+    sprite.setTexture(*texture);
     std::cout << "Entity created: " << entity_Name << std::endl;
 }
 
@@ -18,9 +19,4 @@ Entity::~Entity() {
     // Example:
     // delete texture;
     // delete sprite;
-}
-
-
-void Entity::draw() {
-    // Derived classes can override this to draw their sprite
 }

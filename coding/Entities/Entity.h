@@ -3,13 +3,7 @@
 
 #include <iostream>
 #include <string>
-
-// Forward declare SFML types to avoid dependency issues for now
-// (Replace these with #include <SFML/Graphics.hpp> later)
-namespace sf {
-    class Texture;
-    class Sprite;
-}
+#include <SFML/Graphics.hpp>
 
 // Base Entity Class
 
@@ -20,7 +14,7 @@ protected:
 
     // --- Graphics placeholders (to be implemented later with SFML) ---
     sf::Texture* texture;         // Placeholder for sprite texture
-    sf::Sprite* sprite;           // Placeholder for sprite itself
+    sf::Sprite sprite;           // Placeholder for sprite itself
 
 public:
     // --- Constructors & Destructor ---
@@ -31,8 +25,7 @@ public:
     std::string getName() const { return entity_Name; }
     int getID() const { return entity_ID; }
 
-    // --- Virtual methods (optional placeholders for future use) ---
-    virtual void draw();                    // Placeholder for rendering
+    virtual void draw() = 0;                    // Pure virtual as placeholder for drawing later
 };
 
 #endif

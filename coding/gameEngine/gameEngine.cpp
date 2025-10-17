@@ -4,6 +4,7 @@
 #include <SFML/System.hpp>
 
 #include "gameEngine.h"
+#include "Entities/Entity.cpp"
 
 //private functions
 void gameEngine::initialiseVariables() {
@@ -14,14 +15,13 @@ void gameEngine::initialiseWindow() {
     this->window->setFramerateLimit(60); //frame limit
 };
 
-sf::Sprite gameEngine::createSprites() { //for loading all textures into sprites into game
-    //sf::Sprite sprites; for matrix of sprites? how make code nice?
-    this->testTexture.loadFromFile("coding/gameEngine/gameObjects/assets/test.png"); // returns true bool if file exists and stores texture in testTexture
-    // if (!testTexture.loadFromFile("coding/gameEngine/gameObjects/assets/test.png")) {std::cout<<"no file";} my test to check if file exists
-    this->test.setTexture(testTexture); //sets sprite to testTexture
+sf::Sprite gameEngine::createSprites(Entity sprite) { //for loading all textures into sprites into game
+    Entity::texture.loadFromFile("coding/gameEngine/gameObjects/assets/test.png"); // returns true bool if file exists and stores texture in testTexture
+    // if (!testTexture.loadFromFile("coding/gameEngine/gameObjects/assets/test.png")) {std::cout<<"no file";} test to check if file exists
+    this->sprite.setTexture(texture); //sets sprite to testTexture
     //test.setPosition(5,5);
-    test.setScale(5.f,5.f);
-    return (test);
+    sprite.setScale(5.f,5.f);
+    return (sprite);
 }
 
 //public functions
@@ -45,7 +45,12 @@ void gameEngine::pollEvents() {while (this->window->pollEvent(gameEvent)) //loop
             };
         };};
 
-void gameEngine::update() {this->pollEvents();}
+void gameEngine::update() {
+    this->pollEvents();
+
+    //Mouse position
+    std::cout << "Mouse pos: " << sf::Mouse::getPosition().x << " " << sf::Mouse::getPosition().y << "\n";
+}
 
 
 //render/visualise/display game function
