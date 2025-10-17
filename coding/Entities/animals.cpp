@@ -1,6 +1,5 @@
-#include "animals.h"
 #include <iostream>
-
+#include "./animals.h"
 
 Animals::Animals()
     : produceRate(0),

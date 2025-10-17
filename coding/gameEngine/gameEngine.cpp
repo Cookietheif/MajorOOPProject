@@ -4,7 +4,7 @@
 #include <SFML/System.hpp>
 
 #include "gameEngine.h"
-#include "Entities/Entity.cpp"
+//#include "coding/Entities/entity.cpp"
 
 //private functions
 void gameEngine::initialiseVariables() {
