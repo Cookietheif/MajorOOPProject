@@ -3,20 +3,22 @@
 
 #include <iostream>
 #include <string>
-#include "Entity.h"
+#include "entity.h"
+#include "gameEngine.h"
+
 
 
 class Crops : public Entity {
 protected:
-    int yield;         // Amount of produce gained when harvested
-    int price;         // Selling price per unit
-    int growthTime;    // Number of turns required until harvest
-    int currentAge;    // Current number of turns grown
+    int yield;         
+    int price;         
+    int growthTime;    
+    int currentAge;    
 
 public:
     
-    Crops();                              // Default constructor
-    virtual ~Crops();                     // Virtual destructor
+    Crops();                              
+    virtual ~Crops();                     
 
     
     int getYield() const { return yield; }
@@ -25,10 +27,10 @@ public:
     int getCurrentAge() const { return currentAge; }
 
     
-    virtual void grow();                  // Progresses growth each turn
-    virtual bool isReadyToHarvest() const; // True if growthTime reached
-    virtual int sellCrop() = 0;           // Pure virtual — must define in derived crops
-    virtual void seasonalMod() = 0;       // Pure virtual — for seasonal yield adjustments
+    virtual void grow();                  
+    virtual bool isReadyToHarvest() const; 
+    virtual int sellCrop() = 0;          
+    virtual void seasonalMod(const gameEngine& engine) = 0;     
 };
 
 #endif 
