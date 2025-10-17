@@ -3,7 +3,7 @@
 
 #include <iostream>
 #include <string>
-#include "entity.h"
+#include "./entity.h"
 #include "gameEngine.h"
 
 class Animals : public Entity {
