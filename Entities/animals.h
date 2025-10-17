@@ -8,9 +8,9 @@
 
 class Animals : public Entity {
 protected:
-    int produceRate;     // Goods produced per turn (e.g. milk, eggs)
-    int priceAnimal;     // Price of the animal when sold
-    int priceProduce;    // Price of one unit of produce
+    int produceRate;     
+    int priceAnimal;     
+    int priceProduce;    
   
 
 public:
