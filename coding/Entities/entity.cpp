@@ -20,4 +20,3 @@ Entity::~Entity() {
     // delete texture;
     // delete sprite;
 }
-

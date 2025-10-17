@@ -3,7 +3,7 @@
 
 #include <iostream>
 #include <string>
-#include "entity.h"
+#include "./Entity.h"
 #include "gameEngine.h"
 
 
