@@ -45,13 +45,17 @@ void gameEngine::pollEvents() {while (this->window->pollEvent(gameEvent)) //loop
             };
         };};
 
-void gameEngine::update() {
-    this->pollEvents();
-
-    //Mouse position
-    std::cout << "Mouse pos: " << sf::Mouse::getPosition().x << " " << sf::Mouse::getPosition().y << "\n";
+void gameEngine::updateMousePositions() {
+    this->mousePositionWindow = sf::Mouse::getPosition(*this->window);
 }
 
+void gameEngine::update() {
+  this->pollEvents();
+
+  // Mouse position
+    this->updateMousePositions();
+   // if (gameEvent.) for lmb functionality
+}
 
 //render/visualise/display game function
 void gameEngine::draw() { //draw all sprites
