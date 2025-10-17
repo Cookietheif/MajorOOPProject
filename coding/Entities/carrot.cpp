@@ -1,4 +1,4 @@
-#include "carrot.h"
+#include "./carrot.h"
 #include <iostream>
 #include <cmath>
 
@@ -14,7 +14,13 @@ Carrot::Carrot() {
 
 Carrot::~Carrot() {}
 
-
+void Carrot::initialiseAsset() {
+    this->seedTexture.loadFromFile("gameEngine/gameObjects/assets/");
+    this->ungrownTexture.loadFromFile("gameEngine/gameObjects/assets/");
+    this->grownTexture.loadFromFile("gameEngine/gameObjects/assets/");
+    this->seedSprite.setTexture(seedTexture); // so on
+    this->seedSprite.setScale(5.f,5.f);
+}
 
 int Carrot::sellCrop() {
     if (isReadyToHarvest()) {

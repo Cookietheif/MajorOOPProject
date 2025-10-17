@@ -1,6 +1,3 @@
-#ifndef ENTITY_H
-#define ENTITY_H
-
 #include <iostream>
 #include <SFML/Graphics.hpp>
 #include <string>
@@ -23,5 +20,3 @@ Entity::~Entity() {
     // delete texture;
     // delete sprite;
 }
-
-#endif

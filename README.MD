@@ -9,3 +9,5 @@ make clean
 make
 
 For adding files for compiling, add to end of Makefile SRC: line, e.g. SRC = coding/main.cpp coding/crops.cpp
+
+CARROT.h/cpp has sprite template for entities
