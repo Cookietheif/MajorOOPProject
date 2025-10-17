@@ -11,7 +11,7 @@ public:
 
    
     int sellCrop() override;       
-    void seasonalMod() override;   // No seasonal effect for year-round crop
+  // No seasonal effect for year-round crop
 };
 
 #endif 
