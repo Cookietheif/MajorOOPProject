@@ -3,10 +3,10 @@
 
 Potato::Potato() {
     entity_Name = "Potato";
-    yield = 30;        // Units per harvest
-    price = 5;         // Price per unit
-    growthTime = 4;    // Turns required to mature
-    currentAge = 0;    // Starts at zero
+    yield = 30;        
+    price = 5;         
+    growthTime = 4;    
+    currentAge = 0;    
 }
 
 
@@ -22,6 +22,4 @@ int Potato::sellCrop() {
 }
 
 
-void Potato::seasonalMod() {
-    // No effect
-}
+

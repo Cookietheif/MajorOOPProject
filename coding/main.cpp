@@ -1,23 +1,27 @@
+//default libraries
+#include <iostream>
+//SFML libraries
 #include <SFML/Graphics.hpp>
+#include <SFML/Window.hpp>
+#include <SFML/System.hpp>
+//our files
+#include "gameEngine/gameEngine.cpp"
 
 int main()
 {
-    sf::RenderWindow window(sf::VideoMode(800, 600), "SFML TUTORIAL");
-    sf::CircleShape shape(200.f);
-    shape.setFillColor(sf::Color::Blue);
+    //initialise and utilise game engine
+    gameEngine game;
 
-    while (window.isOpen())
+    while (game.running()) //loop for game runs stuff
     {
-    sf::Event event;
-        while (window.pollEvent(event))
-        {
-            if (event.type == sf::Event::Closed)
-                window.close();
-        }
-        window.clear();
-        window.draw(shape);
-        window.display();
-    }
+        //update game property stuff
+        game.update();
 
+        //draw new stuff
+        game.draw();
+
+        //depiction of update
+        game.render();
+            };
     return 0;
 }

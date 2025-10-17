@@ -2,13 +2,17 @@
 #define ENTITY_H
 
 #include <iostream>
+#include <SFML/Graphics.hpp>
 #include <string>
+#include "coding/Entities/Entity.h"
 
-// Forward declare SFML types to avoid dependency issues for now
-// (Replace these with #include <SFML/Graphics.hpp> later)
-namespace sf {
-    class Texture;
-    class Sprite;
+Entity::Entity()
+    : entity_ID(0),
+      entity_Name("Unnamed Entity"),
+{
+    texture.loadFromFile(); //idk how to do this bit so that works for all.
+    sprite.setTexture(*texture);
+    std::cout << "Entity created: " << entity_Name << std::endl;
 }
 
 // Base Entity Class
