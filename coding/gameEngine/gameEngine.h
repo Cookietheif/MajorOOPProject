@@ -32,6 +32,7 @@ class gameEngine
         void pollEvents();
         void render();
         void draw();
+        void setBaseScreen();
         //accessors
         const bool running() const;
 
