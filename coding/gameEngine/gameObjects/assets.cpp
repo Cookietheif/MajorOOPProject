@@ -141,10 +141,10 @@ void assets::setBaseScreen(GameState gameState, sf::RenderWindow& window) {
         //seeds
             //Strawberry
             strawberry_seed_sprite.setPosition(80,0); //(1,0)
-            window.draw(strawberry);
+            window.draw(strawberry_seed_sprite);
             //Carrot
-            carrot.setPosition(160,0); //(2,0)
-            this->window->draw(carrot);
+            carrot_seed_sprite.setPosition(160,0); //(2,0)
+            this->window->draw(carrot_seed_sprite);
             //potato
             potato.setPosition(240,0); //(3,0)
             this->window->draw(potato);
