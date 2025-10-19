@@ -2,19 +2,23 @@
 #define PIG_H
 
 #include "animals.h"
+#include <string>
 
 class Pig : public Animals {
 private:
-    int age;              
-    int growthRate;       
+    int valueIncrement;  // How much the sell price increases per turn
 
 public:
-    Pig();                       
-    virtual ~Pig();              
+    Pig();
+    virtual ~Pig();
 
-    void grow();                 
-    int sellAnimal() override;   
-    void seasonalMod(const gameEngine& engine) override; 
+    // Override virtual functions
+    virtual int sellAnimal() override;
+    virtual int sellProduce() override;
+    virtual void seasonalMod(const gameEngine& engine) override;
+
+    // New: grow increases the pig's sell value
+    virtual void grow() override;
 };
 
 #endif

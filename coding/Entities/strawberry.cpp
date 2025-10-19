@@ -11,7 +11,6 @@ Strawberry::Strawberry() {
     currentAge = 0;   
 }
 
-
 Strawberry::~Strawberry() {}
 
 

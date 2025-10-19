@@ -3,40 +3,27 @@
 
 Pig::Pig() {
     entity_Name = "Pig";
-    produceRate = 0;        // No produce
-    priceProduce = 0;
-    priceAnimal = 100;      
-    growthRate = 10;        // Value increases $10 per turn
-    age = 0;
+    priceAnimal = 50;      // Base sell value
+    priceProduce = 0;      // Pigs have no per-turn produce
+    valueIncrement = 10;   // Increase in sell value per turn
 }
 
 Pig::~Pig() {}
 
-void Pig::grow() {
-    age++;
-    priceAnimal += growthRate;
-    std::cout << entity_Name << " aged one turn. Age: " << age
-              << ", value now $" << priceAnimal << std::endl;
-}
-
 int Pig::sellAnimal() {
-    std::cout << "Sold " << entity_Name << " (age " << age << ") for $" << priceAnimal << std::endl;
     return priceAnimal;
 }
 
-
+int Pig::sellProduce() {
+    return 0; // No produce
+}
 
 void Pig::seasonalMod(const gameEngine& engine) {
-    std::string season = engine.getSeason();
-
-    if (season == "Spring") {
-        growthRate = 15;   
-    } else if (season == "Winter") {
-        growthRate = 5;    
-    } else {
-        growthRate = 10;   
-    }
-
-    std::cout << entity_Name << " growth rate adjusted to $" << growthRate
-              << " per turn for " << season << "." << std::endl;
+    // Pigs are not affected by season in this example
 }
+
+void Pig::grow() {
+    priceAnimal += valueIncrement; // Increase sell value each turn
+    std::cout << entity_Name << " grew! New value: $" << priceAnimal << std::endl;
+}
+
