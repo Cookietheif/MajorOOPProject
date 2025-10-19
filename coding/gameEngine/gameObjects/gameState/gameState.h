@@ -11,7 +11,7 @@
 class GameState {
 private:
     int turnNumber;
-    std::string currentSeason;
+    int currentSeason;
     int money;
 
     // 9 possible plot slots
@@ -34,7 +34,7 @@ public:
 
     // Accessors
     int getTurnNumber() const { return turnNumber; }
-    std::string getSeason() const { return currentSeason; }
+    int getSeason() const { return currentSeason; } // 1 = spring, 2 summer, 3 autumn, 4 winter
     int getMoney() const { return money; }
 
     Entity* getPlot(int index) const;

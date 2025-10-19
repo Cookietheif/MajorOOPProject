@@ -2,6 +2,8 @@
 #include <SFML/Graphics.hpp>
 #include <SFML/Window.hpp>
 #include <SFML/System.hpp>
+#include "./gameState/gameState.h"
+#include "./gameObjects/assets.h"
 
 #include "gameEngine.h"
 //#include "coding/Entities/entity.cpp"
@@ -19,26 +21,13 @@ void gameEngine::initialiseWindow() {
 
 };
 
-sf::Sprite gameEngine::createSprites(Entity sprite) { //for loading all textures into sprites into game
-    Entity::texture.loadFromFile("coding/gameEngine/gameObjects/assets/test.png"); // returns true bool if file exists and stores texture in testTexture
-    // if (!testTexture.loadFromFile("coding/gameEngine/gameObjects/assets/test.png")) {std::cout<<"no file";} test to check if file exists
-    this->sprite.setTexture(texture); //sets sprite to testTexture
-    //test.setPosition(5,5);
-    sprite.setScale(5.f,5.f);
-    return (sprite);
-}
-
 //public functions
 // constructor
 gameEngine::gameEngine() {
+    GameState gameState;
+    assets assets;
     gameEngine::initialiseVariables();
     gameEngine::initialiseWindow();
-};
-
-//destructor
-gameEngine::~gameEngine() { //deconstructor ensures freeing space and closes window just in case
-    if (this->running()) {this->window->close();}
-    delete this->window;
 };
 
 //game function
@@ -74,6 +63,8 @@ void gameEngine::update() {
 
         } else if (this->mousePositionWindow.x > 480 && this->mousePositionWindow.x <= 560) { //chicken
         
+        } else { //set all to clear
+
         }
 
     }
@@ -81,85 +72,20 @@ void gameEngine::update() {
 
 //render/visualise/display game function
 void gameEngine::draw() { //draw all sprites
-    gameEngine::createSprites();
+    
 }
 
-void gameEngine::setBaseScreen() {
-    //weather
-    .setPosition(0,0); //(0,0)
-    this->window->draw();
-    //seeds
-        //Strawberry
-        strawberry.setPosition(80,0); //(1,0)
-        this->window->draw(strawberry);
-        //Carrot
-        carrot.setPosition(160,0); //(2,0)
-        this->window->draw(carrot);
-        //potato
-        potato.setPosition(240,0); //(3,0)
-        this->window->draw(potato);
-    //animals
-        //cow
-        cow.setPosition(320,0); //(4,0)
-        this->window->draw(cow);
-        //pig
-        pig.setPosition(400,0); //(5,0)
-        this->window->draw(pig);
-        //chicken
-        chicken.setPosition(480,0); //(6,0)
-        this->window->draw(chicken);
-    //coin symbol //probably move this bit to other function
-    sf::Texture coinTexture;
-    sf::Sprite coinSprite;
-    coinTexture.loadFromFile("./gameObjects/assets/coin.png");
-    coinSprite.setTexture(coinTexture);
-    coinSprite.setPosition(560,0); //(7,0)
-    this->window->draw(coinSprite);
-    //fences
-        //move elsewhere also
-        sf::Texture* fenceTexture[7];
-        sf::Sprite* fenceSprite[7];
-        for (int i = 0; i < 7; i++) { //from 1st to 7th tile fence, 8 & 9 gates
-        (*fenceTexture[i]).loadFromFile("./gameObjects/assets/shaded_fence.png");
-        (*fenceSprite[i]).setTexture(*fenceTexture[i]);
-        (*fenceSprite[i]).setPosition(80*i,160); //(x,2)
-        this->window->draw(*fenceSprite[i]);
-        }
-    //gates
-        //left
-        sf::Texture leftGateTexture;
-        sf::Sprite leftGateSprite;
-        leftGateTexture.loadFromFile("./gameObjects/assets/shaded_fence_gate_left.png");
-        leftGateSprite.setTexture(leftGateTexture);
-        leftGateSprite.setPosition(640,0); //(7,2)
-        this->window->draw(leftGateSprite);
-        //right
-        sf::Texture rightGateTexture;
-        sf::Sprite rightGateSprite;
-        rightGateTexture.loadFromFile("./gameObjects/assets/shaded_fence_gate_right.png");
-        rightGateSprite.setTexture(leftGateTexture);
-        rightGateSprite.setPosition(720,0); //(8,2)
-        this->window->draw(rightGateSprite);
-    //plots
-        sf::Texture* plotTexture[9];
-        sf::Sprite* plotSprite[9];
-        int plotNumber = 0;
-        for (int i = 0; i < 3; i++) { //for 3 horizontal
-            for (int j = 0; i < 3; i++) { //for 3 vertical
-            (*plotTexture[plotNumber]).loadFromFile("./gameObjects/assets/empty_tile.png");
-            (*plotSprite[plotNumber]).setTexture(*plotTexture[plotNumber]);
-            (*plotSprite[plotNumber]).setPosition(240+160*i,400+160*j); //(x,2)
-            this->window->draw(*plotSprite[plotNumber]);
-            plotNumber = plotNumber + 1;
-            }
-        }
-}
-
-void gameEngine::render() {
+void gameEngine::render(assets assets, GameState gameState) {
     this->window->clear(sf::Color(0,255,0,255)); //clear old stuff
-    setBaseScreen();
+    assets.setBaseScreen(gameState, *this->window);
     //updates I guess
     this->window->display(); //display new stuff
 }
 
 const bool gameEngine::running() const { return this->window->isOpen(); }; //isOpen() returns bool for if window is open, SFML built in function
+
+//destructor
+gameEngine::~gameEngine() { //deconstructor ensures freeing space and closes window just in case
+    if (this->running()) {this->window->close();}
+    delete this->window;
+};

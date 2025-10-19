@@ -30,9 +30,8 @@ class gameEngine
         void updateMousePositions();
         void update();
         void pollEvents();
-        void render();
+        void render(assets assets, GameState gameState);
         void draw();
-        void setBaseScreen();
         //accessors
         const bool running() const;
 

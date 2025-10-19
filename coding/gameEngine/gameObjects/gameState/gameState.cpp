@@ -9,7 +9,7 @@
 GameState::GameState() {
     turnNumber = 1;
     money = 1000;
-    currentSeason = "Spring";
+    currentSeason = 1;
 
     // Initialize all plots as empty
     plot1 = plot2 = plot3 = plot4 = plot5 = plot6 = plot7 = plot8 = plot9 = nullptr;
@@ -134,10 +134,10 @@ void GameState::nextTurn() {
 void GameState::updateSeason() {
     int month = (turnNumber - 1) % 12;
 
-    if (month < 3) currentSeason = "Spring";
-    else if (month < 6) currentSeason = "Summer";
-    else if (month < 9) currentSeason = "Autumn";
-    else currentSeason = "Winter";
+    if (month < 3) currentSeason = 1; //spring
+    else if ((month >= 3) && (month < 6)) currentSeason = 2; //summer
+    else if ((month >= 6) && (month < 9)) currentSeason = 3; //autumn
+    else currentSeason = 4; //winter
 }
 
 void GameState::growAll() {
