@@ -17,6 +17,9 @@ public:
    
     Animals();           
     virtual ~Animals();  
+   
+    virtual void grow() {}; // Default does nothing
+
 
     
     int getProduceRate() const { return produceRate; }
