@@ -42,7 +42,7 @@ void gameEngine::updateMousePositions() {
     this->mousePositionWindow = sf::Mouse::getPosition(*this->window);
 }
 
-void gameEngine::update() {
+void gameEngine::update(assets assets) {
   this->pollEvents();
 
   // Mouse position
@@ -52,21 +52,24 @@ void gameEngine::update() {
     if ((this->mousePositionWindow.y) <= 80 && (this->mousePositionWindow.y >= 0)) { //in top row
         //what tile hovering bordered call
         if (this->mousePositionWindow.x > 80 && this->mousePositionWindow.x <= 160) { //strawberry
-
+            assets.strawberry_seed_bordered_sprite.setPosition(80,0);
+            this->window->draw(assets.strawberry_seed_bordered_sprite);
         } else if (this->mousePositionWindow.x > 160 && this->mousePositionWindow.x <= 240) { //carrot
-
+            assets.carrot_seed_bordered_sprite.setPosition(160,0);
+            this->window->draw(assets.carrot_seed_bordered_sprite);
         } else if (this->mousePositionWindow.x > 240 && this->mousePositionWindow.x <= 320) { //potato
-        
+            assets.potato_seed_bordered_sprite.setPosition(240,0);
+            this->window->draw(assets.potato_seed_bordered_sprite);
         } else if (this->mousePositionWindow.x > 320 && this->mousePositionWindow.x <= 400) { //cow
-            
+            assets.cow_bordered_sprite.setPosition(320,0);
+            this->window->draw(assets.cow_bordered_sprite);
         } else if (this->mousePositionWindow.x > 400 && this->mousePositionWindow.x <= 480) { //pig
-
+            assets.pig_bordered_sprite.setPosition(400,0);
+            this->window->draw(assets.pig_bordered_sprite);
         } else if (this->mousePositionWindow.x > 480 && this->mousePositionWindow.x <= 560) { //chicken
-        
-        } else { //set all to clear
-
+            assets.chicken_bordered_sprite.setPosition(400,0);
+            this->window->draw(assets.chicken_bordered_sprite);
         }
-
     }
 }
 

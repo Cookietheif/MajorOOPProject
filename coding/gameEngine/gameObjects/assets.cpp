@@ -77,8 +77,10 @@ shaded_fence_gate_left_sprite.setTexture(shaded_fence_gate_left_texture);
 shaded_fence_gate_right_texture.loadFromFile("./assets/shaded_fence_gate_right.png");
 shaded_fence_gate_right_sprite.setTexture(shaded_fence_gate_right_texture);
 
-shaded_fence_texture.loadFromFile("./assets/shaded_fence.png");
-shaded_fence_sprite.setTexture(shaded_fence_texture);
+    shaded_fence_texture.loadFromFile("./assets/shaded_fence.png");
+for (int i = 0; i < 7; i++) { //from 1st to 7th tile fence, 8 & 9 gates
+    (shaded_fence_sprite[i]).setTexture(shaded_fence_texture);
+}
 
 strawberry_seed_bordered_texture.loadFromFile("./assets/strawberry_seed_bordered.png");
 strawberry_seed_bordered_sprite.setTexture(strawberry_seed_bordered_texture);
@@ -97,15 +99,6 @@ sun1_sprite.setTexture(sun1_texture);
 
 sun2_texture.loadFromFile("./assets/sun2.png");
 sun2_sprite.setTexture(sun2_texture);
-
-unshaded_fence_gate_left_texture.loadFromFile("./assets/unshaded_fence_gate_left.png");
-unshaded_fence_gate_left_sprite.setTexture(unshaded_fence_gate_left_texture);
-
-unshaded_fence_gate_right_texture.loadFromFile("./assets/unshaded_fence_gate_right.png");
-unshaded_fence_gate_right_sprite.setTexture(unshaded_fence_gate_right_texture);
-
-unshaded_fence_texture.loadFromFile("./assets/unshaded_fence.png");
-unshaded_fence_sprite.setTexture(unshaded_fence_texture);
 };
 
 assets::~assets() {};
@@ -144,52 +137,35 @@ void assets::setBaseScreen(GameState gameState, sf::RenderWindow& window) {
             window.draw(strawberry_seed_sprite);
             //Carrot
             carrot_seed_sprite.setPosition(160,0); //(2,0)
-            this->window->draw(carrot_seed_sprite);
+            window.draw(carrot_seed_sprite);
             //potato
-            potato.setPosition(240,0); //(3,0)
-            this->window->draw(potato);
+            potato_seed_sprite.setPosition(240,0); //(3,0)
+            window.draw(potato_seed_sprite);
         //animals
             //cow
-            cow.setPosition(320,0); //(4,0)
-            this->window->draw(cow);
+            cow_sprite.setPosition(320,0); //(4,0)
+            window.draw(cow_sprite);
             //pig
-            pig.setPosition(400,0); //(5,0)
-            this->window->draw(pig);
+            pig_sprite.setPosition(400,0); //(5,0)
+            window.draw(pig_sprite);
             //chicken
-            chicken.setPosition(480,0); //(6,0)
-            this->window->draw(chicken);
+            chicken_sprite.setPosition(480,0); //(6,0)
+            window.draw(chicken_sprite);
     //coin symbol //probably move this bit to other function
-    sf::Texture coinTexture;
-    sf::Sprite coinSprite;
-    coinTexture.loadFromFile("./gameObjects/assets/coin.png");
-    coinSprite.setTexture(coinTexture);
-    coinSprite.setPosition(560,0); //(7,0)
-    this->window->draw(coinSprite);
+    coin_sprite.setPosition(560,0); //(7,0)
+    window.draw(coin_sprite);
     //fences
-        //move elsewhere also
-        sf::Texture* fenceTexture[7];
-        sf::Sprite* fenceSprite[7];
         for (int i = 0; i < 7; i++) { //from 1st to 7th tile fence, 8 & 9 gates
-        (*fenceTexture[i]).loadFromFile("./gameObjects/assets/shaded_fence.png");
-        (*fenceSprite[i]).setTexture(*fenceTexture[i]);
-        (*fenceSprite[i]).setPosition(80*i,160); //(x,2)
-        this->window->draw(*fenceSprite[i]);
+        (shaded_fence_sprite[i]).setPosition(80*i,160); //(x,2)
+        window.draw(shaded_fence_sprite[i]);
         }
     //gates
         //left
-        sf::Texture leftGateTexture;
-        sf::Sprite leftGateSprite;
-        leftGateTexture.loadFromFile("./gameObjects/assets/shaded_fence_gate_left.png");
-        leftGateSprite.setTexture(leftGateTexture);
-        leftGateSprite.setPosition(640,0); //(7,2)
-        this->window->draw(leftGateSprite);
+        shaded_fence_gate_left_sprite.setPosition(640,0); //(7,2)
+        window.draw(shaded_fence_gate_left_sprite);
         //right
-        sf::Texture rightGateTexture;
-        sf::Sprite rightGateSprite;
-        rightGateTexture.loadFromFile("./gameObjects/assets/shaded_fence_gate_right.png");
-        rightGateSprite.setTexture(leftGateTexture);
-        rightGateSprite.setPosition(720,0); //(8,2)
-        this->window->draw(rightGateSprite);
+        shaded_fence_gate_right_sprite.setPosition(720,0); //(8,2)
+        window.draw(shaded_fence_gate_right_sprite);
     //plots
         sf::Texture* plotTexture[9];
         sf::Sprite* plotSprite[9];

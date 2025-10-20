@@ -57,7 +57,7 @@ public:
 
     sf::Texture shaded_fence_gate_left_texture; sf::Sprite shaded_fence_gate_left_sprite;
     sf::Texture shaded_fence_gate_right_texture; sf::Sprite shaded_fence_gate_right_sprite;
-    sf::Texture shaded_fence_texture; sf::Sprite shaded_fence_sprite;
+    sf::Texture shaded_fence_texture; sf::Sprite shaded_fence_sprite[7];
 
     sf::Texture strawberry_seed_bordered_texture; sf::Sprite strawberry_seed_bordered_sprite;
     sf::Texture strawberry_seed_texture; sf::Sprite strawberry_seed_sprite;
@@ -66,10 +66,6 @@ public:
 
     sf::Texture sun1_texture; sf::Sprite sun1_sprite;
     sf::Texture sun2_texture; sf::Sprite sun2_sprite;
-
-    sf::Texture unshaded_fence_gate_left_texture; sf::Sprite unshaded_fence_gate_left_sprite;
-    sf::Texture unshaded_fence_gate_right_texture; sf::Sprite unshaded_fence_gate_right_sprite;
-    sf::Texture unshaded_fence_texture; sf::Sprite unshaded_fence_sprite;
 };
 
 #endif

@@ -11,17 +11,19 @@ int main()
 {
     //initialise and utilise game engine
     gameEngine game;
+    GameState gameState;
+    assets assets;
 
     while (game.running()) //loop for game runs stuff
     {
         //update game property stuff
-        game.update();
+        game.update(assets);
 
         //draw new stuff
         game.draw();
 
         //depiction of update
-        game.render();
+        game.render(assets, gameState);
             };
     return 0;
 }
