@@ -4,7 +4,9 @@
 #include "event.h"
 
 class pests : public event {
+    public:
     pests();
+    void spin();
 };
 
 #endif

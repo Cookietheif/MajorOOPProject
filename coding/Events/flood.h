@@ -5,6 +5,7 @@
 
 class flood : public event {
     flood();
+    void spin();
 };
 
 #endif
