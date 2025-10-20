@@ -2,7 +2,7 @@
 #include <SFML/Graphics.hpp>
 #include <SFML/Window.hpp>
 #include <SFML/System.hpp>
-#include "./gameState/gameState.h"
+#include "./gameObjects/gameState/gameState.h"
 #include "./gameObjects/assets.h"
 
 #include "gameEngine.h"
@@ -12,12 +12,12 @@
 void gameEngine::initialiseVariables() {
     this->window = nullptr;
 };
-void gameEngine::initialiseWindow() {
+void gameEngine::initialiseWindow(assets assets, GameState gameState) {
     this->window = new sf::RenderWindow(sf::VideoMode(720, 960), "Farming Simulator", sf::Style::Titlebar | sf::Style::Close); //720=9 (tiles) *16 (pixels) *5 (scale for window size), titled Farming Simulator with close button, 9x12 window
     this->window->setFramerateLimit(60); //frame limit
 
     //default screen
-    gameEngine::setBaseScreen();
+    assets.setBaseScreen(gameState, *this->window);
 
 };
 
@@ -27,7 +27,7 @@ gameEngine::gameEngine() {
     GameState gameState;
     assets assets;
     gameEngine::initialiseVariables();
-    gameEngine::initialiseWindow();
+    gameEngine::initialiseWindow(assets, gameState);
 };
 
 //game function
@@ -70,7 +70,12 @@ void gameEngine::update(assets assets) {
             assets.chicken_bordered_sprite.setPosition(400,0);
             this->window->draw(assets.chicken_bordered_sprite);
         }
-    }
+    }/*
+    if (sf::Mouse::isButtonPressed(sf::Mouse::Left)){
+        if (mousePositionWindow.x <=) {
+
+        }
+    }*/
 }
 
 //render/visualise/display game function
