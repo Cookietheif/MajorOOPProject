@@ -28,7 +28,7 @@ class gameEngine
 
     //function
         void updateMousePositions();
-        void update();
+        void update(assets assets);
         void pollEvents();
         void render(assets assets, GameState gameState);
         void draw();
