@@ -18,7 +18,7 @@ class gameEngine
 
     //private functions
     void initialiseVariables();
-    void initialiseWindow();
+    void initialiseWindow(assets assets, GameState gameState);
 
     public:
 
