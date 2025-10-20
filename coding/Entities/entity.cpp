@@ -1,10 +1,7 @@
-#ifndef ENTITY_H
-#define ENTITY_H
-
 #include <iostream>
 #include <SFML/Graphics.hpp>
 #include <string>
-#include "coding/Entities/Entity.h"
+#include "coding/Entities/entity.h"
 
 Entity::Entity()
     : entity_ID(0),

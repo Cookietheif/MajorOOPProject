@@ -13,12 +13,9 @@ class gameEngine
     //Mouse positions
     sf::Vector2i mousePositionWindow;
 
-    //game objects!!!!!!!!!!
-    sf::Sprite createSprites();
-
     //private functions
     void initialiseVariables();
-    void initialiseWindow();
+    void initialiseWindow(assets assets, GameState gameState);
 
     public:
 
@@ -28,10 +25,9 @@ class gameEngine
 
     //function
         void updateMousePositions();
-        void update();
+        void update(assets assets, GameState gameState);
         void pollEvents();
-        void render();
-        void draw();
+        void render(assets assets, GameState gameState);
         //accessors
         const bool running() const;
 

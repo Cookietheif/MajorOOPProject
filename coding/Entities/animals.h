@@ -3,7 +3,7 @@
 
 #include <iostream>
 #include <string>
-#include "entity.h"
+#include "./entity.h"
 #include "gameEngine.h"
 
 class Animals : public Entity {
@@ -17,6 +17,9 @@ public:
    
     Animals();           
     virtual ~Animals();  
+   
+    virtual void grow() {}; // Default does nothing
+
 
     
     int getProduceRate() const { return produceRate; }
