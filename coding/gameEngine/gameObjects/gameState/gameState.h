@@ -13,6 +13,7 @@ private:
     int turnNumber;
     int currentSeason;
     int money;
+    int seedSelected;
 
     // 9 possible plot slots
     Entity* plot1;
@@ -36,6 +37,8 @@ public:
     int getTurnNumber() const { return turnNumber; }
     int getSeason() const { return currentSeason; } // 1 = spring, 2 summer, 3 autumn, 4 winter
     int getMoney() const { return money; }
+    int getSeedSelected() const {return seedSelected;}
+    void setSeedSelected(int a) {seedSelected = a;}
 
     Entity* getPlot(int index) const;
 
