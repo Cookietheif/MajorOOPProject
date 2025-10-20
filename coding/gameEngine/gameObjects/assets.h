@@ -13,8 +13,8 @@ public:
     assets(); //constructor loads all textures and sets all sprites
     ~assets();
     void setTextures(GameState gameState); //gamestate passed so that money can be getted
-    void drawAll();
     void setBaseScreen(GameState gameState, sf::RenderWindow& window);
+    void setSeeds(sf::RenderWindow& window);
 
     //default screen function
 
@@ -31,12 +31,14 @@ public:
     sf::Texture carrot_tile_texture; sf::Sprite carrot_tile_sprite;
 
     sf::Texture chicken_bordered_texture; sf::Sprite chicken_bordered_sprite;
+    sf::Texture chicken_harvestable_texture; sf::Sprite chicken_harvestable_sprite;
     sf::Texture chicken_tile_texture; sf::Sprite chicken_tile_sprite;
     sf::Texture chicken_texture; sf::Sprite chicken_sprite;
 
     sf::Texture coin_texture; sf::Sprite coin_sprite;
 
     sf::Texture cow_bordered_texture; sf::Sprite cow_bordered_sprite;
+    sf::Texture cow_harvestable_texture; sf::Sprite cow_harvestable_sprite;
     sf::Texture cow_tile_texture; sf::Sprite cow_tile_sprite;
     sf::Texture cow_texture; sf::Sprite cow_sprite;
 

@@ -5,11 +5,13 @@
 #include "coding/Entities/cow.h"
 #include "coding/Entities/chicken.h"
 #include "coding/Entities/pig.h"
+#include "../assets.h"
 
 GameState::GameState() {
     turnNumber = 1;
     money = 1000;
     currentSeason = 1;
+    seedSelected = 0;
 
     // Initialize all plots as empty
     plot1 = plot2 = plot3 = plot4 = plot5 = plot6 = plot7 = plot8 = plot9 = nullptr;
