@@ -10,6 +10,7 @@ private:
     int turnNumber;
     int currentSeason;
     int money;
+    int seedSelected;
 
     Entity* plot1;
     Entity* plot2;
@@ -30,6 +31,8 @@ public:
     int getTurnNumber() const { return turnNumber; }
     int getSeason() const { return currentSeason; } // 1=spring, 2=summer, 3=autumn, 4=winter
     int getMoney() const { return money; }
+    int getSeedSelected() const {return seedSelected;}
+    void setSeedSelected(int a) {seedSelected = a;}
 
     void modifyMoney(int amount) { money += amount; }
     Entity* getPlot(int index) const;
@@ -38,6 +41,9 @@ public:
     bool buyEntity(int plotNumber, Entity* newEntity);
     bool sellEntity(int plotNumber);
     void growAll();
+
+    // Event management
+    void spinEvent();
 };
 
 #endif

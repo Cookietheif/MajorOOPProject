@@ -1,10 +1,25 @@
 #include "coding/gameEngine/gameObjects/gameState/gameState.h"
+
 #include <iostream>
+#include "coding/Entities/potato.h"
+#include "coding/Entities/carrot.h"
+#include "coding/Entities/strawberry.h"
+#include "coding/Entities/cow.h"
+#include "coding/Entities/chicken.h"
+#include "coding/Entities/pig.h"
+#include "../assets.h"
+#include "event.h"
+#include "drought.h"
+#include "flood.h"
+#include "pests.h"
+#include "disease.h"
+
 
 GameState::GameState() {
     turnNumber = 1;
     money = 1000;
     currentSeason = 1;
+    seedSelected = 0;
 
     plot1 = plot2 = plot3 = plot4 = plot5 = plot6 = plot7 = plot8 = plot9 = nullptr;
 }
@@ -44,6 +59,13 @@ bool GameState::buyEntity(int plotNumber, Entity* newEntity) {
     }
 
     int cost = newEntity->getBuyPrice();
+    // Determine cost (using price from crop or animal)
+    Crops* c = dynamic_cast<Crops*>(newEntity);
+    Animals* a = dynamic_cast<Animals*>(newEntity);
+
+    int cost = 0;
+    if (c) cost = c->getBuyPrice();
+    else if (a) cost = a->getBuyPrice();
 
     if (money < cost) {
         std::cout << "Not enough money!\n";
@@ -108,6 +130,7 @@ void GameState::nextTurn() {
     turnNumber++;
     updateSeason();
     growAll();
+    spinEvent();
 }
 
 void GameState::updateSeason() {
@@ -127,5 +150,39 @@ void GameState::growAll() {
             c->grow(*this);
         else if (auto a = dynamic_cast<Animals*>(p))
             a->grow(*this);
+    }
+}
+
+void GameState::spinEvent(){
+    int month = (turnNumber - 1) % 12;
+
+    event* posEvent = new event;
+    double posMultiplier = posEvent->spin();
+    money *= posMultiplier;
+
+    if (month == 1 || month == 4 || month == 7 || month == 11){
+        event* negEvent = new event();
+        switch (currentSeason) {
+            case 1:
+                pests* springEvent = new pests();
+                negEvent = springEvent;
+                break;
+            case 2:
+                drought* summerEvent = new drought();
+                negEvent = summerEvent;
+                break;
+            case 3:
+                disease* autumnEvent = new disease();
+                negEvent = autumnEvent;
+                break;
+            case 4:
+                flood* winterEvent = new flood();
+                negEvent = winterEvent;
+                break;                                                
+            default:
+                break;
+        } 
+        double negMultiplier = negEvent->spin();
+        money *= negMultiplier;
     }
 }

@@ -17,10 +17,7 @@ int main()
     while (game.running()) //loop for game runs stuff
     {
         //update game property stuff
-        game.update(assets);
-
-        //draw new stuff
-        game.draw();
+        game.update(assets, gameState);
 
         //depiction of update
         game.render(assets, gameState);

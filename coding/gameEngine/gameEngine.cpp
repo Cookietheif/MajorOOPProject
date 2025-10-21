@@ -2,7 +2,7 @@
 #include <SFML/Graphics.hpp>
 #include <SFML/Window.hpp>
 #include <SFML/System.hpp>
-#include "./gameState/gameState.h"
+#include "./gameObjects/gameState/gameState.h"
 #include "./gameObjects/assets.h"
 
 #include "gameEngine.h"
@@ -12,12 +12,12 @@
 void gameEngine::initialiseVariables() {
     this->window = nullptr;
 };
-void gameEngine::initialiseWindow() {
+void gameEngine::initialiseWindow(assets assets, GameState gameState) {
     this->window = new sf::RenderWindow(sf::VideoMode(720, 960), "Farming Simulator", sf::Style::Titlebar | sf::Style::Close); //720=9 (tiles) *16 (pixels) *5 (scale for window size), titled Farming Simulator with close button, 9x12 window
     this->window->setFramerateLimit(60); //frame limit
 
     //default screen
-    gameEngine::setBaseScreen();
+    assets.setBaseScreen(gameState, *this->window);
 
 };
 
@@ -27,7 +27,8 @@ gameEngine::gameEngine() {
     GameState gameState;
     assets assets;
     gameEngine::initialiseVariables();
-    gameEngine::initialiseWindow();
+    gameEngine::initialiseWindow(assets, gameState);
+    this->window->clear(sf::Color(0,255,0,255)); //set background
 };
 
 //game function
@@ -42,7 +43,7 @@ void gameEngine::updateMousePositions() {
     this->mousePositionWindow = sf::Mouse::getPosition(*this->window);
 }
 
-void gameEngine::update(assets assets) {
+void gameEngine::update(assets assets, GameState gameState) {
   this->pollEvents();
 
   // Mouse position
@@ -51,35 +52,94 @@ void gameEngine::update(assets assets) {
     //check for shop hover for prettiness
     if ((this->mousePositionWindow.y) <= 80 && (this->mousePositionWindow.y >= 0)) { //in top row
         //what tile hovering bordered call
-        if (this->mousePositionWindow.x > 80 && this->mousePositionWindow.x <= 160) { //strawberry
+        if (this->mousePositionWindow.x > 85 && this->mousePositionWindow.x < 160) { //strawberry, 1
             assets.strawberry_seed_bordered_sprite.setPosition(80,0);
             this->window->draw(assets.strawberry_seed_bordered_sprite);
-        } else if (this->mousePositionWindow.x > 160 && this->mousePositionWindow.x <= 240) { //carrot
+            if (sf::Mouse::isButtonPressed(sf::Mouse::Left)) {gameState.setSeedSelected(1);}
+        } else if (this->mousePositionWindow.x > 165 && this->mousePositionWindow.x < 235) { //carrot 2
             assets.carrot_seed_bordered_sprite.setPosition(160,0);
             this->window->draw(assets.carrot_seed_bordered_sprite);
-        } else if (this->mousePositionWindow.x > 240 && this->mousePositionWindow.x <= 320) { //potato
+            if (sf::Mouse::isButtonPressed(sf::Mouse::Left)) {gameState.setSeedSelected(2);}
+        } else if (this->mousePositionWindow.x > 245 && this->mousePositionWindow.x < 315) { //potato 3
             assets.potato_seed_bordered_sprite.setPosition(240,0);
             this->window->draw(assets.potato_seed_bordered_sprite);
-        } else if (this->mousePositionWindow.x > 320 && this->mousePositionWindow.x <= 400) { //cow
+            if (sf::Mouse::isButtonPressed(sf::Mouse::Left)) {gameState.setSeedSelected(3);}
+        } else if (this->mousePositionWindow.x > 325 && this->mousePositionWindow.x < 395) { //cow 4
             assets.cow_bordered_sprite.setPosition(320,0);
             this->window->draw(assets.cow_bordered_sprite);
-        } else if (this->mousePositionWindow.x > 400 && this->mousePositionWindow.x <= 480) { //pig
+            if (sf::Mouse::isButtonPressed(sf::Mouse::Left)) {gameState.setSeedSelected(4);}
+        } else if (this->mousePositionWindow.x > 405 && this->mousePositionWindow.x < 475) { //pig 5
             assets.pig_bordered_sprite.setPosition(400,0);
             this->window->draw(assets.pig_bordered_sprite);
-        } else if (this->mousePositionWindow.x > 480 && this->mousePositionWindow.x <= 560) { //chicken
+            if (sf::Mouse::isButtonPressed(sf::Mouse::Left)) {gameState.setSeedSelected(5);}
+        } else if (this->mousePositionWindow.x > 485 && this->mousePositionWindow.x < 555) { //chicken 6
             assets.chicken_bordered_sprite.setPosition(400,0);
             this->window->draw(assets.chicken_bordered_sprite);
+            if (sf::Mouse::isButtonPressed(sf::Mouse::Left)) {gameState.setSeedSelected(6);}
+        } else { //reset to no bordered but keep what is selected bordered
+            assets.setSeeds(*this->window);
+
+            switch (gameState.getSeedSelected()) {
+                case 1: //strawberry 1
+                    assets.strawberry_seed_bordered_sprite.setPosition(80,0);
+                    this->window->draw(assets.strawberry_seed_bordered_sprite);
+                case 2: //carrot 2
+                     assets.carrot_seed_bordered_sprite.setPosition(160,0);
+                    this->window->draw(assets.carrot_seed_bordered_sprite);
+                case 3: //potato 3
+                    assets.potato_seed_bordered_sprite.setPosition(240,0);
+                    this->window->draw(assets.potato_seed_bordered_sprite);
+                case 4: //cow 4
+                    assets.cow_bordered_sprite.setPosition(320,0);
+                    this->window->draw(assets.cow_bordered_sprite);
+                case 5: //pig 5
+                    assets.pig_bordered_sprite.setPosition(400,0);
+                    this->window->draw(assets.pig_bordered_sprite);
+                case 6: //chicken 6
+                    assets.chicken_bordered_sprite.setPosition(400,0);
+                    this->window->draw(assets.chicken_bordered_sprite);
+        }
+    }
+        //game function
+    if (sf::Mouse::isButtonPressed(sf::Mouse::Left)){ //
+        int plotNumber = 0;
+        if (gameState.getSeedSelected() > 0) { //check if seed is selected then check if sufficient funds then set plots
+            for (int i = 0; i < 3; i++) { //for 3 horizontal
+                for (int j = 0; j < 3; j++) { //for 3 vertical
+                    plotNumber = plotNumber + 1;
+                    if (((mousePositionWindow.x >= 240+160*i) && (mousePositionWindow.x <= 80+ 240+160*i))&&((mousePositionWindow.y >= 400+160*j) && mousePositionWindow.y <= 80+400+160*j)) {
+                        gameState.buyEntity(plotNumber, gameState.getSeedSelected()); //plot number and pointer to entity
+                        gameState.(*plotTexture[plotNumber]).loadFromFile("./gameObjects/assets/empty_tile.png"); //how tf do I make texture :( get what in crop then set texture here ig, then store in an array to replace all after window reset.
+                (*plotSprite[plotNumber]).setTexture(*plotTexture[plotNumber]);
+                (*plotSprite[plotNumber]).setPosition(240+160*i,400+160*j); //(x,2)
+                this->window->draw(*plotSprite[plotNumber]);
+            }
+        }
+        }
+    }
+    if (sf::Mouse::isButtonPressed(sf::Mouse::Right)){ // sell
+        int plotNumber = 0;
+        if (gameState.getSeedSelected() > 0) { //check if seed is selected then check if sufficient funds then set plots
+            for (int i = 0; i < 3; i++) { //for 3 horizontal
+                for (int j = 0; j < 3; j++) { //for 3 vertical
+                    plotNumber = plotNumber + 1;
+                    if (((mousePositionWindow.x >= 240+160*i) && (mousePositionWindow.x <= 80+ 240+160*i))&&((mousePositionWindow.y >= 400+160*j) && mousePositionWindow.y <= 80+400+160*j)) {
+                        if () {//crop grown
+                        gameState.buyEntity(plotNumber, gameState.getSeedSelected()); //plot number and pointer to entity
+                        gameState.(*plotTexture[plotNumber]).loadFromFile("./gameObjects/assets/empty_tile.png"); //how tf do I make texture :( get what in crop then set texture here ig, then store in an array to replace all after window reset.
+                (*plotSprite[plotNumber]).setTexture(*plotTexture[plotNumber]);
+                (*plotSprite[plotNumber]).setPosition(240+160*i,400+160*j); //(x,2)
+                this->window->draw(*plotSprite[plotNumber]);
+            }
+        }
         }
     }
 }
-
-//render/visualise/display game function
-void gameEngine::draw() { //draw all sprites
-    
 }
+}
+//render/visualise/display game function
 
 void gameEngine::render(assets assets, GameState gameState) {
-    this->window->clear(sf::Color(0,255,0,255)); //clear old stuff
     assets.setBaseScreen(gameState, *this->window);
     //updates I guess
     this->window->display(); //display new stuff
