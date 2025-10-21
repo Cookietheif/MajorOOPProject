@@ -1,18 +1,17 @@
 #ifndef CHICKEN_H
 #define CHICKEN_H
 
-#include "animals.h"
-
+#include "coding/Entities/animals.h"
 
 class Chicken : public Animals {
 public:
-    Chicken();                      
-    virtual ~Chicken();             
+    Chicken();
+    ~Chicken() override = default;
 
-    void grow();                    
-    int sellAnimal() override;      
-    int sellProduce() override;     
-    void seasonalMod(const gameEngine& engine) override; 
+    int sellAnimal(GameState& state) override;
+    int sellProduce(GameState& state) override;
+    void seasonalMod(const GameState& state) override;
+    void grow(const GameState& state) override;
 };
 
 #endif

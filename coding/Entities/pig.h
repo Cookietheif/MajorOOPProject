@@ -1,24 +1,19 @@
 #ifndef PIG_H
 #define PIG_H
 
-#include "animals.h"
-#include <string>
+#include "coding/Entities/animals.h"
 
 class Pig : public Animals {
 private:
-    int valueIncrement;  // How much the sell price increases per turn
-
+    double currentValue;
 public:
     Pig();
-    virtual ~Pig();
+    ~Pig() override = default;
 
-    // Override virtual functions
-    virtual int sellAnimal() override;
-    virtual int sellProduce() override;
-    virtual void seasonalMod(const gameEngine& engine) override;
-
-    // New: grow increases the pig's sell value
-    virtual void grow() override;
+    int sellAnimal(GameState& state) override;
+    int sellProduce(GameState& state) override;
+    void seasonalMod(const GameState& state) override;
+    void grow(const GameState& state) override;
 };
 
 #endif

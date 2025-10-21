@@ -1,29 +1,21 @@
-#include "pig.h"
-#include <iostream>
+#include "coding/Entities/pig.h"
+#include "coding/gameEngine/gameObjects/gameState/gameState.h"
+#include <cmath>
 
-Pig::Pig() {
-    entity_Name = "Pig";
-    priceAnimal = 50;      // Base sell value
-    priceProduce = 0;      // Pigs have no per-turn produce
-    valueIncrement = 10;   // Increase in sell value per turn
+Pig::Pig() : Animals(400, 0, 0, 220) {
+    // Pig starts at 75% of its buy value
+    sellPrice = static_cast<int>(std::round(buyPrice * 0.75));
+    produceAmount = 0;
 }
 
-Pig::~Pig() {}
-
-int Pig::sellAnimal() {
-    return priceAnimal;
+int Pig::sellAnimal(GameState& state) {
+    int money = sellPrice;
+    state.modifyMoney(money);
+    return money;
 }
 
-int Pig::sellProduce() {
-    return 0; // No produce
-}
 
-void Pig::seasonalMod(const gameEngine& engine) {
-    // Pigs are not affected by season in this example
+void Pig::grow(const GameState& state) {
+    // Increase value by 20% each turn
+    sellPrice = static_cast<int>(std::round(sellPrice * 1.2));
 }
-
-void Pig::grow() {
-    priceAnimal += valueIncrement; // Increase sell value each turn
-    std::cout << entity_Name << " grew! New value: $" << priceAnimal << std::endl;
-}
-

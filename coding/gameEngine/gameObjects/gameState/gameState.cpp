@@ -1,22 +1,15 @@
 #include "coding/gameEngine/gameObjects/gameState/gameState.h"
-#include "coding/Entities/potato.h"
-#include "coding/Entities/carrot.h"
-#include "coding/Entities/strawberry.h"
-#include "coding/Entities/cow.h"
-#include "coding/Entities/chicken.h"
-#include "coding/Entities/pig.h"
+#include <iostream>
 
 GameState::GameState() {
     turnNumber = 1;
     money = 1000;
     currentSeason = 1;
 
-    // Initialize all plots as empty
     plot1 = plot2 = plot3 = plot4 = plot5 = plot6 = plot7 = plot8 = plot9 = nullptr;
 }
 
 GameState::~GameState() {
-    // Clean up any remaining entities
     Entity* plots[9] = { plot1, plot2, plot3, plot4, plot5, plot6, plot7, plot8, plot9 };
     for (auto& p : plots) {
         delete p;
@@ -40,34 +33,17 @@ Entity* GameState::getPlot(int index) const {
 }
 
 bool GameState::buyEntity(int plotNumber, Entity* newEntity) {
-    // Check for valid plot
-    Entity*& plotRef = *([&]() -> Entity** {
-        switch (plotNumber) {
-            case 1: return &plot1;
-            case 2: return &plot2;
-            case 3: return &plot3;
-            case 4: return &plot4;
-            case 5: return &plot5;
-            case 6: return &plot6;
-            case 7: return &plot7;
-            case 8: return &plot8;
-            case 9: return &plot9;
-            default: return &plot1;
-        }
-    })();
+    Entity* plots[9] = { plot1, plot2, plot3, plot4, plot5, plot6, plot7, plot8, plot9 };
+    if (plotNumber < 1 || plotNumber > 9) return false;
+
+    Entity*& plotRef = plots[plotNumber - 1];
 
     if (plotRef != nullptr) {
         std::cout << "Plot " << plotNumber << " already occupied!\n";
         return false;
     }
 
-    // Determine cost (using price from crop or animal)
-    Crops* c = dynamic_cast<Crops*>(newEntity);
-    Animals* a = dynamic_cast<Animals*>(newEntity);
-
-    int cost = 0;
-    if (c) cost = c->getPrice();
-    else if (a) cost = a->getPriceAnimal();
+    int cost = newEntity->getBuyPrice();
 
     if (money < cost) {
         std::cout << "Not enough money!\n";
@@ -77,50 +53,53 @@ bool GameState::buyEntity(int plotNumber, Entity* newEntity) {
 
     money -= cost;
     plotRef = newEntity;
+    newEntity->onBuy(*this);
 
-    std::cout << "Bought " << newEntity->getName() << " for $" << cost 
+    switch (plotNumber) {
+        case 1: plot1 = plotRef; break;
+        case 2: plot2 = plotRef; break;
+        case 3: plot3 = plotRef; break;
+        case 4: plot4 = plotRef; break;
+        case 5: plot5 = plotRef; break;
+        case 6: plot6 = plotRef; break;
+        case 7: plot7 = plotRef; break;
+        case 8: plot8 = plotRef; break;
+        case 9: plot9 = plotRef; break;
+    }
+
+    std::cout << "Bought " << newEntity->getName() << " for $" << cost
               << " and placed it in plot " << plotNumber << ".\n";
     return true;
 }
 
 bool GameState::sellEntity(int plotNumber) {
-    Entity*& plotRef = *([&]() -> Entity** {
-        switch (plotNumber) {
-            case 1: return &plot1;
-            case 2: return &plot2;
-            case 3: return &plot3;
-            case 4: return &plot4;
-            case 5: return &plot5;
-            case 6: return &plot6;
-            case 7: return &plot7;
-            case 8: return &plot8;
-            case 9: return &plot9;
-            default: return &plot1;
-        }
-    })();
+    Entity* plots[9] = { plot1, plot2, plot3, plot4, plot5, plot6, plot7, plot8, plot9 };
+    if (plotNumber < 1 || plotNumber > 9) return false;
+
+    Entity*& plotRef = plots[plotNumber - 1];
 
     if (!plotRef) {
         std::cout << "No entity in plot " << plotNumber << " to sell.\n";
         return false;
     }
 
-    int income = 0;
-    if (auto c = dynamic_cast<Crops*>(plotRef)) {
-        if (c->isReadyToHarvest()) {
-            income = c->sellCrop();
-            std::cout << "Harvested " << c->getName() << " for $" << income << "!\n";
-        } else {
-            std::cout << c->getName() << " is not ready to harvest.\n";
-            return false;
-        }
-    } else if (auto a = dynamic_cast<Animals*>(plotRef)) {
-        income = a->sellAnimal();
-        std::cout << "Sold " << a->getName() << " for $" << income << "!\n";
-    }
-
+    int income = plotRef->sell(*this);
     money += income;
+
     delete plotRef;
     plotRef = nullptr;
+
+    switch (plotNumber) {
+        case 1: plot1 = nullptr; break;
+        case 2: plot2 = nullptr; break;
+        case 3: plot3 = nullptr; break;
+        case 4: plot4 = nullptr; break;
+        case 5: plot5 = nullptr; break;
+        case 6: plot6 = nullptr; break;
+        case 7: plot7 = nullptr; break;
+        case 8: plot8 = nullptr; break;
+        case 9: plot9 = nullptr; break;
+    }
 
     return true;
 }
@@ -133,11 +112,10 @@ void GameState::nextTurn() {
 
 void GameState::updateSeason() {
     int month = (turnNumber - 1) % 12;
-
-    if (month < 3) currentSeason = 1; //spring
-    else if ((month >= 3) && (month < 6)) currentSeason = 2; //summer
-    else if ((month >= 6) && (month < 9)) currentSeason = 3; //autumn
-    else currentSeason = 4; //winter
+    if (month < 3) currentSeason = 1;        // spring
+    else if (month < 6) currentSeason = 2;   // summer
+    else if (month < 9) currentSeason = 3;   // autumn
+    else currentSeason = 4;                  // winter
 }
 
 void GameState::growAll() {
@@ -146,8 +124,8 @@ void GameState::growAll() {
         if (!p) continue;
 
         if (auto c = dynamic_cast<Crops*>(p))
-            c->grow();
+            c->grow(*this);
         else if (auto a = dynamic_cast<Animals*>(p))
-            a->grow();
+            a->grow(*this);
     }
 }

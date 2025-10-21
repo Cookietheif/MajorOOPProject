@@ -1,28 +1,18 @@
 #ifndef CARROT_H
 #define CARROT_H
 
-#include <SFML/Graphics.hpp>
-
-#include "./crops.h"
+#include "crops.h"
 
 class Carrot : public Crops {
 public:
-    sf::Texture seedTexture;
-    sf::Texture ungrownTexture;
-    sf::Texture grownTexture;
-    sf::Sprite seedSprite;
-    sf::Sprite ungrownSprite;
-    sf::Sprite grownSprite;
-    
     Carrot();
-    virtual ~Carrot();
+    ~Carrot() override = default;
 
-    void initialiseAsset();
-    
-    int sellCrop() override;       
-    void seasonalMod(const gameEngine& engine) override;
-   
+    int sellCrop() override;
+    void seasonalMod(const GameState& state);
+
+    int getUngrownID() const { return ungrown_ID; }
+    int getGrownID() const { return grown_ID; }
 };
 
-#endif 
- 
+#endif

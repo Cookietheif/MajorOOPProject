@@ -1,31 +1,43 @@
-#include "crops.h"
-#include <iostream>
+#include "coding/Entities/crops.h"
+#include "coding/gameEngine/gameObjects/gameState/gameState.h"
 
+Crops::Crops(int buy, int sell, int growTime, int good, int bad, int ID)
+    : buyPrice(buy), sellPrice(sell), growthTime(growTime),
+      currentAge(0), goodSeason(good), badSeason(bad),
+      ungrown_ID(ID), grown_ID(ID+1) {}
 
-Crops::Crops()
-    : yield(0),
-      price(0),
-      growthTime(0),
-      currentAge(0)
-{
-    entity_Name = "Unnamed Crop";
-    entity_ID = 0;
-    std::cout << "Crop entity created: " << entity_Name << std::endl;
+void Crops::onBuy(GameState& state) {
+    state.modifyMoney(-buyPrice);
+    currentAge = 0;
 }
 
-
-Crops::~Crops() {
-    std::cout << "Crop entity destroyed: " << entity_Name << std::endl;
+void Crops::grow(const GameState& state) {
+    seasonalMod(state);
+    currentAge++;
 }
-
-
-void Crops::grow() {
-    if (currentAge < growthTime) {
-        currentAge++;
-    }
-}
-
 
 bool Crops::isReadyToHarvest() const {
     return currentAge >= growthTime;
+}
+
+int Crops::sellCrop() {
+    if (isReadyToHarvest()) {
+        currentAge = 0;
+        return sellPrice;
+    }
+    return 0;
+}
+
+void Crops::seasonalMod(const GameState& state) {
+    if (state.getSeason() == goodSeason) growthTime = 1;
+    else if (state.getSeason() == badSeason) growthTime = 3;
+    else growthTime = 2;
+}
+
+int Crops::getCurrentID() const {
+    if (isReadyToHarvest) {
+        return grown_ID;
+    } else {
+       return ungrown_ID;
+    }
 }
