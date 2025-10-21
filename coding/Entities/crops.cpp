@@ -4,7 +4,7 @@
 
 Crops::Crops()
     : yield(0),
-      price(0),
+      buyPrice(0),
       growthTime(0),
       currentAge(0)
 {

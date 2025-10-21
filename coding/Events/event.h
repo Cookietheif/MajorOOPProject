@@ -4,6 +4,7 @@
 #include <iostream>
 #include <cmath>
 #include <chrono>
+#include "gameState.h"
 
 class event {
     protected:
@@ -13,7 +14,7 @@ class event {
 
     public:
     event();
-    virtual void spin();
+    virtual int spin();
 };
 
 #endif

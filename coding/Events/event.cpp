@@ -11,6 +11,6 @@ event::event(){
     eventAge = 0;
 }
 
-void event::spin(){
-    // nothing
+int event::spin(){
+    return 1;
 }

@@ -6,7 +6,7 @@
 class disease : public event {
     public:
     disease();
-    void spin();
+    int spin();
 };
 
 #endif

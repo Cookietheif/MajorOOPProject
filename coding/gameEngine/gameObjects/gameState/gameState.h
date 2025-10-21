@@ -51,6 +51,9 @@ public:
 
     // Growth and progression
     void growAll();
+
+    // Event management
+    void spinEvent();
 };
 
 #endif

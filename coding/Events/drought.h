@@ -6,7 +6,7 @@
 class drought : public event {
     public:
     drought();
-    void spin();
+    int spin();
 };
 
 #endif

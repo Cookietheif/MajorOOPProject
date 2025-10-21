@@ -1,21 +1,22 @@
-#include "pests.h"
+#include "event.h"
+#include "boost.h"
 
-pests::pests(){
-    likelihood = 0.2;
+boost::boost(){
+    likelihood = 5;
     duration = 3;
 }
 
-int pests::spin(){
+int boost::spin(){
     std::mt19937 rng(std::chrono::steady_clock::now().time_since_epoch().count());
     std::uniform_int_distribution<int> dist(0,99);
     int rnum = dist(rng);
     std::cout << rnum << std::endl;
 
     if (rnum < likelihood){
-        return 0.8;
+        return 2;
     }
     else {
         return 1;
-    }   
+    }
     
 }

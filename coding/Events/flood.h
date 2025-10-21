@@ -4,8 +4,9 @@
 #include "event.h"
 
 class flood : public event {
+    public:
     flood();
-    void spin();
+    int spin();
 };
 
 #endif

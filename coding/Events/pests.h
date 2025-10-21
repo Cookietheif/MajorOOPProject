@@ -6,7 +6,7 @@
 class pests : public event {
     public:
     pests();
-    void spin();
+    int spin();
 };
 
 #endif
