@@ -7,10 +7,8 @@
 
 event::event(){
     likelihood = 20;
-    duration = 3;
-    eventAge = 0;
 }
 
-int event::spin(){
-    return 1;
+double event::spin(){
+    return 1.0;
 }

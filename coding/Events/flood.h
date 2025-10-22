@@ -5,8 +5,8 @@
 
 class flood : public event {
     public:
-    flood();
-    int spin();
+    flood();    
+    double spin(); // overiding virtual function
 };
 
 #endif

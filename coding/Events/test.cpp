@@ -1,6 +1,10 @@
 #include "event.h"
+#include "drought.h"
+#include "pests.h"
 
 int main(){
-    event e = event();
-    e.spin();
+    event* e = new event();
+    pests* d = new pests();
+    e = d;
+    e->spin();
 }

@@ -2,21 +2,20 @@
 #include "drought.h"
 
 drought::drought(){
-    likelihood = 20;
-    duration = 3;
+    likelihood = 20; // setting the likelihood of the event
 }
 
-int drought::spin(){
+double drought::spin(){
     std::mt19937 rng(std::chrono::steady_clock::now().time_since_epoch().count());
-    std::uniform_int_distribution<int> dist(0,99);
-    int rnum = dist(rng);
-    std::cout << rnum << std::endl;
+    std::uniform_int_distribution<int> dist(0,99); // creating a uniformally distributed random variable between 0 and 99
+    int rnum = dist(rng); // generating a random number between 0 and 99 
 
-    if (rnum < likelihood){
-        return 0.8;
+    if (rnum < likelihood){ // 20% chance of event hitting
+        std::cout << "DROUGHT HAS HIT! YOUR BALANCE HAS BEEN DOUBLED!" << std::endl;
+        return 0.8; // if it hits message displayed and money multiplier returned
     }
     else {
-        return 1;
-    }   
+        return 1.0; // if not then money multiplied by 1 (stays the same)
+    }  
     
 }

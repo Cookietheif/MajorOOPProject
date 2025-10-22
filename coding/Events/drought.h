@@ -6,7 +6,7 @@
 class drought : public event {
     public:
     drought();
-    int spin();
+    double spin(); // overiding virtual function
 };
 
 #endif

@@ -6,7 +6,7 @@
 class disease : public event {
     public:
     disease();
-    int spin();
+    double spin(); // overiding virtual function
 };
 
 #endif

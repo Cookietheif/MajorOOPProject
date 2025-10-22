@@ -6,7 +6,7 @@
 class pests : public event {
     public:
     pests();
-    int spin();
+    double spin(); // overiding virtual function
 };
 
 #endif

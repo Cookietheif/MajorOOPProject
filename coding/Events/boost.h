@@ -6,7 +6,7 @@
 class boost : public event {
     public:
     boost();
-    int spin();
+    double spin(); // overiding virtual function
 };
 
 #endif
