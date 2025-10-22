@@ -43,7 +43,8 @@ assets::assets() {
 
     if (!chicken_texture.loadFromFile("coding/gameEngine/gameObjects/assets/chicken.png")) std::cerr << "Failed to load chicken.png\n";
     chicken_sprite.setTexture(chicken_texture);
-
+    chicken_sprite.setScale(5.f,5.f);
+    
     if (!coin_texture.loadFromFile("coding/gameEngine/gameObjects/assets/coin.png")) std::cerr << "Failed to load coin.png\n";
     coin_sprite.setTexture(coin_texture);
     coin_sprite.setScale(5.f,5.f);
@@ -191,10 +192,10 @@ void assets::setBaseScreen(GameState gameState, sf::RenderWindow& window) {
         }
     //gates
         //left
-        shaded_fence_gate_left_sprite.setPosition(640,160); //(7,2)
+        shaded_fence_gate_left_sprite.setPosition(560,160); //(7,2)
         window.draw(shaded_fence_gate_left_sprite);
         //right
-        shaded_fence_gate_right_sprite.setPosition(720,160); //(8,2)
+        shaded_fence_gate_right_sprite.setPosition(640,160); //(8,2)
         window.draw(shaded_fence_gate_right_sprite);
     //plots
         int plotNumber = 0;
