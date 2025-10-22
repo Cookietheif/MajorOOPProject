@@ -13,7 +13,15 @@
 #include "strawberry.h" 
 
 #include "gameEngine.h"
-//#include "coding/Entities/entity.cpp"
+
+gameEngine::gameEngine() {
+    GameState gameState;
+    assets assets;
+    
+    gameEngine::initialiseVariables();
+    gameEngine::initialiseWindow(assets, gameState);
+};
+
 
 //private functions
 void gameEngine::initialiseVariables() {
@@ -30,13 +38,6 @@ void gameEngine::initialiseWindow(assets assets, GameState gameState) {
 
 //public functions
 // constructor
-gameEngine::gameEngine() {
-    GameState gameState;
-    assets assets;
-    
-    gameEngine::initialiseVariables();
-    gameEngine::initialiseWindow(assets, gameState);
-};
 
 //game function
 void gameEngine::pollEvents() {while (this->window->pollEvent(gameEvent)) //loop for game again - constant checking for game end

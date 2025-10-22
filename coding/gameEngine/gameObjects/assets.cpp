@@ -1,6 +1,7 @@
 #include "assets.h"
 #include "gameState.h"
 #include <string>
+#include <iostream>
 
 assets::assets() {
 //text font
@@ -223,6 +224,7 @@ void assets::maintainPlots(GameState gameState, sf::RenderWindow& window) { //ch
             plotSprite[plotNumber].setTexture(chicken_harvestable_texture);
             window.draw(plotSprite[plotNumber]);
             default:
+            std::cout << "all is well \n";
             }
         delete entityPlaceholder;
         plotNumber = plotNumber + 1;
