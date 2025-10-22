@@ -2,141 +2,144 @@
 #include "gameState.h"
 #include <string>
 #include <iostream>
+#include <SFML/Graphics.hpp>
 
 assets::assets() {
 //text font
-font.loadFromFile("./assets/font.ttf");
+if (!font.loadFromFile("AppleGaramond.ttf")) {
+    std::cerr << "Failed to load font face\n";
+}
 
 //plot array
 plotSprite[9].setScale(5.f,5.f);
 
 //load and assign assets
-carrot_seed_bordered_texture.loadFromFile("./assets/carrot_seed_bordered.png");
+carrot_seed_bordered_texture.loadFromFile("carrot_seed_bordered.png");
 carrot_seed_bordered_sprite.setTexture(carrot_seed_bordered_texture);
 carrot_seed_bordered_sprite.setScale(5.f,5.f);
 
-carrot_seed_texture.loadFromFile("./assets/carrot_seed.png");
+carrot_seed_texture.loadFromFile("carrot_seed.png");
 carrot_seed_sprite.setTexture(carrot_seed_texture);
 carrot_seed_sprite.setScale(5.f,5.f);
 
-carrot_tile_grown_texture.loadFromFile("./assets/carrot_tile_grown.png");
+carrot_tile_grown_texture.loadFromFile("carrot_tile_grown.png");
 carrot_tile_grown_sprite.setTexture(carrot_tile_grown_texture);
 carrot_tile_grown_sprite.setScale(5.f,5.f);
 
-carrot_tile_texture.loadFromFile("./assets/carrot_tile.png");
+carrot_tile_texture.loadFromFile("carrot_tile.png");
 carrot_tile_sprite.setTexture(carrot_tile_texture);
 carrot_tile_sprite.setScale(5.f,5.f);
 
-chicken_bordered_texture.loadFromFile("./assets/chicken_bordered.png");
+chicken_bordered_texture.loadFromFile("chicken_bordered.png");
 chicken_bordered_sprite.setTexture(chicken_bordered_texture);
 chicken_bordered_sprite.setScale(5.f,5.f);
 
-chicken_harvestable_texture.loadFromFile("./assets/chicken_harvestable.png");
+chicken_harvestable_texture.loadFromFile("chicken_harvestable.png");
 chicken_harvestable_sprite.setTexture(chicken_harvestable_texture);
 chicken_harvestable_sprite.setScale(5.f,5.f);
 
-chicken_tile_texture.loadFromFile("./assets/chicken_tile.png");
+chicken_tile_texture.loadFromFile("chicken_tile.png");
 chicken_tile_sprite.setTexture(chicken_tile_texture);
 chicken_tile_sprite.setScale(5.f,5.f);
 
-chicken_texture.loadFromFile("./assets/chicken.png");
+chicken_texture.loadFromFile("chicken.png");
 chicken_sprite.setTexture(chicken_texture);
 
-coin_texture.loadFromFile("./assets/coin.png");
+coin_texture.loadFromFile("coin.png");
 coin_sprite.setTexture(coin_texture);
 coin_sprite.setScale(5.f,5.f);
 
-cow_bordered_texture.loadFromFile("./assets/cow_bordered.png");
+cow_bordered_texture.loadFromFile("cow_bordered.png");
 cow_bordered_sprite.setTexture(cow_bordered_texture);
 cow_bordered_sprite.setScale(5.f,5.f);
 
-cow_harvestable_texture.loadFromFile("./assets/cow_harvestable.png");
+cow_harvestable_texture.loadFromFile("cow_harvestable.png");
 cow_harvestable_sprite.setTexture(cow_harvestable_texture);
 cow_harvestable_sprite.setScale(5.f,5.f);
 
-cow_tile_texture.loadFromFile("./assets/cow_tile.png");
+cow_tile_texture.loadFromFile("cow_tile.png");
 cow_tile_sprite.setTexture(cow_tile_texture);
 cow_tile_sprite.setScale(5.f,5.f);
 
-cow_texture.loadFromFile("./assets/cow.png");
+cow_texture.loadFromFile("cow.png");
 cow_sprite.setTexture(cow_texture);
 cow_sprite.setScale(5.f,5.f);
 
-dead_tree_texture.loadFromFile("./assets/dead_tree.png");
+dead_tree_texture.loadFromFile("dead_tree.png");
 dead_tree_sprite.setTexture(dead_tree_texture);
 dead_tree_sprite.setScale(5.f,5.f);
 
-empty_tile_texture.loadFromFile("./assets/empty_tile.png");
+empty_tile_texture.loadFromFile("empty_tile.png");
 empty_tile_sprite.setTexture(empty_tile_texture);
 empty_tile_sprite.setScale(5.f,5.f);
 
-pig_bordered_texture.loadFromFile("./assets/pig_bordered.png");
+pig_bordered_texture.loadFromFile("pig_bordered.png");
 pig_bordered_sprite.setTexture(pig_bordered_texture);
 pig_bordered_sprite.setScale(5.f,5.f);
 
-pig_tile_texture.loadFromFile("./assets/pig_tile.png");
+pig_tile_texture.loadFromFile("pig_tile.png");
 pig_tile_sprite.setTexture(pig_tile_texture);
 pig_tile_sprite.setScale(5.f,5.f);
 
-pig_texture.loadFromFile("./assets/pig.png");
+pig_texture.loadFromFile("pig.png");
 pig_sprite.setTexture(pig_texture);
 pig_sprite.setScale(5.f,5.f);
 
-potato_seed_bordered_texture.loadFromFile("./assets/potato_seed_bordered.png");
+potato_seed_bordered_texture.loadFromFile("potato_seed_bordered.png");
 potato_seed_bordered_sprite.setTexture(potato_seed_bordered_texture);
 potato_seed_bordered_sprite.setScale(5.f,5.f);
 
-potato_seed_texture.loadFromFile("./assets/potato_seed.png");
+potato_seed_texture.loadFromFile("potato_seed.png");
 potato_seed_sprite.setTexture(potato_seed_texture);
 potato_seed_sprite.setScale(5.f,5.f);
 
-potato_tile_grown_texture.loadFromFile("./assets/potato_tile_grown.png");
+potato_tile_grown_texture.loadFromFile("potato_tile_grown.png");
 potato_tile_grown_sprite.setTexture(potato_tile_grown_texture);
 potato_tile_grown_sprite.setScale(5.f,5.f);
 
-potato_tile_texture.loadFromFile("./assets/potato_tile.png");
+potato_tile_texture.loadFromFile("potato_tile.png");
 potato_tile_sprite.setTexture(potato_tile_texture);
 potato_tile_sprite.setScale(5.f,5.f);
 
-rain_texture.loadFromFile("./assets/rain.png");
+rain_texture.loadFromFile("rain.png");
 rain_sprite.setTexture(rain_texture);
 rain_sprite.setScale(5.f,5.f);
 
-shaded_fence_gate_left_texture.loadFromFile("./assets/shaded_fence_gate_left.png");
+shaded_fence_gate_left_texture.loadFromFile("shaded_fence_gate_left.png");
 shaded_fence_gate_left_sprite.setTexture(shaded_fence_gate_left_texture);
 shaded_fence_gate_left_sprite.setScale(5.f,5.f);
 
-shaded_fence_gate_right_texture.loadFromFile("./assets/shaded_fence_gate_right.png");
+shaded_fence_gate_right_texture.loadFromFile("shaded_fence_gate_right.png");
 shaded_fence_gate_right_sprite.setTexture(shaded_fence_gate_right_texture);
 shaded_fence_gate_right_sprite.setScale(5.f,5.f);
 
-shaded_fence_texture.loadFromFile("./assets/shaded_fence.png");
+shaded_fence_texture.loadFromFile("shaded_fence.png");
 for (int i = 0; i < 7; i++) { //from 1st to 7th tile fence, 8 & 9 gates
     (shaded_fence_sprite[i]).setTexture(shaded_fence_texture);
     (shaded_fence_sprite[i]).setScale(5.f,5.f);
 }
 
-strawberry_seed_bordered_texture.loadFromFile("./assets/strawberry_seed_bordered.png");
+strawberry_seed_bordered_texture.loadFromFile("strawberry_seed_bordered.png");
 strawberry_seed_bordered_sprite.setTexture(strawberry_seed_bordered_texture);
 strawberry_seed_bordered_sprite.setScale(5.f,5.f);
 
-strawberry_seed_texture.loadFromFile("./assets/strawberry_seed.png");
+strawberry_seed_texture.loadFromFile("strawberry_seed.png");
 strawberry_seed_sprite.setTexture(strawberry_seed_texture);
 strawberry_seed_sprite.setScale(5.f,5.f);
 
-strawberry_tile_grown_texture.loadFromFile("./assets/strawberry_tile_grown.png");
+strawberry_tile_grown_texture.loadFromFile("strawberry_tile_grown.png");
 strawberry_tile_grown_sprite.setTexture(strawberry_tile_grown_texture);
 strawberry_tile_grown_sprite.setScale(5.f,5.f);
 
-strawberry_tile_texture.loadFromFile("./assets/strawberry_tile.png");
+strawberry_tile_texture.loadFromFile("strawberry_tile.png");
 strawberry_tile_sprite.setTexture(strawberry_tile_texture);
 strawberry_tile_sprite.setScale(5.f,5.f);
 
-sun1_texture.loadFromFile("./assets/sun1.png");
+sun1_texture.loadFromFile("sun1.png");
 sun1_sprite.setTexture(sun1_texture);
 sun1_sprite.setScale(5.f,5.f);
 
-sun2_texture.loadFromFile("./assets/sun2.png");
+sun2_texture.loadFromFile("sun2.png");
 sun2_sprite.setTexture(sun2_texture);
 sun2_sprite.setScale(5.f,5.f);
 
