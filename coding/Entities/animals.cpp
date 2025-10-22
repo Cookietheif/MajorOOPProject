@@ -1,5 +1,5 @@
-#include "coding/Entities/animals.h"
-#include "coding/gameEngine/gameObjects/gameState/gameState.h"
+#include "animals.h"
+#include "gameState.h"
 
 Animals::Animals(int buy, int sell, int value, int ID)
     : buyPrice(buy), sellPrice(sell), produceValue(value), currentAge(0),

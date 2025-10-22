@@ -2,7 +2,7 @@
 #define ANIMALS_H
 
 #include <string>
-#include "coding/Entities/entity.h"
+#include "entity.h"
 
 class GameState;
 

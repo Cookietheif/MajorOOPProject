@@ -1,5 +1,5 @@
-#include "coding/Entities/cow.h"
-#include "coding/gameEngine/gameObjects/gameState/gameState.h"
+#include "cow.h"
+#include "gameState.h"
 
 Cow::Cow() : Animals(500, 250, 50, 7) {
     produceAmount = 0;

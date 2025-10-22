@@ -1,11 +1,13 @@
-#include "./assets.h"
-#include "./gameState/gameState.h"
-#include <string>
 #include "assets.h"
+#include "gameState.h"
+#include <string>
 
 assets::assets() {
 //text font
 font.loadFromFile("./assets/font.ttf");
+
+//plot array
+plotSprite[9].setScale(5.f,5.f);
 
 //load and assign assets
 carrot_seed_bordered_texture.loadFromFile("./assets/carrot_seed_bordered.png");
@@ -136,21 +138,22 @@ sun1_sprite.setScale(5.f,5.f);
 sun2_texture.loadFromFile("./assets/sun2.png");
 sun2_sprite.setTexture(sun2_texture);
 sun2_sprite.setScale(5.f,5.f);
-};
 
-assets::~assets() {};
-
-void assets::setTextures(GameState gameState) {
 moneyText.setFont(font);
 moneyText.setFillColor(sf::Color::Black);
 moneyText.setPosition(740,30);
 moneyText.setCharacterSize(1); //text size, mess around and see
+};
+
+assets::~assets() {};
+
+void assets::setText(GameState gameState) {
 std::string moneyCount = std::to_string(gameState.getMoney()); //gets int from gamestate and converts to string for display
 moneyText.setString(moneyCount);
 }
 
-void assets::setBaseScreen(GameState gameState, sf::RenderWindow& window) {
-    //season
+void assets::setSeason(GameState gameState, sf::RenderWindow& window) {
+        //season
     switch (gameState.getSeason())
     {
     case 1: //spring
@@ -166,6 +169,10 @@ void assets::setBaseScreen(GameState gameState, sf::RenderWindow& window) {
     sun2_sprite.setPosition(0,0); //(0,0)
     window.draw(sun2_sprite);
     };
+}
+
+void assets::setBaseScreen(GameState gameState, sf::RenderWindow& window) {
+    setSeason(gameState, window);
     setSeeds(window);
     //coin symbol //probably move this bit to other function
     coin_sprite.setPosition(560,0); //(7,0)
@@ -183,39 +190,68 @@ void assets::setBaseScreen(GameState gameState, sf::RenderWindow& window) {
         shaded_fence_gate_right_sprite.setPosition(720,0); //(8,2)
         window.draw(shaded_fence_gate_right_sprite);
     //plots
-        sf::Texture* plotTexture[9];
-        sf::Sprite* plotSprite[9];
-        int plotNumber = 0;
+        int plotNumber = 1;
         for (int i = 0; i < 3; i++) { //for 3 horizontal
             for (int j = 0; i < 3; i++) { //for 3 vertical
-            (*plotTexture[plotNumber]).loadFromFile("./gameObjects/assets/empty_tile.png");
-            (*plotSprite[plotNumber]).setTexture(*plotTexture[plotNumber]);
-            (*plotSprite[plotNumber]).setPosition(240+160*i,400+160*j); //(x,2)
-            this->window->draw(*plotSprite[plotNumber]);
+            (plotSprite[plotNumber]).setTexture(empty_tile_texture);
+            (plotSprite[plotNumber]).setPosition(240+160*i,400+160*j); //(x,2)
+            window.draw(plotSprite[plotNumber]);
             plotNumber = plotNumber + 1;
             }
         }
 }
+/*
+void assets::maintainPlots(GameState gameState, sf::RenderWindow& window) { //check if grown, update when grown
+    int plotNumber = 1;
+    for (int i = 0; i < 3; i++) { //for 3 horizontal
+        for (int j = 0; j < 3; j++) { //for 3 vertical
+            if (gameState.getPlot(plotNumber).) {//check if newly grown
+            plotNumber = plotNumber + 1;
+            Crops::isReadyToHarvest();
+            draw()
+            }
+        }
+    }
+} */
+
+sf::Texture assets::dereferenceSeed(int seedNum) {
+    switch (seedNum) {
+        case 1: //strawberry
+            return strawberry_tile_texture;
+        case 2: //carrot
+            return carrot_tile_texture;
+        case 3: //potato
+            return potato_tile_texture;
+        case 4: //cow
+            return cow_tile_texture;
+        case 5: //pig
+            return pig_tile_texture;
+        case 6: //chicken
+            return chicken_tile_texture;
+        default:
+            return empty_tile_texture;
+        };
+};
 
 void assets::setSeeds(sf::RenderWindow& window) {//shoppable
-    
-        //seeds
-            //Strawberry
-            strawberry_seed_sprite.setPosition(80,0); //(1,0)
-            window.draw(strawberry_seed_sprite);
-            //Carrot
-            carrot_seed_sprite.setPosition(160,0); //(2,0)
-            window.draw(carrot_seed_sprite);
-            //potato
-            potato_seed_sprite.setPosition(240,0); //(3,0)
-            window.draw(potato_seed_sprite);
-        //animals
-            //cow
-            cow_sprite.setPosition(320,0); //(4,0)
-            window.draw(cow_sprite);
-            //pig
-            pig_sprite.setPosition(400,0); //(5,0)
-            window.draw(pig_sprite);
-            //chicken
-            chicken_sprite.setPosition(480,0); //(6,0)
-            window.draw(chicken_sprite);}
+    //seeds
+        //Strawberry
+        strawberry_seed_sprite.setPosition(80,0); //(1,0)
+        window.draw(strawberry_seed_sprite);
+        //Carrot
+        carrot_seed_sprite.setPosition(160,0); //(2,0)
+        window.draw(carrot_seed_sprite);
+        //potato
+        potato_seed_sprite.setPosition(240,0); //(3,0)
+        window.draw(potato_seed_sprite);
+    //animals
+        //cow
+        cow_sprite.setPosition(320,0); //(4,0)
+        window.draw(cow_sprite);
+        //pig
+        pig_sprite.setPosition(400,0); //(5,0)
+        window.draw(pig_sprite);
+        //chicken
+        chicken_sprite.setPosition(480,0); //(6,0)
+        window.draw(chicken_sprite);
+}

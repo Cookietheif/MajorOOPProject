@@ -1,5 +1,5 @@
-#include "coding/Entities/crops.h"
-#include "coding/gameEngine/gameObjects/gameState/gameState.h"
+#include "crops.h"
+#include "gameState.h"
 
 Crops::Crops(int buy, int sell, int growTime, int good, int bad, int ID)
     : buyPrice(buy), sellPrice(sell), growthTime(growTime),

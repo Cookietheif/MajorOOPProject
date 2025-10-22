@@ -1,5 +1,5 @@
-#include "coding/Entities/pig.h"
-#include "coding/gameEngine/gameObjects/gameState/gameState.h"
+#include "pig.h"
+#include "gameState.h"
 #include <cmath>
 
 Pig::Pig() : Animals(400, 0, 0, 220) {

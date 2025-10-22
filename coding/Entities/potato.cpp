@@ -1,5 +1,5 @@
-#include "coding/Entities/potato.h"
-#include "coding/gameEngine/gameObjects/gameState/gameState.h"
+#include "potato.h"
+#include "gameState.h"
 
 Potato::Potato() 
     : Crops(5, 10, 3, 5, 5, 5)

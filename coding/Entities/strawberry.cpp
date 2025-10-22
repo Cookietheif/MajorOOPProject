@@ -1,5 +1,5 @@
-#include "coding/Entities/strawberry.h"
-#include "coding/gameEngine/gameObjects/gameState/gameState.h"
+#include "strawberry.h"
+#include "gameState.h"
 
 Strawberry::Strawberry() 
     : Crops(5, 10, 2, 2, 4, 1)
