@@ -203,15 +203,22 @@ void assets::setBaseScreen(GameState gameState, sf::RenderWindow& window) {
 
 void assets::maintainPlots(GameState gameState, sf::RenderWindow& window) { //check if grown, update when grown
     int plotNumber = 1;
+    Entity* entityPlaceholder = gameState.getPlot[plotNumber];
     for (int i = 0; i < 3; i++) { //for 3 horizontal
         for (int j = 0; j < 3; j++) { //for 3 vertical
-            if (Crops::isReadyToHarvest()) {//check if newly grown
-            plotNumber = plotNumber + 1;
+            switch (entityPlaceholder->getCurrentID())
+            case 2:
+            
+            case 4:
+            case 6:
+            case 8:
+            case 12:
             window.draw()
             }
+        delete entityPlaceholder;
+        plotNumber = plotNumber + 1;
         }
     }
-}
 
 sf::Texture assets::dereferenceSeed(int seedNum) {
     switch (seedNum) {
