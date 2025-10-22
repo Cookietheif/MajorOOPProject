@@ -148,9 +148,10 @@ moneyText.setCharacterSize(1); //text size, mess around and see
 
 assets::~assets() {};
 
-void assets::setText(GameState gameState) {
+void assets::setText(GameState gameState, sf::RenderWindow& window) {
 std::string moneyCount = std::to_string(gameState.getMoney()); //gets int from gamestate and converts to string for display
 moneyText.setString(moneyCount);
+window.draw(moneyText);
 }
 
 void assets::setSeason(GameState gameState, sf::RenderWindow& window) {
@@ -249,6 +250,8 @@ void assets::maintainPlots(GameState gameState, sf::RenderWindow& window) { //ch
         }
     }
 }
+
+void emptyPlot() {}
 
 sf::Texture assets::dereferenceSeed(int seedNum) {
     switch (seedNum) {

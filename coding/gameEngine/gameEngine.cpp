@@ -133,7 +133,7 @@ void gameEngine::update(assets& assets, GameState& gameState) {
                     gameState.sellEntity(plotNumber); //plot number
                     (assets.plotSprite[plotNumber]).setTexture(assets.empty_tile_texture);
                     this->window->draw(assets.plotSprite[plotNumber]);
-                    assets.setText(gameState);
+                    assets.setText(gameState, *this->window);
                     }
                 }
             }
