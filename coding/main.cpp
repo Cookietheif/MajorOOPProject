@@ -13,8 +13,11 @@ int main()
 {
     //initialise and utilise game engine
     assets assets;
+    std::cout << "fart";
     GameState gameState;
+    std::cout << "shot";
     gameEngine game(assets, gameState);
+    std::cout << "cooter";
 
     while (game.running()) //loop for game runs stuff
     {

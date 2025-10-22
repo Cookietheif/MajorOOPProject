@@ -35,16 +35,16 @@ GameState::~GameState() {
 
 Entity* GameState::getPlot(int index) const {
     switch (index) {
-        case 1: return plot1;
-        case 2: return plot2;
-        case 3: return plot3;
-        case 4: return plot4;
-        case 5: return plot5;
-        case 6: return plot6;
-        case 7: return plot7;
-        case 8: return plot8;
-        case 9: return plot9;
-        default: return nullptr;
+        case 1: return plot1; break;
+        case 2: return plot2; break;
+        case 3: return plot3; break;
+        case 4: return plot4; break;
+        case 5: return plot5; break;
+        case 6: return plot6; break;
+        case 7: return plot7; break;
+        case 8: return plot8; break;
+        case 9: return plot9; break;
+        default: return nullptr; break;
     }
 }
 

@@ -87,21 +87,27 @@ void gameEngine::update(assets& assets, GameState& gameState) {
                 case 1: //strawberry 1
                     assets.strawberry_seed_bordered_sprite.setPosition(80,0);
                     this->window->draw(assets.strawberry_seed_bordered_sprite);
+                    break;
                 case 2: //carrot 2
                      assets.carrot_seed_bordered_sprite.setPosition(160,0);
                     this->window->draw(assets.carrot_seed_bordered_sprite);
+                    break;
                 case 3: //potato 3
                     assets.potato_seed_bordered_sprite.setPosition(240,0);
                     this->window->draw(assets.potato_seed_bordered_sprite);
+                    break;
                 case 4: //cow 4
                     assets.cow_bordered_sprite.setPosition(320,0);
                     this->window->draw(assets.cow_bordered_sprite);
+                    break;
                 case 5: //pig 5
                     assets.pig_bordered_sprite.setPosition(400,0);
                     this->window->draw(assets.pig_bordered_sprite);
+                    break;
                 case 6: //chicken 6
                     assets.chicken_bordered_sprite.setPosition(400,0);
                     this->window->draw(assets.chicken_bordered_sprite);
+                    break;
             }
         }
     }
