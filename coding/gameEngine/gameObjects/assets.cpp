@@ -175,7 +175,7 @@ void assets::setSeason(GameState gameState, sf::RenderWindow& window) {
 void assets::setBaseScreen(GameState gameState, sf::RenderWindow& window) {
     setSeason(gameState, window);
     setSeeds(window);
-    //coin symbol //probably move this bit to other function
+    //coin symbol
     coin_sprite.setPosition(560,0); //(7,0)
     window.draw(coin_sprite);
     //fences
@@ -208,21 +208,39 @@ void assets::maintainPlots(GameState gameState, sf::RenderWindow& window) { //ch
     for (int i = 0; i < 3; i++) { //for 3 horizontal
         for (int j = 0; j < 3; j++) { //for 3 vertical
             switch (entityPlaceholder->getCurrentID()){
+            case 1:
+                plotSprite[plotNumber].setTexture(strawberry_tile_texture);
+                window.draw(plotSprite[plotNumber]);
             case 2:
-            plotSprite[plotNumber].setTexture(strawberry_tile_grown_texture);
-            window.draw(plotSprite[plotNumber]);
+                plotSprite[plotNumber].setTexture(strawberry_tile_grown_texture);
+                window.draw(plotSprite[plotNumber]);
+            case 3:
+                plotSprite[plotNumber].setTexture(carrot_tile_texture);
+                window.draw(plotSprite[plotNumber]);
             case 4:
-            plotSprite[plotNumber].setTexture(carrot_tile_grown_texture);
-            window.draw(plotSprite[plotNumber]);
+                plotSprite[plotNumber].setTexture(carrot_tile_grown_texture);
+                window.draw(plotSprite[plotNumber]);
+            case 5: 
+                plotSprite[plotNumber].setTexture(potato_tile_texture);
+                window.draw(plotSprite[plotNumber]);
             case 6:
-            plotSprite[plotNumber].setTexture(potato_tile_grown_texture);
-            window.draw(plotSprite[plotNumber]);
+                plotSprite[plotNumber].setTexture(potato_tile_grown_texture);
+                window.draw(plotSprite[plotNumber]);
+            case 7:
+                plotSprite[plotNumber].setTexture(cow_tile_texture);
+                window.draw(plotSprite[plotNumber]);
             case 8:
-            plotSprite[plotNumber].setTexture(cow_harvestable_texture);
+                plotSprite[plotNumber].setTexture(cow_harvestable_texture);
+                window.draw(plotSprite[plotNumber]);
+            case 9:
+            plotSprite[plotNumber].setTexture(pig_tile_texture);
             window.draw(plotSprite[plotNumber]);
+            case 11:
+                plotSprite[plotNumber].setTexture(chicken_tile_texture);
+                window.draw(plotSprite[plotNumber]);
             case 12:
-            plotSprite[plotNumber].setTexture(chicken_harvestable_texture);
-            window.draw(plotSprite[plotNumber]);
+                plotSprite[plotNumber].setTexture(chicken_harvestable_texture);
+                window.draw(plotSprite[plotNumber]);
             default:
             std::cout << "all is well \n";
             }

@@ -48,42 +48,15 @@ Entity* GameState::getPlot(int index) const {
     }
 }
 
-bool GameState::buyEntity(int plotNumber, int entityType) {
-    if (plotNumber < 1 || plotNumber > 9) {
-        std::cout << "Invalid plot number!\n";
-        return false;
-    }
+bool GameState::buyEntity(int plotNumber, Entity* newEntity) {
+    Entity* plots[9] = { plot1, plot2, plot3, plot4, plot5, plot6, plot7, plot8, plot9 };
+    if (plotNumber < 1 || plotNumber > 9) return false;
 
-    Entity** plotPtr = nullptr;
-    switch (plotNumber) {
-        case 1: plotPtr = &plot1; break;
-        case 2: plotPtr = &plot2; break;
-        case 3: plotPtr = &plot3; break;
-        case 4: plotPtr = &plot4; break;
-        case 5: plotPtr = &plot5; break;
-        case 6: plotPtr = &plot6; break;
-        case 7: plotPtr = &plot7; break;
-        case 8: plotPtr = &plot8; break;
-        case 9: plotPtr = &plot9; break;
-        default: return false;
-    }
+    Entity*& plotRef = plots[plotNumber - 1];
 
-    if (*plotPtr != nullptr) {
+    if (plotRef != nullptr) {
         std::cout << "Plot " << plotNumber << " already occupied!\n";
         return false;
-    }
-
-    Entity* newEntity = nullptr;
-    switch (entityType) {
-        case 1: newEntity = new Strawberry(); break;
-        case 2: newEntity = new Carrot();     break;
-        case 3: newEntity = new Potato();     break;
-        case 4: newEntity = new Cow();        break;
-        case 5: newEntity = new Pig();        break;
-        case 6: newEntity = new Chicken();    break;
-        default:
-            std::cout << "Invalid entity type!\n";
-            return false;
     }
 
     int cost = newEntity->getBuyPrice();
@@ -95,34 +68,64 @@ bool GameState::buyEntity(int plotNumber, int entityType) {
     else if (a) cost = a->getBuyPrice();
 
     if (money < cost) {
-        std::cout << "Not enough money to buy " << newEntity->getName() << "!\n";
+        std::cout << "Not enough money!\n";
         delete newEntity;
         return false;
     }
 
     money -= cost;
-    *plotPtr = newEntity;
+    plotRef = newEntity;
     newEntity->onBuy(*this);
 
-    std::cout << "Bought " << newEntity->getName()
-              << " for $" << cost
-              << " and placed it in plot " << plotNumber << ".\n";
+    switch (plotNumber) {
+        case 1: plot1 = plotRef; break;
+        case 2: plot2 = plotRef; break;
+        case 3: plot3 = plotRef; break;
+        case 4: plot4 = plotRef; break;
+        case 5: plot5 = plotRef; break;
+        case 6: plot6 = plotRef; break;
+        case 7: plot7 = plotRef; break;
+        case 8: plot8 = plotRef; break;
+        case 9: plot9 = plotRef; break;
+    }
 
+    std::cout << "Bought " << newEntity->getName() << " for $" << cost
+              << " and placed it in plot " << plotNumber << ".\n";
     return true;
 }
 
 bool GameState::sellEntity(int plotNumber) {
-    Entity* entityPlaceholder = getPlot(plotNumber);
-    Animals animalPlaceholder = getPlot(plotNumber);
-    if ((entityPlaceholder->getCurrentID() == 2)||(entityPlaceholder->getCurrentID() == 4)||(entityPlaceholder->getCurrentID() == 6)) {
+    Entity* plots[9] = { plot1, plot2, plot3, plot4, plot5, plot6, plot7, plot8, plot9 };
+    if (plotNumber < 1 || plotNumber > 9) return false;
 
-    } else if ((entityPlaceholder->getCurrentID() == 8)||(entityPlaceholder->getCurrentID() == 12)) {
+    Entity*& plotRef = plots[plotNumber - 1];
 
-    } else {
-
+    if (!plotRef) {
+        std::cout << "No entity in plot " << plotNumber << " to sell.\n";
+        return false;
     }
-    delete entityPlaceholder;
+
+    int income = plotRef->sell(*this);
+    money += income;
+
+    delete plotRef;
+    plotRef = nullptr;
+
+    switch (plotNumber) {
+        case 1: plot1 = nullptr; break;
+        case 2: plot2 = nullptr; break;
+        case 3: plot3 = nullptr; break;
+        case 4: plot4 = nullptr; break;
+        case 5: plot5 = nullptr; break;
+        case 6: plot6 = nullptr; break;
+        case 7: plot7 = nullptr; break;
+        case 8: plot8 = nullptr; break;
+        case 9: plot9 = nullptr; break;
+    }
+
+    return true;
 }
+
 
 void GameState::nextTurn() {
     turnNumber++;
