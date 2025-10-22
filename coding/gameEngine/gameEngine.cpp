@@ -77,7 +77,7 @@ void gameEngine::update(assets& assets, GameState& gameState) {
             this->window->draw(assets.pig_bordered_sprite);
             if (sf::Mouse::isButtonPressed(sf::Mouse::Left)) {gameState.setSeedSelected(5);}
         } else if (this->mousePositionWindow.x > 485 && this->mousePositionWindow.x < 555) { //chicken 6
-            assets.chicken_bordered_sprite.setPosition(400,0);
+            assets.chicken_bordered_sprite.setPosition(480,0);
             this->window->draw(assets.chicken_bordered_sprite);
             if (sf::Mouse::isButtonPressed(sf::Mouse::Left)) {gameState.setSeedSelected(6);}
         } else { //reset to no bordered but keep what is selected bordered
@@ -111,48 +111,52 @@ void gameEngine::update(assets& assets, GameState& gameState) {
             }
         }
     }
-    
-        //game function 
-    if (sf::Mouse::isButtonPressed(sf::Mouse::Left)){ // set plots
-        int plotNumber = 0;
-        if (gameState.getSeedSelected() > 0 && gameState.getSeedSelected() < 6) { //check if seed is selected then check if sufficient funds then set plots
-            for (int i = 0; i < 3; i++) { //for 3 horizontal
-                for (int j = 0; j < 3; j++) { //for 3 vertical
-                    plotNumber = plotNumber + 1;
-                    if (((mousePositionWindow.x >= 240+160*i) && (mousePositionWindow.x <= 80+ 240+160*i))&&((mousePositionWindow.y >= 400+160*j) && mousePositionWindow.y <= 80+400+160*j)) {
-                        gameState.buyEntity(plotNumber, gameState.getSeedSelected()); //plot number and pointer to entity
-                        (assets.plotSprite[plotNumber]).setTexture(assets.dereferenceSeed(gameState.getSeedSelected()));
-                        this->window->draw(assets.plotSprite[plotNumber]);
+
+    if (gameEvent.type == sf::Event::MouseButtonPressed) {
+            //game function 
+        if (gameEvent.mouseButton.button == sf::Mouse::Left){ // set plots
+            int plotNumber = 0;
+            if (gameState.getSeedSelected() > 0 && gameState.getSeedSelected() < 6) { //check if seed is selected then check if sufficient funds then set plots
+                for (int i = 0; i < 3; i++) { //for 3 horizontal
+                    for (int j = 0; j < 3; j++) { //for 3 vertical
+                        plotNumber = plotNumber + 1;
+                        if (((mousePositionWindow.x >= 240+160*i) && (mousePositionWindow.x <= 80+ 240+160*i))&&((mousePositionWindow.y >= 400+160*j) && mousePositionWindow.y <= 80+400+160*j)) {
+                            gameState.buyEntity(plotNumber, gameState.getSeedSelected()); //plot number and pointer to entity
+                            (assets.plotSprite[plotNumber]).setTexture(assets.dereferenceSeed(gameState.getSeedSelected()));
+                            this->window->draw(assets.plotSprite[plotNumber]);
+                        }
                     }
                 }
             }
-        }
-    } 
-    
-    if (sf::Mouse::isButtonPressed(sf::Mouse::Right)){ // sell
-        int plotNumber = 0;
-        if (gameState.getSeedSelected() > 0) { //check if seed is selected then check if sufficient funds then set plots
-            for (int i = 0; i < 3; i++) { //for 3 horizontal
-                for (int j = 0; j < 3; j++) { //for 3 vertical
-                    plotNumber = plotNumber + 1;
-                    if (((mousePositionWindow.x >= 240+160*i) && (mousePositionWindow.x <= 80+ 240+160*i))&&((mousePositionWindow.y >= 400+160*j) && mousePositionWindow.y <= 80+400+160*j)) {
-                    gameState.sellEntity(plotNumber); //plot number
-                    (assets.plotSprite[plotNumber]).setTexture(assets.empty_tile_texture);
-                    this->window->draw(assets.plotSprite[plotNumber]);
-                    assets.setText(gameState, *this->window);
+        } 
+
+        if (gameEvent.mouseButton.button == sf::Mouse::Right){ // sell
+            int plotNumber = 0;
+            if (gameState.getSeedSelected() > 0) { //check if seed is selected then check if sufficient funds then set plots
+                for (int i = 0; i < 3; i++) { //for 3 horizontal
+                    for (int j = 0; j < 3; j++) { //for 3 vertical
+                        plotNumber = plotNumber + 1;
+                        if (((mousePositionWindow.x >= 240+160*i) && (mousePositionWindow.x <= 80+ 240+160*i))&&((mousePositionWindow.y >= 400+160*j) && mousePositionWindow.y <= 80+400+160*j)) {
+                        gameState.sellEntity(plotNumber); //plot number
+                        (assets.plotSprite[plotNumber]).setTexture(assets.empty_tile_texture);
+                        this->window->draw(assets.plotSprite[plotNumber]);
+                        assets.setText(gameState, *this->window);
+                        }
                     }
                 }
             }
         }
     }
-    if (sf::Keyboard::isKeyPressed(sf::Keyboard::Space)) {//progress turns
-        gameState.nextTurn();
-        assets.maintainPlots(gameState, *this->window);
-        assets.setSeason(gameState, *this->window);
-        std::cout << "It is turn: " << gameState.getTurnNumber() << "\n";
-        if (gameState.getTurnNumber() > 12) {
-            std::cout << "Your score was: " << gameState.getMoney() << "Well done!" << "\n";
-            gameEngine::~gameEngine();
+    if (gameEvent.type == sf::Event::KeyPressed) {
+        if (gameEvent.key.code == sf::Keyboard::Space) {//progress turns
+            gameState.nextTurn();
+            assets.maintainPlots(gameState, *this->window);
+            assets.setSeason(gameState, *this->window);
+            std::cout << "It is turn: " << gameState.getTurnNumber() << "\n";
+            if (gameState.getTurnNumber() > 12) {
+                std::cout << "Your score was: " << gameState.getMoney() << "Well done!" << "\n";
+                gameEngine::~gameEngine();
+            }
         }
     }
 }
