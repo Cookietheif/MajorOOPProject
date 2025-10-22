@@ -16,7 +16,7 @@ public:
     void setBaseScreen(GameState gameState, sf::RenderWindow& window);
     void setSeeds(sf::RenderWindow& window);
     void maintainPlots(GameState gameState, sf::RenderWindow& window);
-    sf::Texture dereferenceSeed(int seedNum);
+    sf::Texture& dereferenceSeed(int seedNum);
     void setSeason(GameState gameState, sf::RenderWindow& window);
 
     //default screen function
