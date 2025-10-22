@@ -5,13 +5,14 @@
 
 class Potato : public Crops {
 public:
-    
     Potato();
-    virtual ~Potato();
+    ~Potato() override {}
 
-   
-    int sellCrop() override;       
-  // No seasonal effect for year-round crop
+    int sellCrop() override;
+    void seasonalMod(const GameState& state);
+
+    int getBuyPrice() const override { return buyPrice; }
+    int getSellPrice() const override { return sellPrice; }
 };
 
-#endif 
+#endif

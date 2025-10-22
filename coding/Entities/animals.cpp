@@ -1,19 +1,21 @@
-#include <iostream>
-#include "./animals.h"
+#include "animals.h"
+#include "gameState.h"
 
-Animals::Animals()
-    : produceRate(0),
-      priceAnimal(0),
-      priceProduce(0)
-{
-    entity_Name = "Unnamed Animal";
-    entity_ID = 0;
-    std::cout << "Animal entity created: " << entity_Name << std::endl;
+Animals::Animals(int buy, int sell, int value, int ID)
+    : buyPrice(buy), sellPrice(sell), produceValue(value), currentAge(0),
+      ungrown_ID(ID), grown_ID(ID+1) {}
+
+Animals::~Animals() = default;
+
+void Animals::onBuy(GameState& state) {
+    state.modifyMoney(-buyPrice);
+    currentAge = 0;
 }
 
-
-Animals::~Animals() {
-    std::cout << "Animal entity destroyed: " << entity_Name << std::endl;
+int Animals::getCurrentID() const {
+    if (produceAmount>0) {
+        return grown_ID;
+    }else{
+        return ungrown_ID;
+    }
 }
-
-

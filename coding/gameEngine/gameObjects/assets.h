@@ -4,7 +4,7 @@
 #include <SFML/Graphics.hpp>
 #include <SFML/Window.hpp>
 #include <SFML/System.hpp>
-#include "./gameState/gameState.h"
+#include "gameState.h"
 
 //use of "_" instead of snake capitalisation for textures, I felt like it
 
@@ -12,9 +12,12 @@ class assets {
 public:
     assets(); //constructor loads all textures and sets all sprites
     ~assets();
-    void setTextures(GameState gameState); //gamestate passed so that money can be getted
+    void setText(GameState gameState, sf::RenderWindow& window); //gamestate passed so that money can be getted
     void setBaseScreen(GameState gameState, sf::RenderWindow& window);
     void setSeeds(sf::RenderWindow& window);
+    void maintainPlots(GameState gameState, sf::RenderWindow& window);
+    sf::Texture& dereferenceSeed(int seedNum);
+    void setSeason(GameState gameState, sf::RenderWindow& window);
 
     //default screen function
 
@@ -24,6 +27,7 @@ public:
     sf::Text moneyText;
 
     //assets
+    sf::Sprite* plotSprite;
 
     sf::Texture carrot_seed_bordered_texture; sf::Sprite carrot_seed_bordered_sprite;
     sf::Texture carrot_seed_texture; sf::Sprite carrot_seed_sprite;
@@ -69,5 +73,4 @@ public:
     sf::Texture sun1_texture; sf::Sprite sun1_sprite;
     sf::Texture sun2_texture; sf::Sprite sun2_sprite;
 };
-
 #endif

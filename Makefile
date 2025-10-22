@@ -1,14 +1,16 @@
 CXX = g++
-CXXFLAGS = -std=c++17
+CXXFLAGS = -std=c++17 -Wall -I./coding -I./coding/Entities -I./coding/Events -I./coding/gameEngine -I./coding/gameEngine/gameObjects -I./coding/gameEngine/gameObjects/gameState -I./coding/gameEngine/gameObjects/assets
 LDFLAGS = -lsfml-graphics -lsfml-window -lsfml-system -lsfml-audio
 
-SRC = coding/main.cpp 
+SRC = $(shell find coding -name "*.cpp")
+OBJ = $(SRC:.cpp=.o)
+
 TARGET = main
 
 all: $(TARGET)
 
-$(TARGET): $(SRC)
-	$(CXX) $(CXXFLAGS) $(SRC) -o $(TARGET) $(LDFLAGS)
+$(TARGET): $(OBJ)
+	$(CXX) $(CXXFLAGS) $(OBJ) -o $(TARGET) $(LDFLAGS)
 
 clean:
-	rm -f $(TARGET)
+	rm -f $(OBJ) $(TARGET)

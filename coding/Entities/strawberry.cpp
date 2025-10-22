@@ -1,34 +1,23 @@
 #include "strawberry.h"
-#include <iostream>
-#include <cmath>
+#include "gameState.h"
 
-
-Strawberry::Strawberry() {
+Strawberry::Strawberry() 
+    : Crops(5, 10, 2, 2, 4, 1)
+{
     entity_Name = "Strawberry";
-    yield = 20;        
-    price = 6;         
-    growthTime = 4;    
-    currentAge = 0;   
+    
 }
-
-Strawberry::~Strawberry() {}
-
 
 int Strawberry::sellCrop() {
     if (isReadyToHarvest()) {
-        return yield * price;
+        currentAge = 0;
+        return sellPrice;
     }
     return 0;
 }
 
-
-void Strawberry::seasonalMod(const gameEngine& engine) {
-    std::string currentSeason = engine.getSeason();
-
-    if (currentSeason == "Summer") {
-        yield = static_cast<int>(std::round(yield * 1.25));
-    } else if (currentSeason == "Winter") {
-        yield = static_cast<int>(std::round(yield * 0.75));
-    }
+void Strawberry::seasonalMod(const GameState& state) {
+    if (state.getSeason() == 2) growthTime = 1; // summer
+    else if (state.getSeason() == 4) growthTime = 3; // winter
+    else growthTime = 2; // normal
 }
-

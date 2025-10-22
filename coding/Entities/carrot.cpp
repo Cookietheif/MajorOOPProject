@@ -1,41 +1,23 @@
-#include "./carrot.h"
-#include <iostream>
-#include <cmath>
+#include "carrot.h"
+#include "gameState.h"
 
-
-Carrot::Carrot() {
+Carrot::Carrot() 
+    : Crops(5, 10, 2, 4, 2, 3)
+{
     entity_Name = "Carrot";
-    yield = 25;        
-    price = 4;         
-    growthTime = 3;    
-    currentAge = 0;   
-} 
-
-
-Carrot::~Carrot() {}
-
-void Carrot::initialiseAsset() {
-    this->seedTexture.loadFromFile("gameEngine/gameObjects/assets/");
-    this->ungrownTexture.loadFromFile("gameEngine/gameObjects/assets/");
-    this->grownTexture.loadFromFile("gameEngine/gameObjects/assets/");
-    this->seedSprite.setTexture(seedTexture); // so on
-    this->seedSprite.setScale(5.f,5.f);
+    
 }
 
 int Carrot::sellCrop() {
     if (isReadyToHarvest()) {
-        return yield * price;
+        currentAge = 0;
+        return sellPrice;
     }
     return 0;
 }
 
-
-void Carrot::seasonalMod(const gameEngine& engine) {
-    std::string currentSeason = engine.getSeason();
-
-    if (currentSeason == "Winter") {
-        yield = static_cast<int>(std::round(yield * 1.25));
-    } else if (currentSeason == "Summer") {
-        yield = static_cast<int>(std::round(yield * 0.75));
-    }
+void Carrot::seasonalMod(const GameState& state) {
+    if (state.getSeason() == 4) growthTime = 1; // winter
+    else if (state.getSeason() == 2) growthTime = 3; // summer
+    else growthTime = 2; // normal
 }

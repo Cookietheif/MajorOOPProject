@@ -5,14 +5,13 @@
 
 class Cow : public Animals {
 public:
-    
     Cow();
-    virtual ~Cow();
+    ~Cow() override = default;
 
-   
-    int sellAnimal() override;       
-    int sellProduce() override;      
-    void seasonalMod(const gameEngine& engine) override;     
+    int sellAnimal(GameState& state) override;
+    int sellProduce(GameState& state) override;
+    void seasonalMod(const GameState& state) override {};
+    void grow(const GameState& state) override;
 };
 
-#endif 
+#endif

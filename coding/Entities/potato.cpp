@@ -1,25 +1,21 @@
 #include "potato.h"
+#include "gameState.h"
 
-
-Potato::Potato() {
-    entity_Name = "Potato";
-    yield = 30;        
-    price = 5;         
-    growthTime = 4;    
-    currentAge = 0;    
+Potato::Potato() 
+    : Crops(5, 10, 3, 5, 5, 5)
+{
+    entity_Name = "Strawberry";
+    
 }
-
-
-Potato::~Potato() {}
-
 
 int Potato::sellCrop() {
     if (isReadyToHarvest()) {
-        return yield * price;  
-        // Plot will handle removal of this object
+        currentAge = 0;
+        return sellPrice;
     }
-    return 0; 
+    return 0;
 }
 
-
-
+void Potato::seasonalMod(const GameState& state) {
+    growthTime = 3;
+}

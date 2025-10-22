@@ -1,31 +1,30 @@
 #ifndef ENTITY_H
 #define ENTITY_H
 
-#include <iostream>
 #include <string>
-#include <SFML/Graphics.hpp>
 
-// Base Entity Class
+class GameState;
 
 class Entity {
 protected:
-    int entity_ID;                // Unique ID for each entity
-    std::string entity_Name;      // Entity name or label
-
-    // --- Graphics placeholders (to be implemented later with SFML) ---
-    sf::Texture* texture;         // Placeholder for sprite texture
-    sf::Sprite sprite;           // Placeholder for sprite itself
+    int entity_ID;           
+    std::string entity_Name;
+    int buyPrice;
+    int sellPrice;
 
 public:
-    // --- Constructors & Destructor ---
-    Entity();                     // Default constructor
-    virtual ~Entity();            // Virtual destructor for inheritance
+    Entity();
+    virtual ~Entity();
 
-    // --- Accessors ---
     std::string getName() const { return entity_Name; }
     int getID() const { return entity_ID; }
-
-    virtual void draw() = 0;                    // Pure virtual as placeholder for drawing later
+    int sell(GameState& state) { return sellPrice; }
+    
+    virtual int getBuyPrice() const { return buyPrice; }
+    virtual int getSellPrice() const { return sellPrice; }
+    virtual void grow(GameState& state) {}
+    virtual void onBuy(GameState& state) {}
+    virtual int getCurrentID() const = 0;
 };
 
 #endif

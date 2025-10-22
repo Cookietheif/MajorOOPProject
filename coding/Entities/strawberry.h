@@ -5,14 +5,11 @@
 
 class Strawberry : public Crops {
 public:
-   
     Strawberry();
-    virtual ~Strawberry();
+    ~Strawberry() override {};
 
-    
-    int sellCrop() override;       
-    void seasonalMod(const gameEngine& engine) override;
-   
+    int sellCrop() override;                       
+    void seasonalMod(const GameState& state);
 };
 
-#endif 
+#endif

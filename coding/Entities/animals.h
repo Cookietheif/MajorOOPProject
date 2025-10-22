@@ -1,36 +1,39 @@
 #ifndef ANIMALS_H
 #define ANIMALS_H
 
-#include <iostream>
 #include <string>
-#include "./entity.h"
-#include "gameEngine.h"
+#include "entity.h"
+
+class GameState;
 
 class Animals : public Entity {
 protected:
-    int produceRate;     
-    int priceAnimal;     
-    int priceProduce;    
-  
+    int buyPrice;
+    int sellPrice;
+    int produceValue;
+    int currentAge;
+    int produceAmount;
+
+    int ungrown_ID;
+    int grown_ID;
 
 public:
-   
-    Animals();           
-    virtual ~Animals();  
-   
-    virtual void grow() {}; // Default does nothing
+    Animals(int buy, int sell, int value, int ID);
+    virtual ~Animals();
 
+    int getBuyPrice() const { return buyPrice; }
+    int getSellPrice() const { return sellPrice; }
+    int getProduceValue() const { return produceValue; }
+    int getAge() const { return currentAge; }
+    int getProduceAmount() const {return produceAmount;}
 
-    
-    int getProduceRate() const { return produceRate; }
-    int getPriceAnimal() const { return priceAnimal; }
-    int getPriceProduce() const { return priceProduce; }
+    int getCurrentID() const;
 
-    
-    virtual int sellAnimal() = 0;   
-    virtual int sellProduce() = 0;  
-    virtual void seasonalMod(const gameEngine& engine) = 0; 
+    virtual int sellAnimal(GameState& state) = 0;
+    virtual int sellProduce(GameState& state) = 0;
+    virtual void seasonalMod(const GameState& state) = 0;
+    virtual void grow(const GameState& state) { currentAge++; }
+    virtual void onBuy(GameState& state);
 };
 
-#endif 
-
+#endif
