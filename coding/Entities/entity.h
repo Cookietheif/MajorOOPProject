@@ -7,7 +7,7 @@ class GameState;
 
 class Entity {
 protected:
-    int entity_ID;
+    int entity_ID;           
     std::string entity_Name;
     int buyPrice;
     int sellPrice;
@@ -18,13 +18,12 @@ public:
 
     std::string getName() const { return entity_Name; }
     int getID() const { return entity_ID; }
-    
+
     virtual int getBuyPrice() const { return buyPrice; }
     virtual int getSellPrice() const { return sellPrice; }
     virtual void grow(GameState& state) {}
-    virtual void buy(GameState& state) = 0;
-    virtual int sell(GameState& state) = 0;
-    virtual void onBuy(GameState& state) {}  
+    virtual void onBuy(GameState& state) {}
+    virtual int getCurrentID() const = 0;
 };
 
 #endif
