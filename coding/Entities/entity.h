@@ -18,7 +18,8 @@ public:
 
     std::string getName() const { return entity_Name; }
     int getID() const { return entity_ID; }
-
+    int sell(GameState& state) { return sellPrice; }
+    
     virtual int getBuyPrice() const { return buyPrice; }
     virtual int getSellPrice() const { return sellPrice; }
     virtual void grow(GameState& state) {}
