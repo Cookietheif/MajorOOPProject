@@ -105,7 +105,7 @@ void gameEngine::update(assets& assets, GameState& gameState) {
                     this->window->draw(assets.pig_bordered_sprite);
                     break;
                 case 6: //chicken 6
-                    assets.chicken_bordered_sprite.setPosition(400,0);
+                    assets.chicken_bordered_sprite.setPosition(480,0);
                     this->window->draw(assets.chicken_bordered_sprite);
                     break;
             }
