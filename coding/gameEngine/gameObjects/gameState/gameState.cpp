@@ -87,7 +87,6 @@ bool GameState::buyEntity(int plotNumber, int entityType) {
     }
 
     int cost = newEntity->getBuyPrice();
-    int cost = newEntity->getBuyPrice();
     // Determine cost (using price from crop or animal)
     Crops* c = dynamic_cast<Crops*>(newEntity);
     Animals* a = dynamic_cast<Animals*>(newEntity);
