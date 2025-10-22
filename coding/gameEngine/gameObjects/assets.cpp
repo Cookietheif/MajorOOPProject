@@ -11,7 +11,7 @@ assets::assets() {
     moneyText.setCharacterSize(1);
 //plots
     plotSprite = new sf::Sprite[10];
-    for (int i = 0; i < 9; i++) plotSprite[i].setScale(5.f, 5.f);
+    for (int i = 0; i < 10; i++) plotSprite[i].setScale(5.f, 5.f);
 //textures
     if (!carrot_seed_bordered_texture.loadFromFile("coding/gameEngine/gameObjects/assets/carrot_seed_bordered.png")) std::cerr << "Failed to load carrot_seed_bordered.png\n";
     carrot_seed_bordered_sprite.setTexture(carrot_seed_bordered_texture);
@@ -113,7 +113,7 @@ assets::assets() {
     shaded_fence_gate_right_sprite.setScale(5.f,5.f);
 
     if (!shaded_fence_texture.loadFromFile("coding/gameEngine/gameObjects/assets/shaded_fence.png")) std::cerr << "Failed to load shaded_fence.png\n";
-    for (int i = 0; i < 7; i++) {
+    for (int i = 0; i < 8; i++) {
         shaded_fence_sprite[i].setTexture(shaded_fence_texture);
         shaded_fence_sprite[i].setScale(5.f,5.f);
     }
@@ -141,8 +141,6 @@ assets::assets() {
     if (!sun2_texture.loadFromFile("coding/gameEngine/gameObjects/assets/sun2.png")) std::cerr << "Failed to load sun2.png\n";
     sun2_sprite.setTexture(sun2_texture);
     sun2_sprite.setScale(5.f,5.f);
-
-    std::cout << "nerd\n";
 }
 
 
@@ -193,19 +191,19 @@ void assets::setBaseScreen(GameState gameState, sf::RenderWindow& window) {
         }
     //gates
         //left
-        shaded_fence_gate_left_sprite.setPosition(640,0); //(7,2)
+        shaded_fence_gate_left_sprite.setPosition(640,160); //(7,2)
         window.draw(shaded_fence_gate_left_sprite);
         //right
-        shaded_fence_gate_right_sprite.setPosition(720,0); //(8,2)
+        shaded_fence_gate_right_sprite.setPosition(720,160); //(8,2)
         window.draw(shaded_fence_gate_right_sprite);
     //plots
-        int plotNumber = 1;
+        int plotNumber = 0;
         for (int i = 0; i < 3; i++) { //for 3 horizontal
             for (int j = 0; j < 3; j++) { //for 3 vertical
+            plotNumber = plotNumber + 1;
             (plotSprite[plotNumber]).setTexture(empty_tile_texture);
             (plotSprite[plotNumber]).setPosition(240+160*i,400+160*j); //(x,2)
             window.draw(plotSprite[plotNumber]);
-            plotNumber = plotNumber + 1;
             }
         }
 }
