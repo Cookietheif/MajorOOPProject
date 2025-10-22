@@ -107,7 +107,7 @@ void gameEngine::update(assets assets, GameState gameState) {
             }
         }
     }
-    /*
+    
         //game function 
     if (sf::Mouse::isButtonPressed(sf::Mouse::Left)){ // set plots
         int plotNumber = 0;
@@ -124,7 +124,7 @@ void gameEngine::update(assets assets, GameState gameState) {
             }
         }
     } 
-        */
+    
     if (sf::Mouse::isButtonPressed(sf::Mouse::Right)){ // sell
         int plotNumber = 0;
         if (gameState.getSeedSelected() > 0) { //check if seed is selected then check if sufficient funds then set plots
