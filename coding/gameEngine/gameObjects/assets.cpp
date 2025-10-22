@@ -200,19 +200,18 @@ void assets::setBaseScreen(GameState gameState, sf::RenderWindow& window) {
             }
         }
 }
-/*
+
 void assets::maintainPlots(GameState gameState, sf::RenderWindow& window) { //check if grown, update when grown
     int plotNumber = 1;
     for (int i = 0; i < 3; i++) { //for 3 horizontal
         for (int j = 0; j < 3; j++) { //for 3 vertical
-            if (gameState.getPlot(plotNumber).) {//check if newly grown
+            if (Crops::isReadyToHarvest()) {//check if newly grown
             plotNumber = plotNumber + 1;
-            Crops::isReadyToHarvest();
-            draw()
+            window.draw()
             }
         }
     }
-} */
+}
 
 sf::Texture assets::dereferenceSeed(int seedNum) {
     switch (seedNum) {
