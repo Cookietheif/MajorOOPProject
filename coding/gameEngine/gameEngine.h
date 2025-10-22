@@ -1,11 +1,13 @@
-//#ifndef GAMEENGINE_H
-//#define GAMEENGINE_H
+#ifndef GAMEENGINE_H
+#define GAMEENGINE_H
 
-
+#include <SFML/Graphics.hpp>
+#include "assets.h"
+#include "gameState.h"
 
 class gameEngine
 {
-    private:
+private:
     //class members
     sf::RenderWindow* window;
     sf::Event gameEvent;
@@ -15,23 +17,22 @@ class gameEngine
 
     //private functions
     void initialiseVariables();
-    void initialiseWindow(assets assets, GameState gameState);
+    void initialiseWindow(assets& assets, GameState& gameState);
 
-    public:
+public:
 
     //con/destructors
-        gameEngine();
-        virtual ~gameEngine();
+    gameEngine(assets& assets, GameState& gameState);
+    virtual ~gameEngine();
 
     //function
-        void updateMousePositions();
-        void update(assets assets, GameState gameState);
-        void pollEvents();
-        void render();
-        //accessors
-        const bool running() const;
+    void updateMousePositions();
+    void update(assets& assets, GameState& gameState);
+    void pollEvents();
+    void render();
 
-
+    //accessors
+    const bool running() const;
 };
 
-//#endif
+#endif

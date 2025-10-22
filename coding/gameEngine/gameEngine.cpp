@@ -14,10 +14,7 @@
 
 #include "gameEngine.h"
 
-gameEngine::gameEngine() {
-    GameState gameState;
-    assets assets;
-    
+gameEngine::gameEngine(assets& assets, GameState& gameState) {
     gameEngine::initialiseVariables();
     gameEngine::initialiseWindow(assets, gameState);
 };
@@ -27,7 +24,7 @@ gameEngine::gameEngine() {
 void gameEngine::initialiseVariables() {
     this->window = nullptr;
 };
-void gameEngine::initialiseWindow(assets assets, GameState gameState) {
+void gameEngine::initialiseWindow(assets& assets, GameState& gameState) {
     this->window = new sf::RenderWindow(sf::VideoMode(720, 960), "Farming Simulator", sf::Style::Titlebar | sf::Style::Close); //720=9 (tiles) *16 (pixels) *5 (scale for window size), titled Farming Simulator with close button, 9x12 window
     this->window->setFramerateLimit(60); //frame limit
     this->window->clear(sf::Color(0,255,0,255)); //set background
@@ -50,7 +47,7 @@ void gameEngine::updateMousePositions() {
     this->mousePositionWindow = sf::Mouse::getPosition(*this->window);
 }
 
-void gameEngine::update(assets assets, GameState gameState) {
+void gameEngine::update(assets& assets, GameState& gameState) {
     this->pollEvents();
 
     // Mouse position

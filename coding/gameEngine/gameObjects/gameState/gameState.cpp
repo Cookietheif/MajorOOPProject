@@ -111,7 +111,18 @@ bool GameState::buyEntity(int plotNumber, int entityType) {
     return true;
 }
 
+bool GameState::sellEntity(int plotNumber) {
+    Entity* entityPlaceholder = getPlot(plotNumber);
+    Animals animalPlaceholder = getPlot(plotNumber);
+    if ((entityPlaceholder->getCurrentID() == 2)||(entityPlaceholder->getCurrentID() == 4)||(entityPlaceholder->getCurrentID() == 6)) {
 
+    } else if ((entityPlaceholder->getCurrentID() == 8)||(entityPlaceholder->getCurrentID() == 12)) {
+
+    } else {
+
+    }
+    delete entityPlaceholder;
+}
 
 void GameState::nextTurn() {
     turnNumber++;

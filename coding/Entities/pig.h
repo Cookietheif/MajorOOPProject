@@ -11,8 +11,8 @@ public:
     ~Pig() override = default;
 
     int sellAnimal(GameState& state) override;
-    int sellProduce(GameState& state) override;
-    void seasonalMod(const GameState& state) override;
+    int sellProduce(GameState& state) override {};
+    void seasonalMod(const GameState& state) override {};
     void grow(const GameState& state) override;
 };
 

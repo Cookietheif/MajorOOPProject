@@ -12,9 +12,9 @@
 int main()
 {
     //initialise and utilise game engine
-    gameEngine game;
-    GameState gameState;
     assets assets;
+    GameState gameState;
+    gameEngine game(assets, gameState);
 
     while (game.running()) //loop for game runs stuff
     {
