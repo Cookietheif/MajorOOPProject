@@ -200,19 +200,35 @@ void assets::setBaseScreen(GameState gameState, sf::RenderWindow& window) {
             }
         }
 }
-/*
+
 void assets::maintainPlots(GameState gameState, sf::RenderWindow& window) { //check if grown, update when grown
     int plotNumber = 1;
+    Entity* entityPlaceholder = gameState.getPlot(plotNumber);
     for (int i = 0; i < 3; i++) { //for 3 horizontal
         for (int j = 0; j < 3; j++) { //for 3 vertical
-            if (gameState.getPlot(plotNumber).) {//check if newly grown
-            plotNumber = plotNumber + 1;
-            Crops::isReadyToHarvest();
-            draw()
+            switch (entityPlaceholder->getCurrentID()){
+            case 2:
+            plotSprite[plotNumber].setTexture(strawberry_tile_grown_texture);
+            window.draw(plotSprite[plotNumber]);
+            case 4:
+            plotSprite[plotNumber].setTexture(carrot_tile_grown_texture);
+            window.draw(plotSprite[plotNumber]);
+            case 6:
+            plotSprite[plotNumber].setTexture(potato_tile_grown_texture);
+            window.draw(plotSprite[plotNumber]);
+            case 8:
+            plotSprite[plotNumber].setTexture(cow_harvestable_texture);
+            window.draw(plotSprite[plotNumber]);
+            case 12:
+            plotSprite[plotNumber].setTexture(chicken_harvestable_texture);
+            window.draw(plotSprite[plotNumber]);
+            default:
             }
+        delete entityPlaceholder;
+        plotNumber = plotNumber + 1;
         }
     }
-} */
+}
 
 sf::Texture assets::dereferenceSeed(int seedNum) {
     switch (seedNum) {

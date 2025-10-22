@@ -35,7 +35,7 @@ void Crops::seasonalMod(const GameState& state) {
 }
 
 int Crops::getCurrentID() const {
-    if (isReadyToHarvest) {
+    if (isReadyToHarvest()) {
         return grown_ID;
     } else {
        return ungrown_ID;
