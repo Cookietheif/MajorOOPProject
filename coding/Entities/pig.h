@@ -1,11 +1,9 @@
 #ifndef PIG_H
 #define PIG_H
 
-#include "animals.h"
+#include "coding/Entities/animals.h"
 
 class Pig : public Animals {
-private:
-    double currentValue;
 public:
     Pig();
     ~Pig() override = default;

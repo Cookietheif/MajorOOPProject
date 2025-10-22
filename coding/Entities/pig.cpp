@@ -1,8 +1,8 @@
-#include "pig.h"
-#include "gameState.h"
+#include "coding/Entities/pig.h"
+#include "coding/gameEngine/gameObjects/gameState/gameState.h"
 #include <cmath>
 
-Pig::Pig() : Animals(400, 0, 0, 220) {
+Pig::Pig() : Animals(400, 0, 0, 9) {
     // Pig starts at 75% of its buy value
     sellPrice = static_cast<int>(std::round(buyPrice * 0.75));
     produceAmount = 0;
