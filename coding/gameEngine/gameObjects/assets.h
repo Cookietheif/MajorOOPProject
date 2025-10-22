@@ -12,7 +12,7 @@ class assets {
 public:
     assets(); //constructor loads all textures and sets all sprites
     ~assets();
-    void setText(GameState gameState); //gamestate passed so that money can be getted
+    void setText(GameState gameState, sf::RenderWindow& window); //gamestate passed so that money can be getted
     void setBaseScreen(GameState gameState, sf::RenderWindow& window);
     void setSeeds(sf::RenderWindow& window);
     void maintainPlots(GameState gameState, sf::RenderWindow& window);
@@ -73,5 +73,4 @@ public:
     sf::Texture sun1_texture; sf::Sprite sun1_sprite;
     sf::Texture sun2_texture; sf::Sprite sun2_sprite;
 };
-
 #endif

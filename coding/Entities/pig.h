@@ -1,7 +1,7 @@
 #ifndef PIG_H
 #define PIG_H
 
-#include "coding/Entities/animals.h"
+#include "animals.h"
 
 class Pig : public Animals {
 public:
