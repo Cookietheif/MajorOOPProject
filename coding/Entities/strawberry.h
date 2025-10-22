@@ -1,7 +1,7 @@
 #ifndef STRAWBERRY_H
 #define STRAWBERRY_H
 
-#include "coding/Entities/crops.h"
+#include "crops.h"
 
 class Strawberry : public Crops {
 public:

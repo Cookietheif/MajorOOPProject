@@ -1,7 +1,7 @@
 #ifndef POTATO_H
 #define POTATO_H
 
-#include "coding/Entities/crops.h"
+#include "crops.h"
 
 class Potato : public Crops {
 public:

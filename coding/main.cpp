@@ -5,7 +5,9 @@
 #include <SFML/Window.hpp>
 #include <SFML/System.hpp>
 //our files
-#include "gameEngine/gameEngine.cpp"
+#include "gameEngine.h"
+#include "gameState.h"
+#include "assets.h"
 
 int main()
 {
@@ -20,7 +22,7 @@ int main()
         game.update(assets, gameState);
 
         //depiction of update
-        game.render(assets, gameState);
+        game.render();
             };
     return 0;
 }

@@ -27,7 +27,7 @@ class gameEngine
         void updateMousePositions();
         void update(assets assets, GameState gameState);
         void pollEvents();
-        void render(assets assets, GameState gameState);
+        void render();
         //accessors
         const bool running() const;
 

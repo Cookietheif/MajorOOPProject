@@ -1,5 +1,5 @@
-#include "coding/Entities/carrot.h"
-#include "coding/gameEngine/gameObjects/gameState/gameState.h"
+#include "carrot.h"
+#include "gameState.h"
 
 Carrot::Carrot() 
     : Crops(5, 10, 2, 4, 2, 3)

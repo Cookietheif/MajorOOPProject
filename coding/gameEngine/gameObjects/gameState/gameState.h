@@ -1,9 +1,9 @@
 #ifndef GAMESTATE_H
 #define GAMESTATE_H
 
-#include "coding/Entities/entity.h"
-#include "coding/Entities/crops.h"
-#include "coding/Entities/animals.h"
+#include "entity.h"
+#include "crops.h"
+#include "animals.h"
 
 class GameState {
 private:
