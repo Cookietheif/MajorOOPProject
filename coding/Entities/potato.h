@@ -9,7 +9,7 @@ public:
     ~Potato() override {}
 
     int sellCrop() override;
-    void seasonalMod(const GameState& state) {}
+    void seasonalMod(const GameState& state);
 
     int getBuyPrice() const override { return buyPrice; }
     int getSellPrice() const override { return sellPrice; }

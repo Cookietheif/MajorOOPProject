@@ -215,24 +215,22 @@ void assets::maintainPlots(GameState gameState, sf::RenderWindow& window) { //ch
 } */
 
 sf::Texture assets::dereferenceSeed(int seedNum) {
-    if (seedNum > 0 && seedNum <= 6) {
-        switch (seedNum) {
-            case 1: //strawberry
+    switch (seedNum) {
+        case 1: //strawberry
             return strawberry_tile_texture;
-            case 2: //carrot
+        case 2: //carrot
             return carrot_tile_texture;
-            case 3: //potato
+        case 3: //potato
             return potato_tile_texture;
-            case 4: //cow
+        case 4: //cow
             return cow_tile_texture;
-            case 5: //pig
+        case 5: //pig
             return pig_tile_texture;
-            case 6: //chicken
+        case 6: //chicken
             return chicken_tile_texture;
-        }; 
-    } else {
-    return empty_tile_texture;
-    }
+        default:
+            return empty_tile_texture;
+        };
 };
 
 void assets::setSeeds(sf::RenderWindow& window) {//shoppable

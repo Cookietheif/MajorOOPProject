@@ -62,8 +62,7 @@ bool GameState::buyEntity(int plotNumber, Entity* newEntity) {
     // Determine cost (using price from crop or animal)
     Crops* c = dynamic_cast<Crops*>(newEntity);
     Animals* a = dynamic_cast<Animals*>(newEntity);
-
-    int cost = 0;
+    
     if (c) cost = c->getBuyPrice();
     else if (a) cost = a->getBuyPrice();
 
@@ -163,24 +162,24 @@ void GameState::spinEvent(){
     if (month == 1 || month == 4 || month == 7 || month == 11){
         event* negEvent = new event();
         switch (currentSeason) {
-            case 1:
+            case 1: {
                 pests* springEvent = new pests();
                 negEvent = springEvent;
-                break;
-            case 2:
+                break;}
+            case 2: {
                 drought* summerEvent = new drought();
                 negEvent = summerEvent;
-                break;
-            case 3:
+                break; }
+            case 3: {
                 disease* autumnEvent = new disease();
                 negEvent = autumnEvent;
-                break;
-            case 4:
+                break; }
+            case 4: {
                 flood* winterEvent = new flood();
                 negEvent = winterEvent;
-                break;                                                
-            default:
-                break;
+                break; }                                            
+            default: {
+                break;}
         } 
         double negMultiplier = negEvent->spin();
         money *= negMultiplier;

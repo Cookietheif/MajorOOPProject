@@ -1,4 +1,4 @@
-#include "coding/Entities/strawberry.h"
+#include "strawberry.h"
 #include "gameState.h"
 
 Strawberry::Strawberry() 

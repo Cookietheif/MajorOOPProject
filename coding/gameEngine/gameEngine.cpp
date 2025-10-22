@@ -107,11 +107,11 @@ void gameEngine::update(assets assets, GameState gameState) {
             }
         }
     }
-/*        //game function 
+    /*
+        //game function 
     if (sf::Mouse::isButtonPressed(sf::Mouse::Left)){ // set plots
         int plotNumber = 0;
         if (gameState.getSeedSelected() > 0 && gameState.getSeedSelected() < 6) { //check if seed is selected then check if sufficient funds then set plots
-            if (gameState.getMoney() >= Animals. gameState.getSeedSelected())
             for (int i = 0; i < 3; i++) { //for 3 horizontal
                 for (int j = 0; j < 3; j++) { //for 3 vertical
                     plotNumber = plotNumber + 1;
@@ -123,7 +123,8 @@ void gameEngine::update(assets assets, GameState gameState) {
                 }
             }
         }
-    } */
+    } 
+        */
     if (sf::Mouse::isButtonPressed(sf::Mouse::Right)){ // sell
         int plotNumber = 0;
         if (gameState.getSeedSelected() > 0) { //check if seed is selected then check if sufficient funds then set plots
