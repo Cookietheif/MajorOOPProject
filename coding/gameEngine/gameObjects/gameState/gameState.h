@@ -38,7 +38,7 @@ public:
     Entity* getPlot(int index) const;
 
     void nextTurn();
-    bool buyEntity(int plotNumber, Entity* newEntity);
+    bool buyEntity(int plotNumber, int entityType);
     bool sellEntity(int plotNumber);
     void growAll();
 
