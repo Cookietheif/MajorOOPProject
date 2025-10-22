@@ -1,7 +1,7 @@
-#include "chicken.h"
-#include "gameState.h"
+#include "coding/Entities/chicken.h"
+#include "coding/gameEngine/gameObjects/gameState/gameState.h"
 
-Chicken::Chicken() : Animals(150, 75, 20, 9) {
+Chicken::Chicken() : Animals(150, 75, 20, 11) {
     produceAmount = 0;
 }
 
