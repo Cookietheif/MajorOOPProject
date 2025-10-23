@@ -33,6 +33,7 @@ public:
 
     //accessors
     const bool running() const;
+    bool prevMousePressed = false;
 };
 
 #endif

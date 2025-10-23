@@ -54,29 +54,29 @@ void gameEngine::update(assets& assets, GameState& gameState) {
     this->updateMousePositions();
 
     //check for shop hover for prettiness
-    if ((this->mousePositionWindow.y) <= 80 && (this->mousePositionWindow.y >= 0)) { //in top row
+    if ((this->mousePositionWindow.y) <= 120 && (this->mousePositionWindow.y >= 0)) { //in top row
         //what tile hovering bordered call
-        if (this->mousePositionWindow.x > 85 && this->mousePositionWindow.x < 160) { //strawberry, 1
+        if ((this->mousePositionWindow.x > 85 && this->mousePositionWindow.x < 160) && (this->mousePositionWindow.y) <= 80 && (this->mousePositionWindow.y >= 0)) { //strawberry, 1
             assets.strawberry_seed_bordered_sprite.setPosition(80,0);
-            this->window->draw(assets.strawberry_seed_bordered_sprite);
-            if (sf::Mouse::isButtonPressed(sf::Mouse::Left)) {gameState.setSeedSelected(1);}
-        } else if (this->mousePositionWindow.x > 165 && this->mousePositionWindow.x < 235) { //carrot 2
+            //this->window->draw(assets.strawberry_seed_bordered_sprite);
+            //if (sf::Mouse::isButtonPressed(sf::Mouse::Left)) {gameState.setSeedSelected(1);}
+        } else if ((this->mousePositionWindow.x > 165 && this->mousePositionWindow.x < 235) && (this->mousePositionWindow.y) <= 80 && (this->mousePositionWindow.y >= 0)) { //carrot 2
             assets.carrot_seed_bordered_sprite.setPosition(160,0);
             this->window->draw(assets.carrot_seed_bordered_sprite);
             if (sf::Mouse::isButtonPressed(sf::Mouse::Left)) {gameState.setSeedSelected(2);}
-        } else if (this->mousePositionWindow.x > 245 && this->mousePositionWindow.x < 315) { //potato 3
+        } else if ((this->mousePositionWindow.x > 245 && this->mousePositionWindow.x < 315) && (this->mousePositionWindow.y) <= 80 && (this->mousePositionWindow.y >= 0)) { //potato 3
             assets.potato_seed_bordered_sprite.setPosition(240,0);
             this->window->draw(assets.potato_seed_bordered_sprite);
             if (sf::Mouse::isButtonPressed(sf::Mouse::Left)) {gameState.setSeedSelected(3);}
-        } else if (this->mousePositionWindow.x > 325 && this->mousePositionWindow.x < 395) { //cow 4
+        } else if ((this->mousePositionWindow.x > 325 && this->mousePositionWindow.x < 395) && (this->mousePositionWindow.y) <= 80 && (this->mousePositionWindow.y >= 0)) { //cow 4
             assets.cow_bordered_sprite.setPosition(320,0);
             this->window->draw(assets.cow_bordered_sprite);
             if (sf::Mouse::isButtonPressed(sf::Mouse::Left)) {gameState.setSeedSelected(4);}
-        } else if (this->mousePositionWindow.x > 405 && this->mousePositionWindow.x < 475) { //pig 5
+        } else if ((this->mousePositionWindow.x > 405 && this->mousePositionWindow.x < 475) && (this->mousePositionWindow.y) <= 80 && (this->mousePositionWindow.y >= 0)) { //pig 5
             assets.pig_bordered_sprite.setPosition(400,0);
             this->window->draw(assets.pig_bordered_sprite);
             if (sf::Mouse::isButtonPressed(sf::Mouse::Left)) {gameState.setSeedSelected(5);}
-        } else if (this->mousePositionWindow.x > 485 && this->mousePositionWindow.x < 555) { //chicken 6
+        } else if ((this->mousePositionWindow.x > 485 && this->mousePositionWindow.x < 555) && (this->mousePositionWindow.y) <= 80 && (this->mousePositionWindow.y >= 0)) { //chicken 6
             assets.chicken_bordered_sprite.setPosition(480,0);
             this->window->draw(assets.chicken_bordered_sprite);
             if (sf::Mouse::isButtonPressed(sf::Mouse::Left)) {gameState.setSeedSelected(6);}
@@ -89,7 +89,7 @@ void gameEngine::update(assets& assets, GameState& gameState) {
                     this->window->draw(assets.strawberry_seed_bordered_sprite);
                     break;
                 case 2: //carrot 2
-                     assets.carrot_seed_bordered_sprite.setPosition(160,0);
+                    assets.carrot_seed_bordered_sprite.setPosition(160,0);
                     this->window->draw(assets.carrot_seed_bordered_sprite);
                     break;
                 case 3: //potato 3
@@ -120,8 +120,8 @@ void gameEngine::update(assets& assets, GameState& gameState) {
                 for (int i = 0; i < 3; i++) { //for 3 horizontal
                     for (int j = 0; j < 3; j++) { //for 3 vertical
                         plotNumber = plotNumber + 1;
-                        if (((mousePositionWindow.x >= 240+160*i) && (mousePositionWindow.x <= 80+ 240+160*i))&&((mousePositionWindow.y >= 400+160*j) && mousePositionWindow.y <= 80+400+160*j)) {
-                            gameState.buyEntity(plotNumber, gameState.getSeedSelected()); //plot number and pointer to entity
+                        if (((mousePositionWindow.x >= 160+160*i) && (mousePositionWindow.x <= 80+ 160+160*i))&&((mousePositionWindow.y >= 400+160*j) && mousePositionWindow.y <= 80+400+160*j)) {
+                            gameState.buyEntity(plotNumber, gameState.getSeedSelected()); //plot number and integer to reference entity
                             (assets.plotSprite[plotNumber]).setTexture(assets.dereferenceSeed(gameState.getSeedSelected()));
                             this->window->draw(assets.plotSprite[plotNumber]);
                         }
@@ -136,7 +136,7 @@ void gameEngine::update(assets& assets, GameState& gameState) {
                 for (int i = 0; i < 3; i++) { //for 3 horizontal
                     for (int j = 0; j < 3; j++) { //for 3 vertical
                         plotNumber = plotNumber + 1;
-                        if (((mousePositionWindow.x >= 240+160*i) && (mousePositionWindow.x <= 80+ 240+160*i))&&((mousePositionWindow.y >= 400+160*j) && mousePositionWindow.y <= 80+400+160*j)) {
+                        if (((mousePositionWindow.x >= 160+160*i) && (mousePositionWindow.x <= 80+ 160+160*i))&&((mousePositionWindow.y >= 400+160*j) && mousePositionWindow.y <= 80+400+160*j)) {
                         gameState.sellEntity(plotNumber); //plot number
                         (assets.plotSprite[plotNumber]).setTexture(assets.empty_tile_texture);
                         this->window->draw(assets.plotSprite[plotNumber]);

@@ -154,6 +154,7 @@ moneyText.setPosition(740,30);
 std::string moneyCount = std::to_string(gameState.getMoney()); //gets int from gamestate and converts to string for display
 moneyText.setString(moneyCount);
 window.draw(moneyText);
+std::cout << "your money is" << moneyCount << "\n";
 }
 
 void assets::setSeason(GameState gameState, sf::RenderWindow& window) {
@@ -203,7 +204,7 @@ void assets::setBaseScreen(GameState gameState, sf::RenderWindow& window) {
             for (int j = 0; j < 3; j++) { //for 3 vertical
             plotNumber = plotNumber + 1;
             (plotSprite[plotNumber]).setTexture(empty_tile_texture);
-            (plotSprite[plotNumber]).setPosition(240+160*i,400+160*j); //(x,2)
+            (plotSprite[plotNumber]).setPosition(160+160*i,400+160*j); //(x,2)
             window.draw(plotSprite[plotNumber]);
             }
         }
