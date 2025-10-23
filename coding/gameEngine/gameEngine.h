@@ -27,7 +27,7 @@ public:
 
     //function
     void updateMousePositions();
-    void update(assets& assets, GameState& gameState);
+    bool update(assets& assets, GameState& gameState);
     void pollEvents();
     void render();
 
