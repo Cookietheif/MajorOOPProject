@@ -106,6 +106,8 @@ void gameEngine::update(assets& assets, GameState& gameState) {
         }
     }
 
+    int moneyCheck = gameState.getMoney();
+
     if (gameEvent.type == sf::Event::MouseButtonPressed) {
             //game function 
         if (gameEvent.mouseButton.button == sf::Mouse::Left){ // set plots
@@ -115,16 +117,19 @@ void gameEngine::update(assets& assets, GameState& gameState) {
                     for (int j = 0; j < 3; j++) { //for 3 vertical
                         plotNumber = plotNumber + 1;
                         if (((mousePositionWindow.x >= 160+160*i) && (mousePositionWindow.x <= 80+ 160+160*i))&&((mousePositionWindow.y >= 400+160*j) && mousePositionWindow.y <= 80+400+160*j)) {
-                            gameState.buyEntity(plotNumber, gameState.getSeedSelected()); //plot number and integer to reference entity
-                            (assets.plotSprite[plotNumber]).setTexture(assets.dereferenceSeed(gameState.getSeedSelected()));
-                            this->window->draw(assets.plotSprite[plotNumber]);
-                            assets.setText(gameState);
+                            if ((gameState.getSeedSelected() == 1 && moneyCheck < 5) || (gameState.getSeedSelected() == 2 && moneyCheck < 5) || (gameState.getSeedSelected() == 3 && moneyCheck < 5) || (gameState.getSeedSelected() == 4 && moneyCheck < 500) || (gameState.getSeedSelected() == 5 && moneyCheck < 400) || (gameState.getSeedSelected() == 6 && moneyCheck < 150)) {
+                                if (((mousePositionWindow.x >= 240+160*i) && (mousePositionWindow.x <= 80+ 240+160*i))&&((mousePositionWindow.y >= 400+160*j) && mousePositionWindow.y <= 80+400+160*j)) {
+                                    gameState.buyEntity(plotNumber, gameState.getSeedSelected()); //plot number and pointer to entity
+                                    (assets.plotSprite[plotNumber]).setTexture(assets.dereferenceSeed(gameState.getSeedSelected()));
+                                    this->window->draw(assets.plotSprite[plotNumber]);
+                                    assets.setText(gameState);
+                                }
+                            }
                         }
                     }
                 }
             }
         }
-
         if (gameEvent.mouseButton.button == sf::Mouse::Right){ // sell
             int plotNumber = 0;
             if (gameState.getSeedSelected() > 0) { //check if seed is selected then check if sufficient funds then set plots
