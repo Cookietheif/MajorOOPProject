@@ -1,6 +1,8 @@
 #include "gameState.h"
 
 #include <iostream>
+#include "crops.h"
+#include "animals.h"
 #include "potato.h"
 #include "carrot.h"
 #include "strawberry.h"
@@ -116,9 +118,9 @@ bool GameState::buyEntity(int plotNumber, int entityType) {
 
 
 bool GameState::sellEntity(int plotNumber) {
-    Entity* plots[9] = { plot1, plot2, plot3, plot4, plot5, plot6, plot7, plot8, plot9 };
     if (plotNumber < 1 || plotNumber > 9) return false;
 
+    Entity* plots[9] = { plot1, plot2, plot3, plot4, plot5, plot6, plot7, plot8, plot9 };
     Entity*& plotRef = plots[plotNumber - 1];
 
     if (!plotRef) {
@@ -126,26 +128,59 @@ bool GameState::sellEntity(int plotNumber) {
         return false;
     }
 
-    int income = plotRef->sell(*this);
-    money += income;
+    int income = 0;
 
-    delete plotRef;
-    plotRef = nullptr;
+    
+    Crops* c = dynamic_cast<Crops*>(plotRef);
+    Animals* a = dynamic_cast<Animals*>(plotRef);
 
+    
+    if (c) {
+        
+        if (c->getCurrentID() % 2 == 0) { 
+            income = c->getSellPrice();
+            money += income;
+            std::cout << "Sold " << c->getName() << " for $" << income << "!\n";
+            delete plotRef;
+            plotRef = nullptr;
+        } else {
+            std::cout << c->getName() << " is not ready to be harvested!\n";
+            return false;
+        }
+    } 
+    else if (a) {
+        
+        if (a->getCurrentID() % 2 == 0) {
+            income = a->sellAnimal(*this);
+            std::cout << "Sold " << a->getName() << " for $" << income << "!\n";
+            delete plotRef;
+            plotRef = nullptr;
+        } else {
+            income = a->sellProduce(*this);
+            std::cout << "Sold " << a->getName() << "'s produce for $" << income << "!\n";
+        }
+    } 
+    else {
+        std::cout << "Unknown entity type in plot " << plotNumber << "!\n";
+        return false;
+    }
+
+    
     switch (plotNumber) {
-        case 1: plot1 = nullptr; break;
-        case 2: plot2 = nullptr; break;
-        case 3: plot3 = nullptr; break;
-        case 4: plot4 = nullptr; break;
-        case 5: plot5 = nullptr; break;
-        case 6: plot6 = nullptr; break;
-        case 7: plot7 = nullptr; break;
-        case 8: plot8 = nullptr; break;
-        case 9: plot9 = nullptr; break;
+        case 1: plot1 = plotRef; break;
+        case 2: plot2 = plotRef; break;
+        case 3: plot3 = plotRef; break;
+        case 4: plot4 = plotRef; break;
+        case 5: plot5 = plotRef; break;
+        case 6: plot6 = plotRef; break;
+        case 7: plot7 = plotRef; break;
+        case 8: plot8 = plotRef; break;
+        case 9: plot9 = plotRef; break;
     }
 
     return true;
 }
+
 
 
 void GameState::nextTurn() {
