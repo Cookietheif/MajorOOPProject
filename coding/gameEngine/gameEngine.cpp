@@ -26,7 +26,7 @@ void gameEngine::initialiseVariables() {
 };
 void gameEngine::initialiseWindow(assets& assets, GameState& gameState) {
     this->window = new sf::RenderWindow(sf::VideoMode(720, 960), "Farming Simulator", sf::Style::Titlebar | sf::Style::Close); //720=9 (tiles) *16 (pixels) *5 (scale for window size), titled Farming Simulator with close button, 9x12 window
-    this->window->setFramerateLimit(60); //frame limit
+    this->window->setFramerateLimit(20); //frame limit
     this->window->clear(sf::Color(0,255,0,255)); //set background
 
     //default screen
@@ -36,23 +36,17 @@ void gameEngine::initialiseWindow(assets& assets, GameState& gameState) {
 //public functions
 // constructor
 
-//game function
-void gameEngine::pollEvents() {while (this->window->pollEvent(gameEvent)) //loop for game again - constant checking for game end
-    if (gameEvent.type == sf::Event::Closed || (gameEvent.type == sf::Event::KeyPressed && gameEvent.key.code == sf::Keyboard::Escape)) { //for the record, switch cases super recommended here, I just don't like them
-        this->window->close(); 
-    };
-};
-
 void gameEngine::updateMousePositions() {
     this->mousePositionWindow = sf::Mouse::getPosition(*this->window);
 }
 
 void gameEngine::update(assets& assets, GameState& gameState) {
-    this->pollEvents();
-
     // Mouse position
     this->updateMousePositions();
-
+    while (this->window->pollEvent(gameEvent)) {//loop for game again - constant checking for game end
+    if (gameEvent.type == sf::Event::Closed || (gameEvent.type == sf::Event::KeyPressed && gameEvent.key.code == sf::Keyboard::Escape)) { //for the record, switch cases super recommended here, I just don't like them
+        this->window->close(); 
+    };
     //check for shop hover for prettiness
     if ((this->mousePositionWindow.y) <= 120 && (this->mousePositionWindow.y >= 0)) { //in top row
         //what tile hovering bordered call
@@ -124,11 +118,12 @@ void gameEngine::update(assets& assets, GameState& gameState) {
                             gameState.buyEntity(plotNumber, gameState.getSeedSelected()); //plot number and integer to reference entity
                             (assets.plotSprite[plotNumber]).setTexture(assets.dereferenceSeed(gameState.getSeedSelected()));
                             this->window->draw(assets.plotSprite[plotNumber]);
+                            assets.setText(gameState);
                         }
                     }
                 }
             }
-        } 
+        }
 
         if (gameEvent.mouseButton.button == sf::Mouse::Right){ // sell
             int plotNumber = 0;
@@ -140,13 +135,14 @@ void gameEngine::update(assets& assets, GameState& gameState) {
                         gameState.sellEntity(plotNumber); //plot number
                         (assets.plotSprite[plotNumber]).setTexture(assets.empty_tile_texture);
                         this->window->draw(assets.plotSprite[plotNumber]);
-                        assets.setText(gameState, *this->window);
+                        assets.setText(gameState);
                         }
                     }
                 }
             }
         }
     }
+
     if (gameEvent.type == sf::Event::KeyPressed) {
         if (gameEvent.key.code == sf::Keyboard::Space) {//progress turns
             gameState.nextTurn();
@@ -159,6 +155,7 @@ void gameEngine::update(assets& assets, GameState& gameState) {
             }
         }
     }
+}
 }
 
 //render/visualise/display game function

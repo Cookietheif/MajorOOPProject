@@ -4,11 +4,6 @@
 #include <iostream>
 
 assets::assets() {
-    //text
-    font.loadFromFile("AppleGaramond.ttf");
-    moneyText.setFont(font);
-    moneyText.setFillColor(sf::Color::Black);
-    moneyText.setCharacterSize(1);
 //plots
     plotSprite = new sf::Sprite[10];
     for (int i = 0; i < 10; i++) plotSprite[i].setScale(5.f, 5.f);
@@ -149,15 +144,11 @@ assets::~assets() {
     delete[] plotSprite;
 };
 
-void assets::setText(GameState gameState, sf::RenderWindow& window) {
-moneyText.setPosition(740,30);
-std::string moneyCount = std::to_string(gameState.getMoney()); //gets int from gamestate and converts to string for display
-moneyText.setString(moneyCount);
-window.draw(moneyText);
-std::cout << "your money is" << moneyCount << "\n";
+void assets::setText(GameState& gameState) {
+std::cout << "Your money is" << gameState.getMoney() << "\n";
 }
 
-void assets::setSeason(GameState gameState, sf::RenderWindow& window) {
+void assets::setSeason(GameState& gameState, sf::RenderWindow& window) {
         //season
     switch (gameState.getSeason())
     {
@@ -180,7 +171,7 @@ void assets::setSeason(GameState gameState, sf::RenderWindow& window) {
     };
 }
 
-void assets::setBaseScreen(GameState gameState, sf::RenderWindow& window) {
+void assets::setBaseScreen(GameState& gameState, sf::RenderWindow& window) {
     setSeason(gameState, window);
     setSeeds(window);
     //coin symbol
@@ -210,7 +201,7 @@ void assets::setBaseScreen(GameState gameState, sf::RenderWindow& window) {
         }
 }
 
-void assets::maintainPlots(GameState gameState, sf::RenderWindow& window) { //check if grown, update when grown
+void assets::maintainPlots(GameState& gameState, sf::RenderWindow& window) { //check if grown, update when grown
     int plotNumber = 1;
     for (int i = 0; i < 3; i++) { //for 3 horizontal
         for (int j = 0; j < 3; j++) { //for 3 vertical
@@ -287,6 +278,7 @@ sf::Texture& assets::dereferenceSeed(int seedNum) {
             return pig_tile_texture;
             break;
         case 6: //chicken
+        std::cout << "worked to here";
             return chicken_tile_texture;
             break;
         default:

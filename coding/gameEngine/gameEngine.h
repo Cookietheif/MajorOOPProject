@@ -28,12 +28,11 @@ public:
     //function
     void updateMousePositions();
     void update(assets& assets, GameState& gameState);
-    void pollEvents();
     void render();
 
     //accessors
     const bool running() const;
-    bool prevMousePressed = false;
+    int caseOfKeyPress;
 };
 
 #endif
