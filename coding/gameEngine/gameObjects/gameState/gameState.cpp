@@ -199,7 +199,7 @@ bool GameState::sellEntity(int plotNumber) {
     } 
     else if (a) {
         
-        if (a->getCurrentID() % 2 == 0) {
+        if (a->getCurrentID() % 2 != 0) {
             income = a->sellAnimal(*this);
             std::cout << "Sold " << a->getName() << " for $" << income << "!\n";
             delete plotRef;
@@ -214,7 +214,7 @@ bool GameState::sellEntity(int plotNumber) {
         return false;
     }
 
-    
+   
     switch (plotNumber) {
         case 1: plot1 = plotRef; break;
         case 2: plot2 = plotRef; break;
@@ -229,6 +229,7 @@ bool GameState::sellEntity(int plotNumber) {
 
     return true;
 }
+
 
 
 
