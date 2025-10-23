@@ -144,7 +144,7 @@ assets::~assets() {
 };
 
 void assets::setText(GameState& gameState) {
-std::cout << "Your money is" << gameState.getMoney() << "\n";
+std::cout << "Your money is: " << gameState.getMoney() << "\n";
 }
 
 void assets::setSeason(GameState& gameState, sf::RenderWindow& window) {
@@ -202,23 +202,23 @@ void assets::setBaseScreen(GameState& gameState, sf::RenderWindow& window) {
 
 void assets::maintainPlots(GameState& gameState, sf::RenderWindow& window) { //check if grown, update when grown
     Entity* plots[9] = { gameState.getPlot(1), gameState.getPlot(2), gameState.getPlot(3), gameState.getPlot(4), gameState.getPlot(5), gameState.getPlot(6), gameState.getPlot(7), gameState.getPlot(8), gameState.getPlot(9) }; ;
-    std::cerr << "owwie";
+    int id = plots[0]->getCurrentID();
     for (int i = 0; i < 9; i++) {
-                std::cerr << "shining " << i << std::endl;
-            switch (plots[i]->getCurrentID()){
+                if (!plots[i]) {
+        std::cerr << "Plot " << i+1 << " is empty.\n";
+        continue; // skip to next plot
+    }
+                id = plots[i]->getCurrentID();
+            switch (id){
             case 1:
-            std::cerr << "one " << i << std::endl;
                 break;
             case 2:
-            std::cerr << "two " << i << std::endl;
                 break;
             case 3:
-            std::cerr << "three" << i << std::endl;
                 plotSprite[i].setTexture(carrot_tile_texture);
                 window.draw(plotSprite[i]);
                 break;
             case 4:
-            std::cerr << "crash " << i << std::endl;
                 plotSprite[i].setTexture(carrot_tile_grown_texture);
                 window.draw(plotSprite[i]);
                 break;

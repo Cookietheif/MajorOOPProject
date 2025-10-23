@@ -34,7 +34,6 @@ public:
     int getSeedSelected() const {return seedSelected;}
     void setSeedSelected(int a) {seedSelected = a;}
     bool checkMoney (int a);
-    bool checkOccupied(int a);
 
     void modifyMoney(int amount) { money += amount; }
     Entity* getPlot(int index) const;
