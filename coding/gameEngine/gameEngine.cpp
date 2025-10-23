@@ -138,6 +138,7 @@ void gameEngine::update(assets& assets, GameState& gameState) {
                             gameState.sellEntity(plotNumber); //plot number
                             (assets.plotSprite[plotNumber]).setTexture(assets.empty_tile_texture);
                             this->window->draw(assets.plotSprite[plotNumber]);
+                            assets.maintainPlots(gameState, *this->window);
                             assets.setText(gameState);
                             }
                         }
@@ -148,15 +149,12 @@ void gameEngine::update(assets& assets, GameState& gameState) {
 
         if (gameEvent.type == sf::Event::KeyPressed) {
             if (gameEvent.key.code == sf::Keyboard::Space) {//progress turns
-                std::cout << "turns";
                 gameState.nextTurn();
-                std::cout << "tart";
                 assets.maintainPlots(gameState, *this->window);
-                std::cout << "shart";
                 assets.setSeason(gameState, *this->window);
-                std::cout << "It is turn: " << gameState.getTurnNumber() << "\n";
+                std::cerr << "It is turn: " << gameState.getTurnNumber() << "\n";
                 if (gameState.getTurnNumber() > 12) {
-                    std::cout << "Your score was: " << gameState.getMoney() << "Well done!" << "\n";
+                    std::cerr << "Your score was: " << gameState.getMoney() << "Well done!" << "\n";
                     gameEngine::~gameEngine();
                 }
             }

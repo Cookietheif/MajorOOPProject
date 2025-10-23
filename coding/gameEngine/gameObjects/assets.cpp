@@ -141,11 +141,10 @@ assets::assets() {
 
 
 assets::~assets() {
-    delete[] plotSprite;
 };
 
 void assets::setText(GameState& gameState) {
-std::cout << "Your money is" << gameState.getMoney() << "\n";
+std::cout << "Your money is: " << gameState.getMoney() << "\n";
 }
 
 void assets::setSeason(GameState& gameState, sf::RenderWindow& window) {
@@ -202,61 +201,60 @@ void assets::setBaseScreen(GameState& gameState, sf::RenderWindow& window) {
 }
 
 void assets::maintainPlots(GameState& gameState, sf::RenderWindow& window) { //check if grown, update when grown
-    int plotNumber = 1;
-    for (int i = 0; i < 3; i++) { //for 3 horizontal
-        for (int j = 0; j < 3; j++) { //for 3 vertical
-            Entity* entityPlaceholder = gameState.getPlot(plotNumber);
-            switch (entityPlaceholder->getCurrentID()){
+    Entity* plots[9] = { gameState.getPlot(1), gameState.getPlot(2), gameState.getPlot(3), gameState.getPlot(4), gameState.getPlot(5), gameState.getPlot(6), gameState.getPlot(7), gameState.getPlot(8), gameState.getPlot(9) }; ;
+    int id = plots[0]->getCurrentID();
+    for (int i = 0; i < 9; i++) {
+                if (!plots[i]) {
+        std::cerr << "Plot " << i+1 << " is empty.\n";
+        continue; // skip to next plot
+    }
+                id = plots[i]->getCurrentID();
+            switch (id){
             case 1:
-                plotSprite[plotNumber].setTexture(strawberry_tile_texture);
-                window.draw(plotSprite[plotNumber]);
                 break;
             case 2:
-                plotSprite[plotNumber].setTexture(strawberry_tile_grown_texture);
-                window.draw(plotSprite[plotNumber]);
                 break;
             case 3:
-                plotSprite[plotNumber].setTexture(carrot_tile_texture);
-                window.draw(plotSprite[plotNumber]);
+                plotSprite[i].setTexture(carrot_tile_texture);
+                window.draw(plotSprite[i]);
                 break;
             case 4:
-                plotSprite[plotNumber].setTexture(carrot_tile_grown_texture);
-                window.draw(plotSprite[plotNumber]);
+                plotSprite[i].setTexture(carrot_tile_grown_texture);
+                window.draw(plotSprite[i]);
                 break;
             case 5: 
-                plotSprite[plotNumber].setTexture(potato_tile_texture);
-                window.draw(plotSprite[plotNumber]);
+                plotSprite[i].setTexture(potato_tile_texture);
+                window.draw(plotSprite[i]);
                 break;
             case 6:
-                plotSprite[plotNumber].setTexture(potato_tile_grown_texture);
-                window.draw(plotSprite[plotNumber]);
+                plotSprite[i].setTexture(potato_tile_grown_texture);
+                window.draw(plotSprite[i]);
                 break;
             case 7:
-                plotSprite[plotNumber].setTexture(cow_tile_texture);
-                window.draw(plotSprite[plotNumber]);
+                plotSprite[i].setTexture(cow_tile_texture);
+                window.draw(plotSprite[i]);
                 break;
             case 8:
-                plotSprite[plotNumber].setTexture(cow_harvestable_texture);
-                window.draw(plotSprite[plotNumber]);
+                plotSprite[i].setTexture(cow_harvestable_texture);
+                window.draw(plotSprite[i]);
                 break;
             case 9:
-            plotSprite[plotNumber].setTexture(pig_tile_texture);
-            window.draw(plotSprite[plotNumber]);
+                plotSprite[i].setTexture(pig_tile_texture);
+                window.draw(plotSprite[i]);
             break;
             case 11:
-                plotSprite[plotNumber].setTexture(chicken_tile_texture);
-                window.draw(plotSprite[plotNumber]);
+                plotSprite[i].setTexture(chicken_tile_texture);
+                window.draw(plotSprite[i]);
                 break;
             case 12:
-                plotSprite[plotNumber].setTexture(chicken_harvestable_texture);
-                window.draw(plotSprite[plotNumber]);
+                plotSprite[i].setTexture(chicken_harvestable_texture);
+                window.draw(plotSprite[i]);
                 break;
             default:
             std::cout << "all is well \n";
             break;
-            }
-        plotNumber = plotNumber + 1;
         }
+        std::cerr << "seven " << i << std::endl;
     }
 }
 

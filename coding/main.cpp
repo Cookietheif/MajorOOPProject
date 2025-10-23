@@ -23,6 +23,7 @@ int main()
 
         //depiction of update
         game.render();
+            if (!game.running()) {return 0;};
             };
     return 0;
 }
