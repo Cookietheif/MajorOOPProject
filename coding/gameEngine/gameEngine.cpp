@@ -47,7 +47,7 @@ void gameEngine::updateMousePositions() {
     this->mousePositionWindow = sf::Mouse::getPosition(*this->window);
 }
 
-void gameEngine::update(assets& assets, GameState& gameState) {
+bool gameEngine::update(assets& assets, GameState& gameState) {
     this->pollEvents();
 
     // Mouse position
@@ -112,6 +112,8 @@ void gameEngine::update(assets& assets, GameState& gameState) {
         }
     }
 
+    int moneyCheck = gameState.getMoney();
+
     if (gameEvent.type == sf::Event::MouseButtonPressed) {
             //game function 
         if (gameEvent.mouseButton.button == sf::Mouse::Left){ // set plots
@@ -120,6 +122,12 @@ void gameEngine::update(assets& assets, GameState& gameState) {
                 for (int i = 0; i < 3; i++) { //for 3 horizontal
                     for (int j = 0; j < 3; j++) { //for 3 vertical
                         plotNumber = plotNumber + 1;
+                        if (gameState.getSeedSelected() == 1 && moneyCheck < 5) { return false;}
+                        if (gameState.getSeedSelected() == 2 && moneyCheck < 5) { return false;}
+                        if (gameState.getSeedSelected() == 3 && moneyCheck < 5) { return false;}
+                        if (gameState.getSeedSelected() == 4 && moneyCheck < 500) { return false;}
+                        if (gameState.getSeedSelected() == 5 && moneyCheck < 400) { return false;}
+                        if (gameState.getSeedSelected() == 6 && moneyCheck < 150) { return false;}
                         if (((mousePositionWindow.x >= 240+160*i) && (mousePositionWindow.x <= 80+ 240+160*i))&&((mousePositionWindow.y >= 400+160*j) && mousePositionWindow.y <= 80+400+160*j)) {
                             gameState.buyEntity(plotNumber, gameState.getSeedSelected()); //plot number and pointer to entity
                             (assets.plotSprite[plotNumber]).setTexture(assets.dereferenceSeed(gameState.getSeedSelected()));
