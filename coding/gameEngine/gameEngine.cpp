@@ -36,134 +36,129 @@ void gameEngine::initialiseWindow(assets& assets, GameState& gameState) {
 //public functions
 // constructor
 
-//game function
-void gameEngine::pollEvents() {while (this->window->pollEvent(gameEvent)) //loop for game again - constant checking for game end
-    if (gameEvent.type == sf::Event::Closed || (gameEvent.type == sf::Event::KeyPressed && gameEvent.key.code == sf::Keyboard::Escape)) { //for the record, switch cases super recommended here, I just don't like them
-        this->window->close(); 
-    };
-};
-
 void gameEngine::updateMousePositions() {
     this->mousePositionWindow = sf::Mouse::getPosition(*this->window);
 }
 
-bool gameEngine::update(assets& assets, GameState& gameState) {
-    this->pollEvents();
-
+void gameEngine::update(assets& assets, GameState& gameState) {
     // Mouse position
     this->updateMousePositions();
-
+    while (this->window->pollEvent(gameEvent)) {//loop for game again - constant checking for game end
+        if (gameEvent.type == sf::Event::Closed || (gameEvent.type == sf::Event::KeyPressed && gameEvent.key.code == sf::Keyboard::Escape)) { //for the record, switch cases super recommended here, I just don't like them
+            this->window->close(); 
+        };
     //check for shop hover for prettiness
-    if ((this->mousePositionWindow.y) <= 80 && (this->mousePositionWindow.y >= 0)) { //in top row
-        //what tile hovering bordered call
-        if (this->mousePositionWindow.x > 85 && this->mousePositionWindow.x < 160) { //strawberry, 1
-            assets.strawberry_seed_bordered_sprite.setPosition(80,0);
-            this->window->draw(assets.strawberry_seed_bordered_sprite);
-            if (sf::Mouse::isButtonPressed(sf::Mouse::Left)) {gameState.setSeedSelected(1);}
-        } else if (this->mousePositionWindow.x > 165 && this->mousePositionWindow.x < 235) { //carrot 2
-            assets.carrot_seed_bordered_sprite.setPosition(160,0);
-            this->window->draw(assets.carrot_seed_bordered_sprite);
-            if (sf::Mouse::isButtonPressed(sf::Mouse::Left)) {gameState.setSeedSelected(2);}
-        } else if (this->mousePositionWindow.x > 245 && this->mousePositionWindow.x < 315) { //potato 3
-            assets.potato_seed_bordered_sprite.setPosition(240,0);
-            this->window->draw(assets.potato_seed_bordered_sprite);
-            if (sf::Mouse::isButtonPressed(sf::Mouse::Left)) {gameState.setSeedSelected(3);}
-        } else if (this->mousePositionWindow.x > 325 && this->mousePositionWindow.x < 395) { //cow 4
-            assets.cow_bordered_sprite.setPosition(320,0);
-            this->window->draw(assets.cow_bordered_sprite);
-            if (sf::Mouse::isButtonPressed(sf::Mouse::Left)) {gameState.setSeedSelected(4);}
-        } else if (this->mousePositionWindow.x > 405 && this->mousePositionWindow.x < 475) { //pig 5
-            assets.pig_bordered_sprite.setPosition(400,0);
-            this->window->draw(assets.pig_bordered_sprite);
-            if (sf::Mouse::isButtonPressed(sf::Mouse::Left)) {gameState.setSeedSelected(5);}
-        } else if (this->mousePositionWindow.x > 485 && this->mousePositionWindow.x < 555) { //chicken 6
-            assets.chicken_bordered_sprite.setPosition(480,0);
-            this->window->draw(assets.chicken_bordered_sprite);
-            if (sf::Mouse::isButtonPressed(sf::Mouse::Left)) {gameState.setSeedSelected(6);}
-        } else { //reset to no bordered but keep what is selected bordered
-            assets.setSeeds(*this->window);
+        if ((this->mousePositionWindow.y) <= 120 && (this->mousePositionWindow.y >= 0)) { //in top row
+            //what tile hovering bordered call
+            if ((this->mousePositionWindow.x > 85 && this->mousePositionWindow.x < 160) && (this->mousePositionWindow.y) <= 80 && (this->mousePositionWindow.y >= 0)) { //strawberry, 1
+                assets.strawberry_seed_bordered_sprite.setPosition(80,0);
+                //this->window->draw(assets.strawberry_seed_bordered_sprite);
+                //if (sf::Mouse::isButtonPressed(sf::Mouse::Left)) {gameState.setSeedSelected(1);}
+            } else if ((this->mousePositionWindow.x > 165 && this->mousePositionWindow.x < 235) && (this->mousePositionWindow.y) <= 80 && (this->mousePositionWindow.y >= 0)) { //carrot 2
+                assets.carrot_seed_bordered_sprite.setPosition(160,0);
+                this->window->draw(assets.carrot_seed_bordered_sprite);
+                if (sf::Mouse::isButtonPressed(sf::Mouse::Left)) {gameState.setSeedSelected(2);}
+            } else if ((this->mousePositionWindow.x > 245 && this->mousePositionWindow.x < 315) && (this->mousePositionWindow.y) <= 80 && (this->mousePositionWindow.y >= 0)) { //potato 3
+                assets.potato_seed_bordered_sprite.setPosition(240,0);
+                this->window->draw(assets.potato_seed_bordered_sprite);
+                if (sf::Mouse::isButtonPressed(sf::Mouse::Left)) {gameState.setSeedSelected(3);}
+            } else if ((this->mousePositionWindow.x > 325 && this->mousePositionWindow.x < 395) && (this->mousePositionWindow.y) <= 80 && (this->mousePositionWindow.y >= 0)) { //cow 4
+                assets.cow_bordered_sprite.setPosition(320,0);
+                this->window->draw(assets.cow_bordered_sprite);
+                if (sf::Mouse::isButtonPressed(sf::Mouse::Left)) {gameState.setSeedSelected(4);}
+            } else if ((this->mousePositionWindow.x > 405 && this->mousePositionWindow.x < 475) && (this->mousePositionWindow.y) <= 80 && (this->mousePositionWindow.y >= 0)) { //pig 5
+                assets.pig_bordered_sprite.setPosition(400,0);
+                this->window->draw(assets.pig_bordered_sprite);
+                if (sf::Mouse::isButtonPressed(sf::Mouse::Left)) {gameState.setSeedSelected(5);}
+            } else if ((this->mousePositionWindow.x > 485 && this->mousePositionWindow.x < 555) && (this->mousePositionWindow.y) <= 80 && (this->mousePositionWindow.y >= 0)) { //chicken 6
+                assets.chicken_bordered_sprite.setPosition(480,0);
+                this->window->draw(assets.chicken_bordered_sprite);
+                if (sf::Mouse::isButtonPressed(sf::Mouse::Left)) {gameState.setSeedSelected(6);}
+            } else { //reset to no bordered but keep what is selected bordered
+                assets.setSeeds(*this->window);
 
-            switch (gameState.getSeedSelected()) {
-                case 1: //strawberry 1
-                    assets.strawberry_seed_bordered_sprite.setPosition(80,0);
-                    this->window->draw(assets.strawberry_seed_bordered_sprite);
-                    break;
-                case 2: //carrot 2
-                     assets.carrot_seed_bordered_sprite.setPosition(160,0);
-                    this->window->draw(assets.carrot_seed_bordered_sprite);
-                    break;
-                case 3: //potato 3
-                    assets.potato_seed_bordered_sprite.setPosition(240,0);
-                    this->window->draw(assets.potato_seed_bordered_sprite);
-                    break;
-                case 4: //cow 4
-                    assets.cow_bordered_sprite.setPosition(320,0);
-                    this->window->draw(assets.cow_bordered_sprite);
-                    break;
-                case 5: //pig 5
-                    assets.pig_bordered_sprite.setPosition(400,0);
-                    this->window->draw(assets.pig_bordered_sprite);
-                    break;
-                case 6: //chicken 6
-                    assets.chicken_bordered_sprite.setPosition(480,0);
-                    this->window->draw(assets.chicken_bordered_sprite);
-                    break;
+                switch (gameState.getSeedSelected()) {
+                    case 1: //strawberry 1
+                        assets.strawberry_seed_bordered_sprite.setPosition(80,0);
+                        this->window->draw(assets.strawberry_seed_bordered_sprite);
+                        break;
+                    case 2: //carrot 2
+                        assets.carrot_seed_bordered_sprite.setPosition(160,0);
+                        this->window->draw(assets.carrot_seed_bordered_sprite);
+                        break;
+                    case 3: //potato 3
+                        assets.potato_seed_bordered_sprite.setPosition(240,0);
+                        this->window->draw(assets.potato_seed_bordered_sprite);
+                        break;
+                    case 4: //cow 4
+                        assets.cow_bordered_sprite.setPosition(320,0);
+                        this->window->draw(assets.cow_bordered_sprite);
+                        break;
+                    case 5: //pig 5
+                        assets.pig_bordered_sprite.setPosition(400,0);
+                        this->window->draw(assets.pig_bordered_sprite);
+                        break;
+                    case 6: //chicken 6
+                        assets.chicken_bordered_sprite.setPosition(480,0);
+                        this->window->draw(assets.chicken_bordered_sprite);
+                        break;
+                }
             }
         }
-    }
 
-    int moneyCheck = gameState.getMoney();
-
-    if (gameEvent.type == sf::Event::MouseButtonPressed) {
-            //game function 
-        if (gameEvent.mouseButton.button == sf::Mouse::Left){ // set plots
-            int plotNumber = 0;
-            if (gameState.getSeedSelected() > 0 && gameState.getSeedSelected() < 6) { //check if seed is selected then check if sufficient funds then set plots
-                for (int i = 0; i < 3; i++) { //for 3 horizontal
-                    for (int j = 0; j < 3; j++) { //for 3 vertical
-                        plotNumber = plotNumber + 1;
-                        if (gameState.getSeedSelected() == 1 && moneyCheck < 5) { return false;}
-                        if (gameState.getSeedSelected() == 2 && moneyCheck < 5) { return false;}
-                        if (gameState.getSeedSelected() == 3 && moneyCheck < 5) { return false;}
-                        if (gameState.getSeedSelected() == 4 && moneyCheck < 500) { return false;}
-                        if (gameState.getSeedSelected() == 5 && moneyCheck < 400) { return false;}
-                        if (gameState.getSeedSelected() == 6 && moneyCheck < 150) { return false;}
-                        if (((mousePositionWindow.x >= 240+160*i) && (mousePositionWindow.x <= 80+ 240+160*i))&&((mousePositionWindow.y >= 400+160*j) && mousePositionWindow.y <= 80+400+160*j)) {
-                            gameState.buyEntity(plotNumber, gameState.getSeedSelected()); //plot number and pointer to entity
-                            (assets.plotSprite[plotNumber]).setTexture(assets.dereferenceSeed(gameState.getSeedSelected()));
+        if (gameEvent.type == sf::Event::MouseButtonPressed) {
+                //game function 
+            if (gameEvent.mouseButton.button == sf::Mouse::Left){ // set plots
+                int plotNumber = 0;
+                if (gameState.getSeedSelected() > 0 && gameState.getSeedSelected() < 7) { //check if seed is selected then check if sufficient funds then set plots
+                    for (int i = 0; i < 3; i++) { //for 3 horizontal
+                        for (int j = 0; j < 3; j++) { //for 3 vertical
+                            plotNumber = plotNumber + 1;
+                            if (((mousePositionWindow.x >= 160+160*i) && (mousePositionWindow.x <= 80+ 160+160*i)) && ((mousePositionWindow.y >= 400+160*j) && mousePositionWindow.y <= 80+400+160*j)) {
+                                if (gameState.checkMoney(gameState.getSeedSelected())) {
+                                    if (((mousePositionWindow.x >= 160+160*i) && (mousePositionWindow.x <= 240+160*i))&&((mousePositionWindow.y >= 400+160*j) && mousePositionWindow.y <= 80+400+160*j)) {
+                                        gameState.buyEntity(plotNumber, gameState.getSeedSelected()); //plot number and pointer to entity
+                                        (assets.plotSprite[plotNumber]).setTexture(assets.dereferenceSeed(gameState.getSeedSelected()));
+                                        this->window->draw(assets.plotSprite[plotNumber]);
+                                        assets.setText(gameState);
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+            if (gameEvent.mouseButton.button == sf::Mouse::Right){ // sell
+                int plotNumber = 0;
+                if (gameState.getSeedSelected() > 0) { //check if seed is selected then check if sufficient funds then set plots
+                    for (int i = 0; i < 3; i++) { //for 3 horizontal
+                        for (int j = 0; j < 3; j++) { //for 3 vertical
+                            plotNumber = plotNumber + 1;
+                            if (((mousePositionWindow.x >= 160+160*i) && (mousePositionWindow.x <= 80+ 160+160*i))&&((mousePositionWindow.y >= 400+160*j) && mousePositionWindow.y <= 80+400+160*j)) {
+                            gameState.sellEntity(plotNumber); //plot number
+                            (assets.plotSprite[plotNumber]).setTexture(assets.empty_tile_texture);
                             this->window->draw(assets.plotSprite[plotNumber]);
-                        }
-                    }
-                }
-            }
-        } 
-
-        if (gameEvent.mouseButton.button == sf::Mouse::Right){ // sell
-            int plotNumber = 0;
-            if (gameState.getSeedSelected() > 0) { //check if seed is selected then check if sufficient funds then set plots
-                for (int i = 0; i < 3; i++) { //for 3 horizontal
-                    for (int j = 0; j < 3; j++) { //for 3 vertical
-                        plotNumber = plotNumber + 1;
-                        if (((mousePositionWindow.x >= 240+160*i) && (mousePositionWindow.x <= 80+ 240+160*i))&&((mousePositionWindow.y >= 400+160*j) && mousePositionWindow.y <= 80+400+160*j)) {
-                        gameState.sellEntity(plotNumber); //plot number
-                        (assets.plotSprite[plotNumber]).setTexture(assets.empty_tile_texture);
-                        this->window->draw(assets.plotSprite[plotNumber]);
-                        assets.setText(gameState, *this->window);
+                            assets.setText(gameState);
+                            }
                         }
                     }
                 }
             }
         }
-    }
-    if (gameEvent.type == sf::Event::KeyPressed) {
-        if (gameEvent.key.code == sf::Keyboard::Space) {//progress turns
-            gameState.nextTurn();
-            assets.maintainPlots(gameState, *this->window);
-            assets.setSeason(gameState, *this->window);
-            std::cout << "It is turn: " << gameState.getTurnNumber() << "\n";
-            if (gameState.getTurnNumber() > 12) {
-                std::cout << "Your score was: " << gameState.getMoney() << "Well done!" << "\n";
-                gameEngine::~gameEngine();
+
+        if (gameEvent.type == sf::Event::KeyPressed) {
+            if (gameEvent.key.code == sf::Keyboard::Space) {//progress turns
+                std::cout << "turns";
+                gameState.nextTurn();
+                std::cout << "tart";
+                assets.maintainPlots(gameState, *this->window);
+                std::cout << "shart";
+                assets.setSeason(gameState, *this->window);
+                std::cout << "It is turn: " << gameState.getTurnNumber() << "\n";
+                if (gameState.getTurnNumber() > 12) {
+                    std::cout << "Your score was: " << gameState.getMoney() << "Well done!" << "\n";
+                    gameEngine::~gameEngine();
+                }
             }
         }
     }

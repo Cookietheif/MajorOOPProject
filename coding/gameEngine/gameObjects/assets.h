@@ -12,12 +12,12 @@ class assets {
 public:
     assets(); //constructor loads all textures and sets all sprites
     ~assets();
-    void setText(GameState gameState, sf::RenderWindow& window); //gamestate passed so that money can be getted
-    void setBaseScreen(GameState gameState, sf::RenderWindow& window);
+    void setText(GameState& gameState); //gamestate passed so that money can be getted
+    void setBaseScreen(GameState& gameState, sf::RenderWindow& window);
     void setSeeds(sf::RenderWindow& window);
-    void maintainPlots(GameState gameState, sf::RenderWindow& window);
+    void maintainPlots(GameState& gameState, sf::RenderWindow& window);
     sf::Texture& dereferenceSeed(int seedNum);
-    void setSeason(GameState gameState, sf::RenderWindow& window);
+    void setSeason(GameState& gameState, sf::RenderWindow& window);
 
     //default screen function
 

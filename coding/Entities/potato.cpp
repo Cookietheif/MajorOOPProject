@@ -4,7 +4,7 @@
 Potato::Potato() 
     : Crops(5, 10, 3, 5, 5, 5)
 {
-    entity_Name = "Strawberry";
+    entity_Name = "Potato";
     
 }
 

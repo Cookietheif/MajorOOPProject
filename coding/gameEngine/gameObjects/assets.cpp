@@ -4,11 +4,6 @@
 #include <iostream>
 
 assets::assets() {
-    //text
-    font.loadFromFile("AppleGaramond.ttf");
-    moneyText.setFont(font);
-    moneyText.setFillColor(sf::Color::Black);
-    moneyText.setCharacterSize(1);
 //plots
     plotSprite = new sf::Sprite[10];
     for (int i = 0; i < 10; i++) plotSprite[i].setScale(5.f, 5.f);
@@ -149,14 +144,11 @@ assets::~assets() {
     delete[] plotSprite;
 };
 
-void assets::setText(GameState gameState, sf::RenderWindow& window) {
-moneyText.setPosition(740,30);
-std::string moneyCount = std::to_string(gameState.getMoney()); //gets int from gamestate and converts to string for display
-moneyText.setString(moneyCount);
-window.draw(moneyText);
+void assets::setText(GameState& gameState) {
+std::cout << "Your money is" << gameState.getMoney() << "\n";
 }
 
-void assets::setSeason(GameState gameState, sf::RenderWindow& window) {
+void assets::setSeason(GameState& gameState, sf::RenderWindow& window) {
         //season
     switch (gameState.getSeason())
     {
@@ -179,7 +171,7 @@ void assets::setSeason(GameState gameState, sf::RenderWindow& window) {
     };
 }
 
-void assets::setBaseScreen(GameState gameState, sf::RenderWindow& window) {
+void assets::setBaseScreen(GameState& gameState, sf::RenderWindow& window) {
     setSeason(gameState, window);
     setSeeds(window);
     //coin symbol
@@ -203,13 +195,13 @@ void assets::setBaseScreen(GameState gameState, sf::RenderWindow& window) {
             for (int j = 0; j < 3; j++) { //for 3 vertical
             plotNumber = plotNumber + 1;
             (plotSprite[plotNumber]).setTexture(empty_tile_texture);
-            (plotSprite[plotNumber]).setPosition(240+160*i,400+160*j); //(x,2)
+            (plotSprite[plotNumber]).setPosition(160+160*i,400+160*j); //(x,2)
             window.draw(plotSprite[plotNumber]);
             }
         }
 }
 
-void assets::maintainPlots(GameState gameState, sf::RenderWindow& window) { //check if grown, update when grown
+void assets::maintainPlots(GameState& gameState, sf::RenderWindow& window) { //check if grown, update when grown
     int plotNumber = 1;
     for (int i = 0; i < 3; i++) { //for 3 horizontal
         for (int j = 0; j < 3; j++) { //for 3 vertical

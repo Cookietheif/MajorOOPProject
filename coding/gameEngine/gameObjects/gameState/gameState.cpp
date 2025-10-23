@@ -33,19 +33,70 @@ GameState::~GameState() {
     }
 }
 
+bool GameState::checkMoney(int a) { switch (a) {
+    case 1:
+        if (getMoney() >= 5){
+        return true;} else {return false;}
+        break;
+    case 2:
+        if (getMoney() >= 5){
+        return true;} else {return false;}
+        break;
+    case 3:
+        if (getMoney() >= 5){
+        return true;} else {return false;}
+        break;
+    case 4:
+        if (getMoney() >= 500){
+        return true;} else {return false;}
+        break;
+    case 5:
+        if (getMoney() >= 400){
+        return true;} else {return false;};
+        break;
+    case 6:
+        if (getMoney() >= 150){
+        return true;} else {return false;};
+        break;
+    default:
+        return false;
+        break;
+    };
+}
+
 Entity* GameState::getPlot(int index) const {
-    switch (index) {
-        case 1: return plot1; break;
-        case 2: return plot2; break;
-        case 3: return plot3; break;
-        case 4: return plot4; break;
-        case 5: return plot5; break;
-        case 6: return plot6; break;
-        case 7: return plot7; break;
-        case 8: return plot8; break;
-        case 9: return plot9; break;
-        default: return nullptr; break;
-    }
+  switch (index) {
+    case 1:
+      return plot1;
+      break;
+    case 2:
+      return plot2;
+      break;
+    case 3:
+      return plot3;
+      break;
+    case 4:
+      return plot4;
+      break;
+    case 5:
+      return plot5;
+      break;
+    case 6:
+      return plot6;
+      break;
+    case 7:
+      return plot7;
+      break;
+    case 8:
+      return plot8;
+      break;
+    case 9:
+      return plot9;
+      break;
+    default:
+      return nullptr;
+      break;
+  }
 }
 
 bool GameState::buyEntity(int plotNumber, int entityType) {
@@ -102,8 +153,6 @@ bool GameState::buyEntity(int plotNumber, int entityType) {
         return false;
     }
 
-    
-    money -= 0.5*cost;
     *plotPtr = newEntity;
     newEntity->onBuy(*this);
 
