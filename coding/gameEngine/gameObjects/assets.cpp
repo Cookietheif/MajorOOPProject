@@ -278,7 +278,6 @@ sf::Texture& assets::dereferenceSeed(int seedNum) {
             return pig_tile_texture;
             break;
         case 6: //chicken
-        std::cout << "worked to here";
             return chicken_tile_texture;
             break;
         default:
