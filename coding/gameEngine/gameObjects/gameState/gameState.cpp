@@ -103,7 +103,7 @@ bool GameState::buyEntity(int plotNumber, int entityType) {
     }
 
     
-    money -= cost;
+    money -= 0.5*cost;
     *plotPtr = newEntity;
     newEntity->onBuy(*this);
 
