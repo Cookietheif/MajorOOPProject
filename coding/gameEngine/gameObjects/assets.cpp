@@ -201,13 +201,11 @@ void assets::setBaseScreen(GameState& gameState, sf::RenderWindow& window) {
 }
 
 void assets::maintainPlots(GameState& gameState, sf::RenderWindow& window) { //check if grown, update when grown
-    int plotNumber = 1;
-    Entity* entityPlaceholder;
+    Entity* plots[9] = { gameState.getPlot(1), gameState.getPlot(2), gameState.getPlot(3), gameState.getPlot(4), gameState.getPlot(5), gameState.getPlot(6), gameState.getPlot(7), gameState.getPlot(8), gameState.getPlot(9) }; ;
     std::cerr << "owwie";
-    for (int i = 1; i < 9; i++) {
-            entityPlaceholder = gameState.getPlot(plotNumber);
+    for (int i = 0; i < 9; i++) {
                 std::cerr << "shining " << i << std::endl;
-            switch (entityPlaceholder->getCurrentID()){
+            switch (plots[i]->getCurrentID()){
             case 1:
             std::cerr << "one " << i << std::endl;
                 break;
@@ -216,47 +214,46 @@ void assets::maintainPlots(GameState& gameState, sf::RenderWindow& window) { //c
                 break;
             case 3:
             std::cerr << "three" << i << std::endl;
-                plotSprite[plotNumber].setTexture(carrot_tile_texture);
-                window.draw(plotSprite[plotNumber]);
+                plotSprite[i].setTexture(carrot_tile_texture);
+                window.draw(plotSprite[i]);
                 break;
             case 4:
             std::cerr << "crash " << i << std::endl;
-                plotSprite[plotNumber].setTexture(carrot_tile_grown_texture);
-                window.draw(plotSprite[plotNumber]);
+                plotSprite[i].setTexture(carrot_tile_grown_texture);
+                window.draw(plotSprite[i]);
                 break;
             case 5: 
-                plotSprite[plotNumber].setTexture(potato_tile_texture);
-                window.draw(plotSprite[plotNumber]);
+                plotSprite[i].setTexture(potato_tile_texture);
+                window.draw(plotSprite[i]);
                 break;
             case 6:
-                plotSprite[plotNumber].setTexture(potato_tile_grown_texture);
-                window.draw(plotSprite[plotNumber]);
+                plotSprite[i].setTexture(potato_tile_grown_texture);
+                window.draw(plotSprite[i]);
                 break;
             case 7:
-                plotSprite[plotNumber].setTexture(cow_tile_texture);
-                window.draw(plotSprite[plotNumber]);
+                plotSprite[i].setTexture(cow_tile_texture);
+                window.draw(plotSprite[i]);
                 break;
             case 8:
-                plotSprite[plotNumber].setTexture(cow_harvestable_texture);
-                window.draw(plotSprite[plotNumber]);
+                plotSprite[i].setTexture(cow_harvestable_texture);
+                window.draw(plotSprite[i]);
                 break;
             case 9:
-                plotSprite[plotNumber].setTexture(pig_tile_texture);
-                window.draw(plotSprite[plotNumber]);
+                plotSprite[i].setTexture(pig_tile_texture);
+                window.draw(plotSprite[i]);
             break;
             case 11:
-                plotSprite[plotNumber].setTexture(chicken_tile_texture);
-                window.draw(plotSprite[plotNumber]);
+                plotSprite[i].setTexture(chicken_tile_texture);
+                window.draw(plotSprite[i]);
                 break;
             case 12:
-                plotSprite[plotNumber].setTexture(chicken_harvestable_texture);
-                window.draw(plotSprite[plotNumber]);
+                plotSprite[i].setTexture(chicken_harvestable_texture);
+                window.draw(plotSprite[i]);
                 break;
             default:
             std::cout << "all is well \n";
             break;
         }
-        plotNumber = plotNumber + 1;
         std::cerr << "seven " << i << std::endl;
     }
 }
