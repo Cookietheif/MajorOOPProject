@@ -188,7 +188,6 @@ bool GameState::sellEntity(int plotNumber) {
         
         if (c->getCurrentID() % 2 == 0) { 
             income = c->getSellPrice();
-            money += income;
             std::cout << "Sold " << c->getName() << " for $" << income << "!\n";
             delete plotRef;
             plotRef = nullptr;
@@ -213,7 +212,7 @@ bool GameState::sellEntity(int plotNumber) {
         std::cout << "Unknown entity type in plot " << plotNumber << "!\n";
         return false;
     }
-
+    money += income;
     
     switch (plotNumber) {
         case 1: plot1 = plotRef; break;

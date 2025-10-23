@@ -141,7 +141,6 @@ assets::assets() {
 
 
 assets::~assets() {
-    delete[] plotSprite;
 };
 
 void assets::setText(GameState& gameState) {
@@ -203,23 +202,25 @@ void assets::setBaseScreen(GameState& gameState, sf::RenderWindow& window) {
 
 void assets::maintainPlots(GameState& gameState, sf::RenderWindow& window) { //check if grown, update when grown
     int plotNumber = 1;
-    for (int i = 0; i < 3; i++) { //for 3 horizontal
-        for (int j = 0; j < 3; j++) { //for 3 vertical
-            Entity* entityPlaceholder = gameState.getPlot(plotNumber);
+    Entity* entityPlaceholder;
+    std::cerr << "owwie";
+    for (int i = 1; i < 9; i++) {
+            entityPlaceholder = gameState.getPlot(plotNumber);
+                std::cerr << "shining " << i << std::endl;
             switch (entityPlaceholder->getCurrentID()){
             case 1:
-                plotSprite[plotNumber].setTexture(strawberry_tile_texture);
-                window.draw(plotSprite[plotNumber]);
+            std::cerr << "one " << i << std::endl;
                 break;
             case 2:
-                plotSprite[plotNumber].setTexture(strawberry_tile_grown_texture);
-                window.draw(plotSprite[plotNumber]);
+            std::cerr << "two " << i << std::endl;
                 break;
             case 3:
+            std::cerr << "three" << i << std::endl;
                 plotSprite[plotNumber].setTexture(carrot_tile_texture);
                 window.draw(plotSprite[plotNumber]);
                 break;
             case 4:
+            std::cerr << "crash " << i << std::endl;
                 plotSprite[plotNumber].setTexture(carrot_tile_grown_texture);
                 window.draw(plotSprite[plotNumber]);
                 break;
@@ -240,8 +241,8 @@ void assets::maintainPlots(GameState& gameState, sf::RenderWindow& window) { //c
                 window.draw(plotSprite[plotNumber]);
                 break;
             case 9:
-            plotSprite[plotNumber].setTexture(pig_tile_texture);
-            window.draw(plotSprite[plotNumber]);
+                plotSprite[plotNumber].setTexture(pig_tile_texture);
+                window.draw(plotSprite[plotNumber]);
             break;
             case 11:
                 plotSprite[plotNumber].setTexture(chicken_tile_texture);
@@ -254,9 +255,9 @@ void assets::maintainPlots(GameState& gameState, sf::RenderWindow& window) { //c
             default:
             std::cout << "all is well \n";
             break;
-            }
-        plotNumber = plotNumber + 1;
         }
+        plotNumber = plotNumber + 1;
+        std::cerr << "seven " << i << std::endl;
     }
 }
 
