@@ -33,6 +33,7 @@ public:
     int getMoney() const { return money; }
     int getSeedSelected() const {return seedSelected;}
     void setSeedSelected(int a) {seedSelected = a;}
+    bool checkMoney (int a);
 
     void modifyMoney(int amount) { money += amount; }
     Entity* getPlot(int index) const;

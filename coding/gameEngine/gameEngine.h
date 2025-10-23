@@ -27,12 +27,12 @@ public:
 
     //function
     void updateMousePositions();
-    bool update(assets& assets, GameState& gameState);
-    void pollEvents();
+    void update(assets& assets, GameState& gameState);
     void render();
 
     //accessors
     const bool running() const;
+    int caseOfKeyPress;
 };
 
 #endif
